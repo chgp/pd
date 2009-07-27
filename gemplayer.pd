@@ -1,0 +1,239 @@
+#N canvas 199 27 760 671 10;
+#X msg 138 615 open \$1;
+#X obj 148 574 openpanel;
+#X obj 130 110 bng 12 250 50 0 \$0-file empty open -24 8 0 8 -262144
+-1 -1;
+#X text 297 577 Frame command;
+#X obj 231 464 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 1
+1;
+#X floatatom 461 616 10 0 0 0 - - -;
+#X text 571 484 change direction;
+#X obj 561 512 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X text 584 514 reset to minimum \, wait for next bang before output
+;
+#X obj 572 538 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X text 596 539 reset and output imediately;
+#X floatatom 292 474 5 0 0 0 - - -;
+#X obj 583 561 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 460 583 counter;
+#X msg 420 495 jam \$1;
+#X obj 403 126 hradio 15 1 0 3 \$0-direction empty loop:prog|regr|pingpong
+-140 8 0 10 -262144 -1 -1 0;
+#X floatatom 264 432 5 0 0 0 - - -;
+#X obj 243 388 r \$0-direction;
+#X obj 148 161 hsl 400 15 0 5260 0 0 \$0-s-max \$0-r-max empty -2 -8
+0 10 -262144 -1 -1 39900 1;
+#X obj 109 164 tgl 30 0 \$0-s-play \$0-r-play >/|| 2 14 0 11 -24198
+-24198 -262144 1 1;
+#X obj 109 130 bng 30 250 50 0 \$0-s-cue empty cue 3 14 0 14 -260097
+-1 -262144;
+#X obj 148 143 hsl 400 15 0 5260 0 0 \$0-s-min \$0-r-min empty -2 -8
+0 10 -262144 -1 -1 0 1;
+#X obj 478 653 s \$0-r-scratch;
+#X obj 140 507 r \$0-file;
+#X obj 178 425 r \$0-s-play;
+#X obj -19 199 select 1;
+#X msg -19 222 16 16 0;
+#X msg 37 223 13 13 0;
+#X obj -12 269 prepend color;
+#X obj -11 312 s \$0-r-play;
+#X obj 0 172 r \$0-s-play;
+#X text -13 157 color play;
+#X obj 549 327 r \$0-s-max;
+#X obj 671 606 r \$0-s-min;
+#X obj 479 669 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 502 671 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 527 669 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 453 310 r \$0-s-min;
+#X obj 456 336 int;
+#X floatatom 420 471 5 0 0 0 - - -;
+#X obj 681 631 int;
+#X msg 473 484 min \$1;
+#X msg 521 483 max \$1;
+#X floatatom 473 463 5 0 0 0 - - -;
+#X floatatom 521 462 5 0 0 0 - - -;
+#X obj 550 349 int;
+#X obj 690 453 r \$0-s-cue;
+#X obj 488 126 nbx 5 14 -1e+37 1e+37 0 0 \$0-s-framerate \$0-r-framerate
+FPS 0 -8 0 12 -260097 -1 -1 0 256;
+#X obj 147 179 hsl 400 15 0 5260 0 0 empty \$0-r-scratch empty -2 -8
+0 10 -260097 -262144 -262144 27065 0;
+#X obj 459 114 knob 24 24 90 10 0 1 \$0-s-tempo \$0-r-tempo empty 0
+-8 192 8 -260097 -4034 -1 2300 1;
+#X obj 345 421 int;
+#X obj 477 381 select;
+#X obj 564 389 select;
+#X obj 643 733 int;
+#X floatatom 638 759 5 0 0 0 - - -;
+#X floatatom 638 777 5 0 0 0 - - -;
+#X floatatom 668 701 5 0 0 0 - - -;
+#X obj 637 703 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom 591 363 5 0 0 0 - - -;
+#X msg 501 416 0;
+#X obj 498 440 s \$0-s-play;
+#X symbolatom 146 109 50 0 0 0 - #0-r-file -;
+#X obj 234 495 metro 30;
+#X obj 507 722 s \$0-r-rmax;
+#X obj 481 742 s \$0-r-rmin;
+#X obj 536 696 s \$0-r-loops;
+#X obj 121 321 loadbang;
+#X obj 132 345 s \$0-reset;
+#X msg 148 550 symbol /home/chgp/videos;
+#X floatatom 484 181 10 0 0 0 frame #0-r-scratch -;
+#X obj 162 595 s \$0-r-file;
+#X obj 158 529 s \$0-reset;
+#X floatatom 518 109 5 0 0 0 - #0-r-loops -;
+#N canvas 67 224 450 432 :: 0;
+#X text 24 16 the format [pix_film] is able to decode depends on the
+system you are running Gem.;
+#X text 30 101 Win32: [pix_film] should be able to decode AVIs (all
+installed codecs). If you are lucky and your version of Gem is compiled
+with quicktime-support and you have quicktime installed on your machine
+\, you might be able to play back quicktime MOVs.;
+#X text 31 63 macOS-X: [pix_film] should be ablte to decode quicktime
+MOVs.;
+#X text 32 175 linux: that's a bit tricky. Since there is no "native"
+video-format for linux it heavily depends on what you have installed
+on your machine and how Gem has been compiled. If your system supports
+it \, [pix_film] is able to use quicktime4linux/libquicktime to decode
+quicktime-MOVs \, libmpeg1/libmpeg3 to decode MPEG2-videos and libaviplay
+which opens a wide range of supported formats (with the possibility
+to install additional codec-plugins) \, from AVI via MPEG2 to DivX
+\, although i have found MPEG support rather unstable. libaviplay does
+not support quicktime decoding. There is also some ruddy ffmpeg support
+(apart from the one supplied by libaviplay).;
+#X text 36 351 although one wouldn't believe it \, but i have found
+that iunder linux i could play most formats...;
+#X restore 105 59 pd :: FORMATS;
+#X obj 126 638 pix_film;
+#X obj 176 672 unpack 0 0 0;
+#X floatatom 175 696 5 0 0 0 - - -;
+#X floatatom 215 696 5 0 0 0 - - -;
+#X floatatom 262 692 5 0 0 0 - - -;
+#X obj 187 753 s \$0-total_frames;
+#X obj 78 564 gemhead;
+#X obj 803 204 prepend range 0;
+#X obj 789 256 s \$0-r-max;
+#X obj 773 286 s \$0-r-min;
+#X obj 803 161 r \$0-total_frames;
+#X obj 733 103 loadbang;
+#X obj 730 180 t f f f;
+#X obj 733 132 t b b;
+#X msg 760 152 1;
+#X msg 729 153 0;
+#X obj 722 74 r \$0-reset;
+#X obj 803 135 s \$0-r-play;
+#X msg 803 112 color 13 13 0;
+#X obj 345 392 r \$0-s-tempo;
+#X obj 121 697 outlet;
+#X text 102 196 vout;
+#X text 520 196 tempo;
+#X obj 781 339 s \$0-r-scratch;
+#X obj 269 724 prepend range 0;
+#X obj 333 749 print;
+#X floatatom 314 689 5 0 0 0 - - -;
+#X obj 800 225 t a a a;
+#X obj 699 260 s \$0-rmax;
+#X obj 369 325 inlet;
+#X obj 378 358 s \$0-r-min;
+#X floatatom 379 181 5 0 0 0 totalframes: #0-total_frames -;
+#X obj 415 660 outlet;
+#X obj 437 635 t 0 0;
+#X obj 523 39 inlet;
+#X connect 0 0 74 0;
+#X connect 1 0 0 0;
+#X connect 1 0 70 0;
+#X connect 4 0 62 0;
+#X connect 5 0 74 1;
+#X connect 5 0 107 0;
+#X connect 7 0 13 2;
+#X connect 9 0 13 3;
+#X connect 11 0 62 1;
+#X connect 12 0 13 4;
+#X connect 13 0 5 0;
+#X connect 13 1 34 0;
+#X connect 13 1 64 0;
+#X connect 13 2 35 0;
+#X connect 13 2 63 0;
+#X connect 13 3 36 0;
+#X connect 13 3 65 0;
+#X connect 14 0 13 0;
+#X connect 16 0 13 1;
+#X connect 17 0 16 0;
+#X connect 23 0 68 0;
+#X connect 23 0 71 0;
+#X connect 24 0 4 0;
+#X connect 25 0 26 0;
+#X connect 25 1 27 0;
+#X connect 26 0 28 0;
+#X connect 27 0 28 0;
+#X connect 28 0 29 0;
+#X connect 30 0 25 0;
+#X connect 32 0 45 0;
+#X connect 33 0 40 0;
+#X connect 37 0 38 0;
+#X connect 38 0 39 0;
+#X connect 38 0 51 0;
+#X connect 38 0 52 1;
+#X connect 38 0 43 0;
+#X connect 39 0 14 0;
+#X connect 41 0 13 0;
+#X connect 42 0 13 0;
+#X connect 43 0 41 0;
+#X connect 44 0 42 0;
+#X connect 45 0 44 0;
+#X connect 45 0 51 1;
+#X connect 45 0 52 0;
+#X connect 45 0 58 0;
+#X connect 46 0 7 0;
+#X connect 50 0 11 0;
+#X connect 51 0 59 0;
+#X connect 52 0 59 0;
+#X connect 53 0 54 0;
+#X connect 54 0 55 0;
+#X connect 56 0 53 1;
+#X connect 57 0 53 0;
+#X connect 59 0 60 0;
+#X connect 62 0 13 0;
+#X connect 66 0 67 0;
+#X connect 68 0 1 0;
+#X connect 74 0 94 0;
+#X connect 74 1 75 0;
+#X connect 75 0 76 0;
+#X connect 75 1 77 0;
+#X connect 75 2 78 0;
+#X connect 76 0 79 0;
+#X connect 80 0 74 0;
+#X connect 81 0 101 0;
+#X connect 84 0 81 0;
+#X connect 84 0 102 0;
+#X connect 85 0 87 0;
+#X connect 85 0 92 0;
+#X connect 86 0 97 0;
+#X connect 86 1 83 0;
+#X connect 86 2 82 0;
+#X connect 87 0 89 0;
+#X connect 87 1 88 0;
+#X connect 88 0 81 0;
+#X connect 89 0 86 0;
+#X connect 90 0 89 0;
+#X connect 90 0 92 0;
+#X connect 92 0 91 0;
+#X connect 93 0 50 0;
+#X connect 98 0 99 0;
+#X connect 100 0 98 0;
+#X connect 101 0 82 0;
+#X connect 101 1 83 0;
+#X connect 101 2 97 0;
+#X connect 103 0 104 0;
+#X connect 107 0 106 0;
+#X connect 107 1 22 0;
+#X connect 108 0 20 0;
+#X coords 0 -1 1 1 460 110 2 100 100;

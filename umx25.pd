@@ -1,0 +1,102 @@
+#N canvas 59 160 776 432 10;
+#N canvas 260 246 762 406 controls 0;
+#X obj 51 75 ctlin 91;
+#X obj 67 24 ctlin;
+#X floatatom 77 54 5 0 0 0 - - -;
+#X obj 123 72 ctlin 93;
+#X obj 194 72 ctlin 74;
+#X obj 268 71 ctlin 71;
+#X obj 362 69 ctlin 73;
+#X obj 434 66 ctlin 75;
+#X obj 56 204 ctlin 97;
+#X obj 195 200 ctlin 66;
+#X obj 127 205 ctlin 96;
+#X obj 254 202 ctlin 67;
+#X obj 324 205 ctlin 64;
+#X obj 388 204 ctlin 65;
+#X obj 458 204 ctlin 7;
+#X obj 572 202 ctlin 10;
+#X obj 505 66 ctlin 72;
+#X obj 579 65 ctlin 10;
+#X obj 61 103 s \$0-r-r1;
+#X obj 126 102 s \$0-r-r2;
+#X obj 200 103 s \$0-r-r3;
+#X obj 55 239 s \$0-r-b1;
+#X obj 131 238 s \$0-r-b2;
+#X obj 196 238 s \$0-r-b3;
+#X obj 262 242 s \$0-r-b4;
+#X obj 327 243 s \$0-r-b5;
+#X obj 391 244 s \$0-r-b6;
+#X obj 460 241 s \$0-r-b7;
+#X obj 576 238 s \$0-b-r8;
+#X obj 269 102 s \$0-r-r4;
+#X obj 343 104 s \$0-r-r5;
+#X obj 429 96 s \$0-r-r6;
+#X obj 504 98 s \$0-r-r7;
+#X obj 575 97 s \$0-r-r8;
+#X connect 0 0 18 0;
+#X connect 1 1 2 0;
+#X connect 3 0 19 0;
+#X connect 4 0 20 0;
+#X connect 5 0 29 0;
+#X connect 6 0 30 0;
+#X connect 7 0 31 0;
+#X connect 8 0 21 0;
+#X connect 9 0 23 0;
+#X connect 10 0 22 0;
+#X connect 11 0 24 0;
+#X connect 12 0 25 0;
+#X connect 13 0 26 0;
+#X connect 14 0 27 0;
+#X connect 16 0 32 0;
+#X connect 17 0 33 0;
+#X restore 66 58 pd controls;
+#X obj 120 117 knob 32 32 0 127 0 0 s-r1 \$0-r-r1 empty 0 -8 192 8
+-262144 -1 -1 659 1;
+#X obj 155 117 knob 32 32 0 127 0 0 s-r2 \$0-r-r2 empty 0 -8 192 8
+-262144 -1 -1 1269 1;
+#X obj 190 117 knob 32 32 0 127 0 0 s-r3 \$0-r-r3 empty 0 -8 192 8
+-262144 -1 -1 2099 1;
+#X obj 225 117 knob 32 32 0 127 0 0 s-r4 \$0-r-r4 empty 0 -8 192 8
+-262144 -1 -1 1684 1;
+#X obj 435 117 knob 32 32 0 127 0 0 s-r5 \$0-r-r5 empty 0 -8 192 8
+-262144 -1 -1 220 1;
+#X obj 470 117 knob 32 32 0 127 0 0 s-r6 \$0-r-r6 empty 0 -8 192 8
+-262144 -1 -1 24 1;
+#X obj 505 117 knob 32 32 0 127 0 0 s-r7 \$0-r-r7 empty 0 -8 192 8
+-262144 -1 -1 24 1;
+#X obj 540 117 knob 32 32 0 127 0 0 s-r8 \$0-r-r8 empty 0 -8 192 8
+-262144 -1 -1 24 1;
+#X obj 267 139 bng 15 250 50 0 s-b1 \$0-r-b1 empty 17 7 0 10 -262144
+-1 -1;
+#X obj 286 139 bng 15 250 50 0 s-b2 \$0-r-b2 empty 17 7 0 10 -262144
+-1 -1;
+#X obj 304 139 bng 15 250 50 0 s-b3 \$0-r-b3 empty 17 7 0 10 -262144
+-1 -1;
+#X obj 323 139 bng 15 250 50 0 s-b4 \$0-r-b4 empty 17 7 0 10 -262144
+-1 -1;
+#X obj 351 139 bng 15 250 50 0 s-b5 \$0-r-b5 empty 17 7 0 10 -262144
+-1 -1;
+#X obj 370 139 bng 15 250 50 0 s-b6 \$0-r-b6 empty 17 7 0 10 -262144
+-1 -1;
+#X obj 388 139 bng 15 250 50 0 s-b7 \$0-r-b7 empty 17 7 0 10 -262144
+-1 -1;
+#X obj 407 139 bng 15 250 50 0 s-b8 \$0-r-b8 empty 17 7 0 10 -262144
+-1 -1;
+#X obj 268 115 tgl 15 0 s-t1 \$0-r-b1 empty 17 7 0 10 -262144 -1 -1
+0 127;
+#X obj 287 115 tgl 15 0 s-t2 \$0-r-b2 empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj 305 115 tgl 15 0 s-t3 \$0-r-b3 empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj 324 115 tgl 15 0 s-t4 \$0-r-b4 empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj 350 115 tgl 15 0 s-t5 \$0-r-b5 empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj 369 115 tgl 15 0 r-t6 \$0-r-b6 empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj 387 115 tgl 15 0 \$0-s-t7 \$0-r-b7 empty 17 7 0 10 -262144 -1
+-1 0 1;
+#X obj 406 115 tgl 15 0 s-t8 \$0-r-b8 empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X coords 0 -1 1 1 500 60 1 100 100;
