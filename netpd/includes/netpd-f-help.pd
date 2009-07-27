@@ -1,0 +1,43 @@
+#N canvas 234 20 409 545 10;
+#X obj 19 219 hsl 128 17 0 127 0 0 sendsymbol receivesymbol empty -2
+-6 0 8 -262144 -1 -1 9700 1;
+#X obj 152 219 netpd-f sendsymbol receivesymbol;
+#X obj 19 65 netpd-a sendsymbol;
+#X obj 27 307 netpd-r sendsymbol;
+#X floatatom 27 338 5 0 0 0 - - -;
+#X obj 22 29 hsl 128 15 0 127 0 0 empty empty empty -2 -6 0 8 -262144
+-1 -1 0 1;
+#X text 15 82 ___________________________________________________;
+#X text 14 278 ___________________________________________________
+;
+#X text 30 243 ^;
+#X text 19 112 [netpd-f <sendsymbol> <receivesymbol>];
+#X text 17 4 [netpd-f];
+#X text 30 251 ^ see slider-properties;
+#X text 65 338 < see broadcasted vcalues;
+#X text 13 154 [netpd-f] is used to update guis \, if another user
+changes the value. it also provides a feedback-suppression.;
+#X text 44 46 ^ imitate another user changing the value;
+#X floatatom 205 250 5 0 0 0 - - -;
+#X text 242 250 < broadcasted value;
+#X text 17 360 ___________________________________________________
+;
+#X floatatom 188 480 5 0 0 0 - - -;
+#X obj 188 515 s netpd-receive;
+#X msg 188 496 sendsymbol-nogui \$1;
+#X floatatom 28 473 5 0 0 0 - - -;
+#X obj 28 508 s netpd-receive;
+#X msg 28 489 sendsymbol \$1;
+#X text 24 453 with gui-update:;
+#X text 187 447 without gui-update:;
+#X text 185 461 (in order to save cpu-load);
+#X text 23 407 for internal use (e.g. automation);
+#X text 23 385 >>>>>>>>>ONLY FOR ADVANCED PURPOSES<<<<<<<<<<<<<<;
+#X text 23 427 update value locally (not broadcasted!!):;
+#X connect 1 0 15 0;
+#X connect 3 0 4 0;
+#X connect 5 0 2 0;
+#X connect 18 0 20 0;
+#X connect 20 0 19 0;
+#X connect 21 0 23 0;
+#X connect 23 0 22 0;

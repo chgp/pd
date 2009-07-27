@@ -1,0 +1,48 @@
+N E T P D - I N S T A L L
+
+------------------------------------------------------------------------------
+
+for questions mailto: 
+
+	all@netpd.org
+
+visit for more detailed description:  
+   
+	http://www.netpd.org/howto 
+
+chat on irc:
+
+	#netpd (channel on irc.freenode.net)
+
+-------------------------------------------------------------------------------
+
+CHECK before you install netpd:
+
+ * pd 0.40 (or later)
+
+ * zexy 2.1 (or later)
+
+ * maxlib 1.5.2
+
+a recent version of pd-extended fulfills all those requirements.
+
+------------------------------------------------------------------------------
+
+INSTALL
+
+untar netpd.tar.gz to whereever you want, but you must 
+have write-permission in this directory (on unix-systems).
+
+
+START netpd
+
+- start pd and open _chat.pd
+- click the 'settings'-bang
+- set your name
+- click the 'save and close'-bang
+- talk to other netpd-people and start a session
+
+
+HAVE FUN !!
+
+

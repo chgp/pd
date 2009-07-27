@@ -1,0 +1,80 @@
+#N canvas 31 37 971 488 12;
+#X floatatom 25 128 5 0 0 0 - - -;
+#X floatatom 65 91 5 0 0 0 - - -;
+#X symbolatom 145 46 10 0 0 0 - - -;
+#X msg 25 -117 print;
+#X floatatom 105 67 5 0 0 0 - - -;
+#X obj 25 18 netserver 3000;
+#X msg 521 88 send \$1 \$2;
+#X obj 515 61 pack;
+#X msg 65 -42 client 1 5000;
+#X text 114 94 numero de conexoes;
+#X text 155 70 numero do soquete;
+#X text 243 45 endereco ip do cliente;
+#X text 78 127 dado recebido;
+#X msg 59 -80 send 12 3.1415;
+#X text 93 -115 exibe informacoes da conexao na console;
+#X text 192 -41 envia dados ao cliente "client <numero do cliente>
+<dados>";
+#X msg 66 -11 broadcast 666;
+#X text 193 -80 envia dados ao soquete "send <numero do soquete> <dados>"
+;
+#X text 194 -9 envia dados ao cliente "broadcast <dados>";
+#X obj 733 160 cnv 15 210 170 empty empty empty 20 12 0 14 -225271
+-66577 0;
+#X obj 737 271 netclient;
+#X msg 737 170 connect localhost 3000;
+#X msg 753 234 disconnect;
+#X floatatom 857 302 5 0 0 0 retorno - -;
+#X floatatom 789 199 5 0 0 0 dados - -;
+#X msg 856 200 send \$1;
+#X obj 830 272 tgl 15 0 empty empty empty 0 -6 0 8 -24198 -1 -1 0 1
+;
+#X text 781 125 cliente b;
+#X obj 734 -64 cnv 15 210 170 empty empty empty 20 12 0 14 -225271
+-66577 0;
+#X obj 738 47 netclient;
+#X msg 738 -54 connect localhost 3000;
+#X msg 754 10 disconnect;
+#X floatatom 858 78 5 0 0 0 retorno - -;
+#X floatatom 790 -25 5 0 0 0 dados - -;
+#X msg 857 -24 send \$1;
+#X obj 831 48 tgl 15 0 empty empty empty 0 -6 0 8 -24198 -1 -1 0 1
+;
+#X text 782 -99 cliente a;
+#X text 477 117 loopback para envio do pacote que foi recebido do cliente
+x;
+#X text 94 192 Este eh um exemplo de como configurar uma conexao cliente/servidor
+\, na cena existem dois clientes (lado direito) e um servidor (acima).
+O objetivo e demonstrar o envio e o recebimento de dados individuais
+atraves de netclient/netserver. utilize a mensagem connect de cada
+cliente \, a caixa verde acende no caso de uma conexao bem sucedida
+\, deslize o mouse sobre o atomo cdados de cada um. Os dados sao enviados
+ao servidor atraves do objeto netclient \, o servidor recebe estes
+dados e a reenvia ao cliente correto.;
+#X text 927 351 chgp;
+#X connect 0 0 7 1;
+#X connect 3 0 5 0;
+#X connect 4 0 7 0;
+#X connect 5 0 0 0;
+#X connect 5 1 1 0;
+#X connect 5 2 4 0;
+#X connect 5 3 2 0;
+#X connect 6 0 5 0;
+#X connect 7 0 6 0;
+#X connect 8 0 5 0;
+#X connect 13 0 5 0;
+#X connect 16 0 5 0;
+#X connect 20 0 23 0;
+#X connect 20 1 26 0;
+#X connect 21 0 20 0;
+#X connect 22 0 20 0;
+#X connect 24 0 25 0;
+#X connect 25 0 20 0;
+#X connect 29 0 32 0;
+#X connect 29 1 35 0;
+#X connect 30 0 29 0;
+#X connect 31 0 29 0;
+#X connect 33 0 34 0;
+#X connect 34 0 29 0;
+#X coords 0 0 1 1 200 140 0;

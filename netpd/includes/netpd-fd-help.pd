@@ -1,0 +1,47 @@
+#N canvas 214 169 435 561 10;
+#X obj 19 219 hsl 128 17 0 127 0 0 sendsymbol2 receivesymbol2 empty
+-2 -6 0 8 -262144 -1 -1 0 1;
+#X floatatom 27 338 5 0 0 0 - - -;
+#X obj 22 29 hsl 128 15 0 127 0 0 empty empty empty -2 -6 0 8 -262144
+-1 -1 0 1;
+#X text 15 82 ___________________________________________________;
+#X text 11 280 ___________________________________________________
+;
+#X text 40 240 ^;
+#X text 40 247 ^ see slider-properties;
+#X text 44 46 ^ imitate another user changing the value;
+#X text 17 4 [netpd-fd];
+#X text 16 134 [netpd-fd] is almost the same as [netpd-f]. it is used
+to update guis \, if another user changes the value.;
+#X obj 19 65 netpd-a sendsymbol2;
+#X obj 27 307 netpd-r sendsymbol2;
+#X floatatom 216 247 5 0 0 0 - - -;
+#X text 253 247 < broadcasted value;
+#X text 65 338 < see broadcasted value;
+#X obj 176 217 netpd-fd sendsymbol2 receivesymbol2 1000;
+#X text 16 164 in order to save bandwidth \, it only broadcasts the
+actual value after the slider stops moving. set delay time with optional
+3 argument. the default is 50;
+#X text 19 112 [netpd-fd <sendsymbol> <receivesymbol> [senddelay]]
+;
+#X text 17 360 ___________________________________________________
+;
+#X floatatom 188 480 5 0 0 0 - - -;
+#X obj 188 515 s netpd-receive;
+#X floatatom 28 473 5 0 0 0 - - -;
+#X obj 28 508 s netpd-receive;
+#X text 23 427 update value locally:;
+#X text 24 453 with gui-update:;
+#X text 187 447 without gui-update:;
+#X text 185 461 (in order to save cpu-load);
+#X text 23 407 for internal use (e.g. automation);
+#X text 23 385 >>>>>>>>>ONLY FOR ADVANCED PURPOSES<<<<<<<<<<<<<<;
+#X msg 28 489 sendsymbol2 \$1;
+#X msg 188 496 sendsymbol2-nogui \$1;
+#X connect 2 0 10 0;
+#X connect 11 0 1 0;
+#X connect 15 0 12 0;
+#X connect 19 0 30 0;
+#X connect 21 0 29 0;
+#X connect 29 0 22 0;
+#X connect 30 0 20 0;

@@ -1,0 +1,59 @@
+#N canvas 291 37 445 690 10;
+#X obj 17 269 hsl 128 17 0 127 0 0 sendsymbol3 receivesymbol3 empty
+-2 -6 0 8 -262144 -1 -1 0 1;
+#X floatatom 25 467 5 0 0 0 - - -;
+#X obj 20 44 hsl 128 15 0 127 0 0 empty empty empty -2 -6 0 8 -262144
+-1 -1 0 1;
+#X text 13 97 ___________________________________________________;
+#X text 17 414 ___________________________________________________
+;
+#X text 37 291 ^;
+#X text 37 298 ^ see slider-properties;
+#X text 63 467 < see broadcasted vcalues;
+#X text 42 61 ^ imitate another user changing the value;
+#X obj 17 80 netpd-a sendsymbol3;
+#X obj 25 436 netpd-r sendsymbol3;
+#X symbolatom 48 348 10 0 0 0 - - -;
+#X symbolatom 125 349 10 0 0 0 - - -;
+#X obj 31 348 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X text 29 390 see 'help-netpd-x.pd' to get more info about the;
+#X text 29 404 e(x)tended abs and [netpd-x].;
+#X text 59 331 LOAD__and__SAVE presets:;
+#X obj 31 370 netpd-x \$0 help-netpd-fdx;
+#X text 14 154 [netpd-fdx] is almost the same as [netpd-fx]. it is
+used to update guis \, if another user changes the value.;
+#X text 17 14 [netpd-fdx] extended version of [netpd-fd];
+#X text 14 224 [netpd-fdx] is like [netpd-fd] \, but with [netpd-fdx]
+you can save or load presets in combination with [netpd-x].;
+#X floatatom 216 295 5 0 0 0 - - -;
+#X text 253 295 < broadcasted value;
+#X text 16 124 [netpd-fdx \$0 <sendsymbol> <receivesymbol> <startvalue>]
+;
+#X text 17 492 ___________________________________________________
+;
+#X floatatom 188 612 5 0 0 0 - - -;
+#X obj 188 647 s netpd-receive;
+#X floatatom 28 605 5 0 0 0 - - -;
+#X obj 28 640 s netpd-receive;
+#X text 24 585 with gui-update:;
+#X text 187 579 without gui-update:;
+#X text 185 593 (in order to save cpu-load);
+#X text 23 539 for internal use (e.g. automation);
+#X text 23 517 >>>>>>>>>ONLY FOR ADVANCED PURPOSES<<<<<<<<<<<<<<;
+#X text 14 187 in order to save bandwidth \, it only broadcasts the
+actual value \, after the slider stops moving.;
+#X msg 28 621 sendsymbol3 \$1;
+#X msg 188 628 sendsymbol3-nogui \$1;
+#X text 23 559 update value locally (not broadcasted!!):;
+#X obj 167 268 netpd-fdx \$0 sendsymbol3 receivesymbol3 50;
+#X connect 2 0 9 0;
+#X connect 10 0 1 0;
+#X connect 11 0 17 0;
+#X connect 12 0 17 1;
+#X connect 13 0 17 0;
+#X connect 25 0 36 0;
+#X connect 27 0 35 0;
+#X connect 35 0 28 0;
+#X connect 36 0 26 0;
+#X connect 38 0 21 0;

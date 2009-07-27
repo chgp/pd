@@ -1,0 +1,61 @@
+#N canvas 102 135 472 672 10;
+#X obj 23 296 hsl 128 17 0 127 0 0 amp ampr amp -2 -6 1 8 -262144 -1
+-1 0 1;
+#X obj 23 330 hsl 128 17 0 127 0 0 freq freqr freq -2 -6 1 8 -262144
+-1 -1 5000 1;
+#X text 21 487 creation arguments:;
+#X symbolatom 20 381 10 0 0 0 - - -;
+#X obj 32 408 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X symbolatom 105 430 10 0 0 0 - - -;
+#X text 13 6 [netpd-x];
+#X obj 133 527 netpd-r amp;
+#X obj 44 527 netpd-r freq;
+#X obj 44 550 mtof;
+#X obj 44 572 osc~;
+#X obj 44 597 *~;
+#X obj 133 571 / 127;
+#X obj 44 623 dac~;
+#X obj 187 629 netpd-fx;
+#X obj 247 629 netpd-fdx;
+#X obj 314 629 netpd-ax;
+#X obj 174 330 netpd-fx \$0 freq freqr 50;
+#X text 19 261 EXAMPLE USING [netpd-x]:;
+#X text 51 408 < opens an openpanel to load a preset;
+#X text 112 448 ^ saves preset with the name <patchname>-<presetname>.pst
+;
+#X text 224 604 see helpfiles of:;
+#X obj 374 629 netpd-tx;
+#X text 32 102 preset-files are saved in the netpd/presets-dir with
+the filename '<patchname>-<presetname>.pst';
+#X text 20 77 -;
+#X text 23 160 -;
+#X text 32 76 it is used to save the actual state into a preset file
+and also to load a preset file into the patch;
+#X text 33 159 it garantuees that all clients has the same patch state.
+with [netpd-x] the time \, when a client joins a session \, is indifferent
+([netpd-x] will send a 'state-send-request' \, if necessary).;
+#X text 32 129 !! [netpd-x] won't work without _preset.pd in netpd/.
+!!;
+#X text 33 214 !! this feature only works \, when the patch was loaded
+by creator !!;
+#X text 19 38 [netpd-x] is the patch state manager of netpd. it provides
+two main funtions:;
+#X text 181 429 <- enter a presetname;
+#X text 56 395 ^ loads preset with the name <patchname>-<presetname>.pst
+;
+#X text 97 381 <- enter a presetname;
+#X obj 174 296 netpd-fx \$0 amp ampr 20;
+#X obj 20 464 netpd-x \$0 netpd-x-help;
+#X text 34 243 !! the second argument must be the patchname !!;
+#X text 20 500 [netpd-x \$0 <patchname>] (must be the patchname);
+#X connect 3 0 35 0;
+#X connect 4 0 35 0;
+#X connect 5 0 35 1;
+#X connect 7 0 12 0;
+#X connect 8 0 9 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 11 0 13 0;
+#X connect 11 0 13 1;
+#X connect 12 0 11 1;

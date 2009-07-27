@@ -1,0 +1,57 @@
+#N canvas 244 62 459 669 10;
+#X obj 17 246 hsl 128 17 0 127 0 0 sendsymbol4 receivesymbol4 empty
+-2 -6 0 8 -262144 -1 -1 8900 1;
+#X floatatom 25 444 5 0 0 0 - - -;
+#X obj 20 43 hsl 128 15 0 127 0 0 empty empty empty -2 -6 0 8 -262144
+-1 -1 0 1;
+#X text 13 96 ___________________________________________________;
+#X text 17 391 ___________________________________________________
+;
+#X text 24 270 ^;
+#X text 24 277 ^ see slider-properties;
+#X text 42 60 ^ imitate another user changing the value;
+#X symbolatom 48 325 10 0 0 0 - - -;
+#X symbolatom 122 326 10 0 0 0 - - -;
+#X obj 31 325 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X text 29 367 see 'help-netpd-x.pd' to get more info about the;
+#X text 29 381 e(x)tended abs and [netpd-x].;
+#X text 67 305 LOAD__and__SAVE presets:;
+#X text 16 123 [netpd-fdx \$0 <sendsymbol> <receivesymbol> <setvalue>]
+;
+#X obj 150 246 netpd-fx \$0 sendsymbol4 receivesymbol4 89;
+#X obj 31 347 netpd-x \$0 help-netpd-fx;
+#X text 14 150 [netpd-fx] is used to update guis \, if another user
+changes the value. it also provides a feedback-suppression.;
+#X obj 17 79 netpd-a sendsymbol4;
+#X obj 25 413 netpd-r sendsymbol4;
+#X floatatom 200 276 5 0 0 0 - - -;
+#X text 235 276 < broadcasted value;
+#X text 16 15 [netpd-fx] extended version of [netpd-f];
+#X text 17 471 ___________________________________________________
+;
+#X floatatom 188 591 5 0 0 0 - - -;
+#X obj 188 626 s netpd-receive;
+#X floatatom 28 584 5 0 0 0 - - -;
+#X obj 28 619 s netpd-receive;
+#X text 24 564 with gui-update:;
+#X text 187 558 without gui-update:;
+#X text 185 572 (in order to save cpu-load);
+#X text 23 496 >>>>>>>>>ONLY FOR ADVANCED PURPOSES<<<<<<<<<<<<<<;
+#X msg 28 600 sendsymbol4 \$1;
+#X msg 188 607 sendsymbol4-nogui \$1;
+#X text 23 538 update value locally (not broadcasted!!):;
+#X text 13 197 [netpd-fx] is like [netpd-f] \, but with [netpd-fx]
+you can save or load presets in combination with [netpd-x].;
+#X text 63 444 < see broadcasted values;
+#X text 23 518 for local use (e.g. automation);
+#X connect 2 0 18 0;
+#X connect 8 0 16 0;
+#X connect 9 0 16 1;
+#X connect 10 0 16 0;
+#X connect 15 0 20 0;
+#X connect 19 0 1 0;
+#X connect 24 0 33 0;
+#X connect 26 0 32 0;
+#X connect 32 0 27 0;
+#X connect 33 0 25 0;

@@ -1,0 +1,164 @@
+#N canvas 75 92 479 468 10;
+#N canvas 339 34 488 558 catatauator 1;
+#X msg 353 277 read catatau.txt;
+#X msg 293 237 rewind;
+#X obj 271 266 textfile;
+#X obj 220 182 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#N canvas 425 116 617 638 querty 0;
+#X msg 14 122 occam;
+#X msg 77 126 decartes;
+#X msg 108 104 voce;
+#X msg 148 127 eu;
+#X obj 126 368 outlet;
+#X obj 33 7 key;
+#X obj 14 83 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 77 79 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 109 79 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 230 83 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 254 83 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 285 83 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 320 80 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 82 12 nbx 5 20 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 20
+-262144 -1 -1 0 256;
+#X obj 143 79 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 174 82 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 203 82 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 172 107 tucano;
+#X msg 257 132;
+#X obj 45 83 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 44 102;
+#X msg 199 127;
+#X msg 233 109;
+#X obj 14 49 select 113 119 101 114 116 121 117 105 111 91 93;
+#X obj 348 81 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 286 106;
+#X msg 320 131;
+#X msg 349 106;
+#X connect 5 0 13 0;
+#X connect 5 0 23 0;
+#X connect 6 0 0 0;
+#X connect 7 0 1 0;
+#X connect 8 0 2 0;
+#X connect 9 0 22 0;
+#X connect 10 0 18 0;
+#X connect 11 0 25 0;
+#X connect 12 0 26 0;
+#X connect 14 0 3 0;
+#X connect 15 0 17 0;
+#X connect 16 0 21 0;
+#X connect 19 0 20 0;
+#X connect 23 0 6 0;
+#X connect 23 1 19 0;
+#X connect 23 2 7 0;
+#X connect 23 3 8 0;
+#X connect 23 4 14 0;
+#X connect 23 5 15 0;
+#X connect 23 6 16 0;
+#X connect 23 7 9 0;
+#X connect 23 8 10 0;
+#X connect 23 9 11 0;
+#X connect 23 10 12 0;
+#X connect 23 11 24 0;
+#X connect 24 0 27 0;
+#X restore 313 57 pd querty;
+#X obj 376 229 loadbang;
+#X obj 223 204 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 278 137 prepent read;
+#X obj 280 103 openpanel;
+#X obj 181 183 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 133 297 prepend set;
+#X msg 17 445 Coloquem aqui patches criados por voces. eh soh criar
+uma pasta e tacar os patches!;
+#X obj 291 301 list length;
+#X floatatom 291 330 5 0 0 0 - - -;
+#X text 206 182 >;
+#X obj 21 216 random;
+#X obj 107 127 bng 30 250 50 0 empty empty empty 17 7 0 10 -24198 -1
+-1;
+#X floatatom 26 255 5 0 0 0 - - -;
+#X msg 69 418 set \$8;
+#X obj 39 356 t b f;
+#X msg 69 378 set \, add2 set \, adddollar \$1;
+#X text 159 183 <<;
+#X symbolatom 102 231 20 0 0 0 - - -;
+#X msg 132 421 criar;
+#X obj 46 292 select 0;
+#X obj 13 313 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 184 424 outlet;
+#X obj 234 409 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 124 400 t b;
+#X obj 383 352 outlet;
+#X msg 387 318 teste;
+#X floatatom 111 162 5 0 0 0 - - -;
+#X text 155 160 palavras;
+#X obj 273 360 select 1;
+#X text 108 184 linha:;
+#X text 109 206 abrir arquivo:;
+#X text 56 19 ideal utilizar arquivos texto comuns com paragrafos completos
+;
+#X connect 0 0 2 0;
+#X connect 1 0 2 0;
+#X connect 2 0 10 0;
+#X connect 2 0 12 0;
+#X connect 2 1 1 0;
+#X connect 3 0 2 0;
+#X connect 5 0 0 0;
+#X connect 6 0 8 0;
+#X connect 7 0 2 0;
+#X connect 8 0 7 0;
+#X connect 8 0 9 0;
+#X connect 9 0 1 0;
+#X connect 10 0 11 0;
+#X connect 11 0 18 0;
+#X connect 12 0 13 0;
+#X connect 13 0 15 1;
+#X connect 13 0 31 0;
+#X connect 13 0 33 0;
+#X connect 15 0 17 0;
+#X connect 16 0 15 0;
+#X connect 17 0 24 0;
+#X connect 18 0 22 0;
+#X connect 18 0 23 0;
+#X connect 18 0 28 0;
+#X connect 19 0 11 0;
+#X connect 19 1 20 0;
+#X connect 20 0 18 0;
+#X connect 23 0 26 0;
+#X connect 24 0 25 0;
+#X connect 24 1 19 0;
+#X connect 28 0 23 0;
+#X connect 30 0 29 0;
+#X connect 33 0 3 0;
+#X coords 0 -1 1 1 150 150 1 100 100;
+#X restore 14 15 pd catatauator;
+#X msg 233 153 set;
+#X obj 173 144 bng 30 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 13 264;
+#X obj 23 217 prepent add2;
+#X msg 54 409 criar;
+#X obj 64 362 prepent set;
+#X connect 0 0 4 0;
+#X connect 0 0 6 0;
+#X connect 1 0 3 0;
+#X connect 2 0 1 0;
+#X connect 4 0 3 0;
+#X connect 6 0 5 0;
+#X coords 0 0 1 1 300 500 0;

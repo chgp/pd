@@ -1,0 +1,140 @@
+#N canvas 55 99 1110 641 10;
+#X floatatom 679 328 0 0 128 0 - - -;
+#X msg -5 254 add alias;
+#X msg -5 272 add bind;
+#X msg -5 290 add break;
+#X msg -5 309 add built-in;
+#X msg -5 328 add case;
+#X msg 321 472 delete bind;
+#X msg 321 490 delete break;
+#X msg 321 509 delete built-in;
+#X msg 321 528 delete case;
+#X obj 283 334 symbol;
+#X msg 302 314 case;
+#X msg 302 295 built-in;
+#X msg 302 276 break;
+#X msg 302 258 bind;
+#X msg 302 240 alias;
+#X obj 283 353 send 2index;
+#X obj 61 480 receive 2index;
+#X obj 301 555 send 2index;
+#X obj -18 350 send 2index;
+#X text -11 236 add new item to map;
+#X text 318 432 delete item from map;
+#X msg 321 454 delete alias;
+#X text 162 71 auto :: 1_sets auto ON \, 0_sets auto OFF (default off)
+;
+#X obj 62 557 print INDEX;
+#X obj 679 369 send 2index;
+#X text 678 306 query an item at index #;
+#X text 164 58 n :: initial max. number of elements in list (default:
+128);
+#X obj 557 11 index;
+#X obj 107 348 send 2index;
+#X text 82 269 add new item to map at index#;
+#X msg 107 297 add foo 7;
+#X msg 114 320 add bar 2;
+#X text 88 281 (if that slot is still free);
+#X obj 471 522 send 2index;
+#X text 415 471 delete item at index# from map;
+#X msg 471 486 delete 6;
+#X text 60 105 "0" indicates success \; "-1" indicates an error;
+#X text 19 89 NOTE: indices start counting from "1" !!!;
+#X obj 61 507 netpd-index \$0 name 10 1;
+#X obj 495 174 netpd-x \$0 netpd-index-help;
+#X text 20 7 netpd-index:: index for netpd \, create a symbol->int
+map;
+#N canvas 0 0 450 300 graph1 0;
+#X coords 0 1 100 -1 200 400 1;
+#X restore 676 205 graph;
+#X text 680 217 not broadcastet operations \,;
+#X text 679 231 but gives you instantly some;
+#X msg 686 437 dump;
+#X msg 727 437 bang;
+#X obj 681 493 send 2index;
+#X text 678 243 output:;
+#N canvas 677 192 673 568 netpd_level_1 0;
+#X obj 68 444 outlet;
+#X msg 103 397 sort;
+#X msg 106 307 compact;
+#X text 165 307 compact the entries \, so there are no holes in the
+map;
+#X text 151 399 sort the elements alphabetically;
+#X text 164 344 this does not produce any immediate output!;
+#X text 169 325 (e.g. "1 ... foo \, 3 ... bar" --> "1 ... foo \, 2
+... bar");
+#X text 148 416 (e.g. "1 ... foo \, 2 ... bar" --> "1 ... bar \, 2
+... foo");
+#X text 153 434 this does not produce any immediate output!;
+#X msg 42 93 reset;
+#X text 31 74 clear map;
+#X msg 84 171 auto \$1;
+#X obj 84 150 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0 1
+;
+#X obj 117 216 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0
+1;
+#X msg 117 237 resize \$1;
+#X text 155 132 in AUTO mode \, unknown symbols are automatically added
+to the map \;;
+#X text 156 159 in NON-AUTO mode (default) \, only ADDed symbols (eg.
+"add <symbol>") are added to the map;
+#X text 216 213 normally \, the map will resize automatically if it
+gets to small. you can prevent it from resizing by sending a "resize
+0" message.;
+#X text 33 -45 this administrative commands are only netpd level 1
+\, not saved in presets(netpd-level 3). but if you want it \, just
+route this commands trough a [netpd-ax \$0 anyname]...;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 9 0 0 0;
+#X connect 11 0 0 0;
+#X connect 12 0 11 0;
+#X connect 13 0 14 0;
+#X connect 14 0 0 0;
+#X restore 193 427 pd netpd_level_1;
+#X text 128 39 creation : "netpd-index [$0 anyname <n> [<auto>]]";
+#X text 574 106 adapted by enrique erne \, moritz wettstein;
+#N canvas 0 0 450 300 graph1 0;
+#X coords 0 1 100 -1 500 220 1;
+#X restore -18 156 graph;
+#X text -7 163 this will be broadcastet \, and with the netpd-x-system
+it is possible to save the contents from index.;
+#X text 497 158 check help-file:;
+#X text 618 11 is part of zexy;
+#X text 311 391 also broadcastet (but only netpd-level 1):;
+#X obj 183 573 netpd-r name;
+#X obj 184 595 print received_from_the_net;
+#X msg -11 439 reset;
+#X text 258 200 get item index (gives output;
+#X text 257 212 instantly \, not broadcastet);
+#X text 251 225 (evt. add new item-->broadcastet);
+#X obj 414 321 netpd-r name;
+#X obj 414 355 print broadcastet!;
+#X connect 0 0 25 0;
+#X connect 1 0 19 0;
+#X connect 2 0 19 0;
+#X connect 3 0 19 0;
+#X connect 4 0 19 0;
+#X connect 5 0 19 0;
+#X connect 6 0 18 0;
+#X connect 7 0 18 0;
+#X connect 8 0 18 0;
+#X connect 9 0 18 0;
+#X connect 10 0 16 0;
+#X connect 11 0 10 0;
+#X connect 12 0 10 0;
+#X connect 13 0 10 0;
+#X connect 14 0 10 0;
+#X connect 15 0 10 0;
+#X connect 17 0 39 0;
+#X connect 22 0 18 0;
+#X connect 31 0 29 0;
+#X connect 32 0 29 0;
+#X connect 36 0 34 0;
+#X connect 39 0 24 0;
+#X connect 45 0 47 0;
+#X connect 46 0 47 0;
+#X connect 49 0 39 0;
+#X connect 57 0 58 0;
+#X connect 59 0 39 0;
+#X connect 63 0 64 0;

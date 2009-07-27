@@ -1,0 +1,58 @@
+#N canvas 125 18 499 633 10;
+#X declare -path ../abs;
+#X obj 13 215 osc~;
+#X obj 15 121 hsl 128 15 0 127 0 0 freq freq-r frequency 7 7 1 7 -262144
+-1 -1 3300 1;
+#X obj 13 191 mtof;
+#X obj 155 121 hsl 128 15 0 1 0 0 amp amp-r amplitude 7 7 1 7 -262144
+-1 -1 1270 1;
+#X obj 14 261 dac~;
+#X floatatom 25 170 5 0 0 0 - - -;
+#X floatatom 210 170 5 0 0 0 - - -;
+#X text 295 120 <- see properties;
+#X text 62 450 - all users hear \, if values are changed;
+#X text 62 463 - the guis show always the actual value;
+#X obj 13 147 netpd-fx \$0 freq freq-r 69;
+#X text 22 434 let's call such a patch: netpd-level 3;
+#X obj 82 282 netpd-x \$0 03_level_3;
+#X obj 82 227 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X symbolatom 101 228 10 0 0 0 - - -;
+#X symbolatom 224 205 10 0 0 0 - - -;
+#X text 300 205 <- save actual slidervalues;
+#X text 175 230 <- load a preset to set slidervalues;
+#X text 192 243 'bang' opens the openpanel. have a look;
+#X text 196 259 at the netpd/presets-directory.;
+#X text 63 476 - actual values can be saved in a preset-file;
+#X text 63 490 - users who join a running session will get automatically
+all actual values;
+#X text 14 36 this is the same patch as 02_leve_02.pd \, but it uses
+the e(x)tended versions of the netpd-abstractions (names ending with
+an 'x'). with this system you can save all settings of your patch in
+a preset-file.;
+#X obj 14 237 *~ 0;
+#X text 364 168 ^initial value;
+#X text 17 315 [netpd-x] has two functions:;
+#X text 56 332 - it handles the saving/loading of a preset-file;
+#X text 56 349 - it recognizes \, if another instance of your netpd-patch
+is openened. (this happens when a new user is joining a session). if
+so \, it will send all actual values to the new users instance in order
+to set all parameters to the actual values.;
+#X text 15 11 NETPD-LEVEL 3;
+#X obj 18 600 declare -path ../abs;
+#X text 15 566 this won't be necessary in your netpd-patches \, since
+creator already adds the path:;
+#X text 15 543 - - - - - - - - - - - - - - - - - - - - - - - - - -
+- - - -;
+#X obj 210 146 netpd-fx \$0 amp amp-r 0.1;
+#X connect 0 0 23 0;
+#X connect 2 0 0 0;
+#X connect 10 0 2 0;
+#X connect 10 0 5 0;
+#X connect 13 0 12 0;
+#X connect 14 0 12 0;
+#X connect 15 0 12 1;
+#X connect 23 0 4 0;
+#X connect 23 0 4 1;
+#X connect 32 0 6 0;
+#X connect 32 0 23 1;

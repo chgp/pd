@@ -1,0 +1,38 @@
+#N canvas 336 3 451 456 10;
+#X text 18 101 [netpd-ax \$0 <sendsymbol>];
+#X floatatom 19 151 5 0 0 0 - - -;
+#X symbolatom 24 171 10 0 0 0 - - -;
+#X text 19 17 BROADCASTING ANY DATA (extended);
+#X obj 13 214 netpd-ax \$0 broadcast;
+#X obj 15 270 netpd-r broadcast;
+#X obj 15 295 print;
+#X msg 126 165 set \$1;
+#X msg 13 130 eins two trois;
+#X floatatom 126 133 5 0 0 0 - - -;
+#X symbolatom 165 134 10 0 0 0 - - -;
+#X symbolatom 150 254 10 0 0 0 - - -;
+#X symbolatom 224 255 10 0 0 0 - - -;
+#X obj 133 254 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X text 131 296 see 'help-netpd-x.pd' to get more info about the;
+#X text 131 310 e(x)tended abs and [netpd-x].;
+#X obj 133 276 netpd-x \$0 help-netpd-ax;
+#X text 169 234 LOAD__and__SAVE presets:;
+#X text 12 343 set-messages will not be broadcasted \, but stored inside
+the abs. this is used to set a value when opening the patch without
+overwriting the value in case somebody else is already using the same
+patch.;
+#X text 12 407 if you set a value by set-message \, it will also be
+saved with the preset-save function of [netpd-x].;
+#X text 17 49 [netpd-ax] is basically the same as [netpd-a] \, but
+it provides further functions in order to load and save presets.;
+#X connect 1 0 4 0;
+#X connect 2 0 4 0;
+#X connect 5 0 6 0;
+#X connect 7 0 4 0;
+#X connect 8 0 4 0;
+#X connect 9 0 7 0;
+#X connect 10 0 7 0;
+#X connect 11 0 16 0;
+#X connect 12 0 16 1;
+#X connect 13 0 16 0;

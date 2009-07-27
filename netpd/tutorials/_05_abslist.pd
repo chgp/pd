@@ -1,0 +1,94 @@
+#N canvas 154 16 453 634 10;
+#X declare -path ../abs;
+#X obj 62 516 dac~;
+#N canvas 253 260 243 207 save/load 0;
+#X obj 130 101 r \$0-save.pst;
+#X obj 33 117 r \$0-load.pst;
+#X obj 13 98 r \$0-open.pst;
+#X obj 13 143 outlet;
+#X obj 130 124 outlet;
+#X obj 12 5 loadbang;
+#X obj 12 69 s \$0-set.load.pst;
+#X obj 84 48 s \$0-set.save.pst;
+#X msg 12 27 set load;
+#X msg 83 27 set save;
+#X connect 0 0 4 0;
+#X connect 1 0 3 0;
+#X connect 2 0 3 0;
+#X connect 5 0 8 0;
+#X connect 5 0 9 0;
+#X connect 8 0 6 0;
+#X connect 9 0 7 0;
+#X restore 223 412 pd save/load;
+#X obj 24 327 netpd-fx \$0 decay1-s decay1-r;
+#X obj 163 375 netpd-fx \$0 decay3-s decay3-r;
+#X obj 96 350 netpd-fx \$0 decay2-s decay2-r;
+#X obj 8 474 pling 440;
+#X obj 78 474 pling 550;
+#X obj 147 473 pling 660;
+#X obj 8 449 f;
+#X obj 78 449 f;
+#X obj 147 452 f;
+#X obj 41 419 metro 700;
+#X msg 41 398 1;
+#X obj 41 376 loadbang;
+#N canvas 431 199 244 118 abslist 0;
+#X msg 33 22 pling;
+#X restore 29 293 pd abslist;
+#X text 212 480 <- this is an abs;
+#X text 109 293 <- have a look;
+#X text 7 15 LINKING PATCHES AND ABSTARCTIONS;
+#X obj 223 436 netpd-x \$0 _05_abslist-ctrl;
+#X obj 14 615 declare -path ../abs;
+#X text 11 581 this won't be necessary in your netpd-patches \, since
+creator already adds the path:;
+#X text 11 558 - - - - - - - - - - - - - - - - - - - - - - - - - -
+- - - -;
+#N canvas 137 213 262 78 _05_abslist-gui 0;
+#X obj 11 11 hsl 128 15 10 1000 0 0 decay1-s decay1-r decay1 7 7 1
+7 -262144 -1 -1 100 1;
+#X symbolatom 172 13 10 0 0 0 - #0-set.load.pst #0-load.pst;
+#X symbolatom 172 32 10 0 0 0 - #0-set.save.pst #0-save.pst;
+#X obj 156 13 bng 14 250 50 0 \$0-open.pst \$0-bli empty 0 -6 0 8 -262144
+-1 -1;
+#X obj 11 31 hsl 128 15 10 1000 0 0 decay2-s decay2-r decay2 7 7 1
+7 -262144 -1 -1 0 1;
+#X obj 11 51 hsl 128 15 10 1000 0 0 decay3-s decay3-r decay3 7 7 1
+7 -262144 -1 -1 100 1;
+#X restore 251 293 pd _05_abslist-gui;
+#X text 7 36 if you upload your patch \, which uses some abstraction
+\, the patch won't work on other users machines \, because it is lacking
+the absractions.;
+#X text 7 89 it is possible to upload the abstraction manually before
+you upload your patch \, but it's nicer to use the automatic abstraction
+synchronizing mechanism of creator.;
+#X text 8 143 to specify the abstractions \, that are used in your
+patch and should be uploaded with it \, just create a subpatch named
+[pd abslist] anywhere in your patch and put for each abstraction a
+msg-box with the name into this subpatch.;
+#X text 8 209 before you share your patch with others \, you should
+first save the abstractions in .../netpd/abs. this is the place where
+creator is looking for them. if creator couldn't find a certain abstraction
+\, it won't upload the patch and output an error-msg '<abstraction
+name>: missing abs'.;
+#X obj 156 506 cnv 15 280 40 empty empty empty 20 12 0 14 -24198 -66577
+0;
+#X text 163 507 before loading this patch in creator;
+#X text 159 522 move [pling] to ../netpd/abs;
+#X connect 1 0 18 0;
+#X connect 1 1 18 1;
+#X connect 2 0 8 1;
+#X connect 3 0 10 1;
+#X connect 4 0 9 1;
+#X connect 5 0 0 0;
+#X connect 6 0 0 0;
+#X connect 6 0 0 1;
+#X connect 7 0 0 1;
+#X connect 8 0 5 0;
+#X connect 9 0 6 0;
+#X connect 10 0 7 0;
+#X connect 11 0 8 0;
+#X connect 11 0 9 0;
+#X connect 11 0 10 0;
+#X connect 12 0 11 0;
+#X connect 13 0 12 0;

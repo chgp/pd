@@ -1,0 +1,34 @@
+#N canvas 387 179 612 405 10;
+#N canvas 0 0 450 300 graph3 0;
+#X array array2 66 float 0;
+#X coords 0 1 65 -1 200 140 1;
+#X restore 60 37 graph;
+#X text 281 54 inlet: array size;
+#X floatatom 274 40 5 0 0 0 - - -;
+#X obj 484 319 print CHECK;
+#X text 421 277 see what is broadcasted:;
+#X text 25 298 only changing values will be broadcasted.;
+#X text 24 8 BROADCASTING DATA FROM ARRAYS (extended);
+#X symbolatom 295 142 10 0 0 0 - - -;
+#X symbolatom 375 143 10 0 0 0 - - -;
+#X obj 278 142 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X text 311 124 LOAD___and___SAVE presets:;
+#X text 276 185 see 'help-netpd-x.pd' to get more info about the;
+#X text 275 202 e(x)tended abs and [netpd-x].;
+#X obj 484 295 netpd-r array2;
+#X obj 274 76 netpd-tx \$0 array2 20;
+#X obj 278 164 netpd-x \$0 help-netpd-tx;
+#X text 274 96 [netpd-tx \$0 <arrayname> <arraysyze>];
+#X floatatom 67 242 5 0 0 0 - array2-resize-r array2-resize;
+#X text 114 241 <- this is also possible to resize the array;
+#X text 132 257 have a look at the properties.;
+#X text 23 357 the update rate is dependent on the arraysize \, but
+maximum 3Hz (at least 330ms/period).;
+#X text 23 323 don't use [netpd-tx] to broadcast audiosamples in order
+to save bandwidth. otherwise you may block the netpd-server.;
+#X connect 2 0 14 0;
+#X connect 7 0 15 0;
+#X connect 8 0 15 1;
+#X connect 9 0 15 0;
+#X connect 13 0 3 0;

@@ -1,0 +1,23 @@
+#N canvas 357 217 512 392 10;
+#N canvas 0 0 450 300 graph3 0;
+#X array array 12 float 0;
+#X coords 0 1 11 -1 200 140 1;
+#X restore 60 36 graph;
+#X text 281 53 inlet: array size;
+#X floatatom 274 39 5 0 0 0 - - -;
+#X text 33 6 BROADCASTING DATA FROM ARRAYS;
+#X obj 329 168 print CHECK;
+#X text 325 125 see what is broadcasted:;
+#X text 27 263 only changing values will be broadcasted.;
+#X obj 329 144 netpd-r array;
+#X obj 274 75 netpd-t array 20;
+#X floatatom 67 213 5 0 0 0 - array-resize-r array-resize;
+#X text 114 212 <- this is also possible to resize the array;
+#X text 132 228 have a look at the properties.;
+#X text 29 327 the update rate is dependent on the arraysize \, but
+maximum 1/3Hz (330ms/period).;
+#X text 26 284 don't use [netpd-t] to broadcast audiosamples in order
+to save bandwidth. otherwise you may block the netpd-server.;
+#X text 274 95 [netpd-t <arrayname> <arraysize>];
+#X connect 2 0 8 0;
+#X connect 7 0 4 0;

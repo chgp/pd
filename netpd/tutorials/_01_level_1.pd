@@ -1,0 +1,46 @@
+#N canvas 121 80 476 566 10;
+#X declare -path ../abs;
+#X obj 13 196 osc~;
+#X obj 16 81 hsl 128 15 0 127 0 0 freq freq-r frequency 7 7 1 7 -262144
+-1 -1 1200 1;
+#X obj 13 172 mtof;
+#X obj 161 81 hsl 128 15 0 1 0 0 empty empty amplitude 7 7 1 7 -262144
+-1 -1 3300 1;
+#X obj 14 242 dac~;
+#X obj 16 298 print DATA;
+#X text 89 300 <- see the data that comes back from the server;
+#X floatatom 25 151 5 0 0 0 - - -;
+#X floatatom 179 153 5 0 0 0 - - -;
+#X obj 13 128 netpd-r freq;
+#X obj 160 132 netpd-r amp;
+#X obj 13 103 netpd-a freq;
+#X obj 158 105 netpd-a amp;
+#X text 56 452 - the guis are not updated;
+#X text 16 26 we modified the patch in order to broadcast the values
+of the sliders. when you upload such a patch \, the other user will
+hear \, when you move the sliders.;
+#X text 35 338 when you upload this patch \, the other users will hear
+\, but not see the changed values \, because the guis (the sliders)
+are not updated.;
+#X text 56 420 - this is the simplest way to make your patch netpd-capable.
+all users hear when you change the values;
+#X obj 14 218 *~ 0;
+#X text 15 403 let's call such a patch: netpd-level 1;
+#X text 19 5 NETPD-LEVEL 1;
+#X obj 16 276 r netpd-receive;
+#X obj 14 542 declare -path ../abs;
+#X text 11 508 this won't be necessary in your netpd-patches \, since
+creator already adds the path:;
+#X text 8 483 - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- - -;
+#X connect 0 0 17 0;
+#X connect 1 0 11 0;
+#X connect 2 0 0 0;
+#X connect 3 0 12 0;
+#X connect 9 0 2 0;
+#X connect 9 0 7 0;
+#X connect 10 0 8 0;
+#X connect 10 0 17 1;
+#X connect 17 0 4 0;
+#X connect 17 0 4 1;
+#X connect 20 0 5 0;

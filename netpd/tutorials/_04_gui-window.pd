@@ -1,0 +1,64 @@
+#N canvas 199 14 440 524 10;
+#X declare -path ../abs;
+#X obj 17 329 osc~;
+#X obj 17 305 mtof;
+#X obj 18 375 dac~;
+#X floatatom 29 284 5 0 0 0 - - -;
+#X floatatom 157 318 5 0 0 0 - - -;
+#X obj 17 261 netpd-fx \$0 freq freq-r 69;
+#N canvas 253 260 241 205 save/load 0;
+#X obj 130 101 r \$0-save.pst;
+#X obj 33 117 r \$0-load.pst;
+#X obj 13 98 r \$0-open.pst;
+#X obj 13 143 outlet;
+#X obj 130 124 outlet;
+#X obj 12 5 loadbang;
+#X obj 12 69 s \$0-set.load.pst;
+#X obj 84 48 s \$0-set.save.pst;
+#X msg 12 27 set load;
+#X msg 83 27 set save;
+#X connect 0 0 4 0;
+#X connect 1 0 3 0;
+#X connect 2 0 3 0;
+#X connect 5 0 8 0;
+#X connect 5 0 9 0;
+#X connect 8 0 6 0;
+#X connect 9 0 7 0;
+#X restore 153 362 pd save/load;
+#X text 187 99 patch is opened with creator;
+#X text 166 85 <- this subpatch will be displayed when the;
+#X obj 18 351 *~ 0;
+#X obj 157 287 netpd-fx \$0 amp amp-r 0.05;
+#N canvas 137 213 256 72 _04_gui-window-gui 0;
+#X obj 11 11 hsl 128 15 0 127 0 0 freq freq-r frequency 7 7 1 7 -262144
+-1 -1 4500 1;
+#X obj 11 32 hsl 128 15 0 1 0 0 amp amp-r amplitude 7 7 1 7 -262144
+-1 -1 0 1;
+#X symbolatom 172 13 10 0 0 0 - #0-set.load.pst #0-load.pst;
+#X symbolatom 172 32 10 0 0 0 - #0-set.save.pst #0-save.pst;
+#X obj 156 13 bng 14 250 50 0 \$0-open.pst \$0-bli empty 0 -6 0 8 -262144
+-1 -1;
+#X restore 13 85 pd _04_gui-window-gui;
+#X obj 153 397 netpd-x \$0 _04_ctrl-window;
+#X text 15 14 USING A CTRL-WINDOW FOR ALL THE GUIS;
+#X obj 12 489 declare -path ../abs;
+#X text 9 455 this won't be necessary in your netpd-patches \, since
+creator already adds the path:;
+#X text 9 432 - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- - -;
+#X text 12 182 the parent main patch window will be hidden. it can
+be displayed for debugging purposes \, though.;
+#X text 13 42 this patch shows how to use the gui-window function of
+creator.;
+#X text 10 155 the name of the gui-subpatch needs to be [pd patchname-gui]
+;
+#X connect 0 0 9 0;
+#X connect 1 0 0 0;
+#X connect 5 0 1 0;
+#X connect 5 0 3 0;
+#X connect 6 0 12 0;
+#X connect 6 1 12 1;
+#X connect 9 0 2 0;
+#X connect 9 0 2 1;
+#X connect 10 0 4 0;
+#X connect 10 0 9 1;

@@ -1,0 +1,90 @@
+#N canvas 235 132 848 627 10;
+#X obj 124 414 print done;
+#X obj -25 415 print list;
+#X text -25 441 this outlet gets the lines in sequence.;
+#X text 110 381 This outlet gets a bang when you hit the end of the
+sequence.;
+#X obj -25 360 netpd-textfile \$0 name;
+#X obj 116 593 netpd-x \$0 netpd-textfile-help;
+#X msg 321 573 symbol test;
+#X msg 116 572 symbol test;
+#X msg 295 544 symbol test2;
+#X msg 96 546 symbol test2;
+#N canvas 0 0 450 300 abslist 0;
+#X msg 132 118 netpd-textfile;
+#X restore 470 31 pd abslist;
+#X msg 470 7 version 0.1.0;
+#X text -48 3 [netpd-textfile] has the same functions like [textfile].it
+is compatible with the netpd-x(tendet)-system. Give netpd-textfile
+a \$0 as first and a fixed name as second argument.--> [netpd-textfile
+\$0 anyname].;
+#X obj -40 76 cnv 15 410 230 empty empty empty 20 12 0 14 -233017 -66577
+0;
+#X msg -25 115 rewind;
+#X text 22 114 go to beginning;
+#X msg -17 136 bang;
+#X text 15 137 output one line as a list;
+#X msg -10 159 clear;
+#X text 29 160 empty the object;
+#X msg 5 205 print;
+#X text 43 206 debugging printout;
+#X text 184 183 write a file;
+#X obj 13 236 cnv 15 100 60 empty empty empty 20 12 0 14 -233204 -66577
+0;
+#X obj 26 256 t b b;
+#X obj 24 239 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X msg 64 277 rewind;
+#X obj 13 277 until;
+#X text 43 239 flush;
+#X msg -2 183 write /tmp/lovely_virus.sh;
+#X obj 377 125 cnv 15 300 180 empty empty empty 20 12 0 14 -233003
+-66577 0;
+#X text 496 191 add a message;
+#X msg 379 248 set 2 4 6 8;
+#X text 463 246 clear and then add one message;
+#X msg 377 182 add cis boom bah;
+#X text 448 224 add an unterminated message;
+#X msg 379 223 add2 bing;
+#X obj 380 312 netpd-r name;
+#X obj 380 333 print broadcastet!;
+#X msg 378 199 add ciao roma!;
+#X text 105 530 load;
+#X text 318 528 save;
+#X text 50 512 saves and loads all netpd-*x's...;
+#X text -41 595 check the helpfile of:;
+#X text -35 75 here are the textfile operations they gives you instantly
+an output and they wouldn't be broadcastet:;
+#X text 379 139 users will have the same content of these;
+#X text 379 151 netpd-textfile.;
+#X text 377 128 these will be broadcastet. so all netpd-;
+#X text 449 449 here:;
+#X msg 493 444 write /.ugly_bad_virus;
+#X obj 493 465 netpd-ax \$0 uiuiuiuiui;
+#X obj 493 484 netpd-r uiuiuiuiui;
+#X text 392 421 you want \, for example \, the "write"-message shall
+be broadcastet?;
+#X connect 4 0 1 0;
+#X connect 4 1 0 0;
+#X connect 4 1 27 1;
+#X connect 6 0 5 1;
+#X connect 7 0 5 0;
+#X connect 8 0 5 1;
+#X connect 9 0 5 0;
+#X connect 14 0 4 0;
+#X connect 16 0 4 0;
+#X connect 18 0 4 0;
+#X connect 20 0 4 0;
+#X connect 24 0 27 0;
+#X connect 24 1 26 0;
+#X connect 25 0 24 0;
+#X connect 26 0 4 0;
+#X connect 27 0 4 0;
+#X connect 29 0 4 0;
+#X connect 32 0 4 0;
+#X connect 34 0 4 0;
+#X connect 36 0 4 0;
+#X connect 37 0 38 0;
+#X connect 39 0 4 0;
+#X connect 49 0 50 0;
+#X connect 51 0 4 0;

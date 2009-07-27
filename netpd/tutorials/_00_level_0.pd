@@ -1,0 +1,23 @@
+#N canvas 164 16 464 359 10;
+#X obj 28 132 osc~;
+#X obj 31 69 hsl 128 15 0 127 0 0 empty empty empty -2 -6 0 8 -262144
+-1 -1 0 1;
+#X obj 28 108 mtof;
+#X obj 89 99 hsl 128 15 0 1 0 0 empty empty empty -2 -6 0 8 -262144
+-1 -1 0 1;
+#X obj 28 168 *~;
+#X obj 29 203 dac~;
+#X text 16 231 you can upload this patch with creator \, but the values
+of the sliders are not broadcasted \, so nobody else will hear what
+you play.;
+#X text 17 297 let's call such a patch: netpd-level 0;
+#X text 49 312 -no netpd-capabilities;
+#X text 20 30 here we have a patch we want to make 'netpd-capable'.
+;
+#X text 23 11 NEPTD-LEVEL 0;
+#X connect 0 0 4 0;
+#X connect 1 0 2 0;
+#X connect 2 0 0 0;
+#X connect 3 0 4 1;
+#X connect 4 0 5 0;
+#X connect 4 0 5 1;

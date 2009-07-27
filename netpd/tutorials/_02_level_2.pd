@@ -1,0 +1,47 @@
+#N canvas 103 2 542 513 10;
+#X declare -path ../abs;
+#X obj 15 175 osc~;
+#X obj 17 81 hsl 128 15 0 127 0 0 freq freq-r frequency 7 7 1 7 -262144
+-1 -1 0 1;
+#X obj 15 151 mtof;
+#X obj 155 81 hsl 128 15 0 1 0 0 amp amp-r amplitude 7 7 1 7 -262144
+-1 -1 0 1;
+#X obj 16 221 dac~;
+#X obj 18 277 print DATA;
+#X text 91 279 <- see the data that comes back from the server;
+#X obj 15 107 netpd-f freq freq-r;
+#X obj 151 112 netpd-f amp amp-r;
+#X floatatom 27 130 5 0 0 0 - - -;
+#X floatatom 151 137 5 0 0 0 - - -;
+#X text 294 80 <- see properties;
+#X text 26 346 let's call such a patch: netpd-level 2;
+#X text 16 35 in this version of our patch the values of the sliders
+are shown \, if another user moves the sliders.;
+#X text 66 362 - all users hear \, if values are changed;
+#X text 68 376 - the guis show always the actual value;
+#X floatatom 139 170 5 0 0 0 - - -;
+#X obj 191 211 netpd-a amp;
+#X obj 139 211 netpd-a freq;
+#X floatatom 191 172 5 0 0 0 - - -;
+#X text 234 170 <- imitate another user changing values;
+#X obj 16 197 *~ 0;
+#X obj 191 190 * 0.01;
+#X text 18 10 NETPD-LEVEL 2;
+#X obj 18 255 r netpd-receive;
+#X obj 26 488 declare -path ../abs;
+#X text 23 454 this won't be necessary in your netpd-patches \, since
+creator already adds the path:;
+#X text 20 429 - - - - - - - - - - - - - - - - - - - - - - - - - -
+- - - -;
+#X connect 0 0 21 0;
+#X connect 2 0 0 0;
+#X connect 7 0 2 0;
+#X connect 7 0 9 0;
+#X connect 8 0 10 0;
+#X connect 8 0 21 1;
+#X connect 16 0 18 0;
+#X connect 19 0 22 0;
+#X connect 21 0 4 0;
+#X connect 21 0 4 1;
+#X connect 22 0 17 0;
+#X connect 24 0 5 0;

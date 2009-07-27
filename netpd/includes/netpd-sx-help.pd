@@ -1,0 +1,57 @@
+#N canvas 244 62 459 669 10;
+#X text 13 96 ___________________________________________________;
+#X text 17 391 ___________________________________________________
+;
+#X text 9 276 ^;
+#X text 42 60 ^ imitate another user changing the value;
+#X symbolatom 48 325 10 0 0 0 - - -;
+#X symbolatom 122 326 10 0 0 0 - - -;
+#X obj 31 325 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X text 29 367 see 'help-netpd-x.pd' to get more info about the;
+#X text 29 381 e(x)tended abs and [netpd-x].;
+#X text 67 305 LOAD__and__SAVE presets:;
+#X text 16 123 [netpd-fdx \$0 <sendsymbol> <receivesymbol> <setvalue>]
+;
+#X text 237 269 < broadcasted value;
+#X text 22 465 ___________________________________________________
+;
+#X obj 188 626 s netpd-receive;
+#X obj 28 619 s netpd-receive;
+#X text 24 564 with gui-update:;
+#X text 187 558 without gui-update:;
+#X text 185 572 (in order to save cpu-load);
+#X text 23 496 >>>>>>>>>ONLY FOR ADVANCED PURPOSES<<<<<<<<<<<<<<;
+#X text 23 538 update value locally (not broadcasted!!):;
+#X text 100 455 < see broadcasted values;
+#X obj 23 414 netpd-r sendsymbol5;
+#X msg 28 600 sendsymbol5 \$1;
+#X msg 188 607 sendsymbol5-nogui \$1;
+#X obj 17 79 netpd-a sendsymbol5;
+#X symbolatom 17 37 10 0 0 0 - - -;
+#X text 16 15 [netpd-sx];
+#X text 14 150 [netpd-sx] is used to update guis \, if another user
+changes the value. it also provides a feedback-suppression.;
+#X text 12 197 [netpd-sx] is actually the same as [netpd-fx] and is
+only here for compatibility reasons.;
+#X symbolatom 150 270 10 0 0 0 - - -;
+#X symbolatom 18 248 10 0 0 0 - receivesymbol5 sendsymbol5;
+#X text 10 285 ^ see symbol-atom-properties;
+#X obj 31 347 netpd-x \$0 netpd-sx-help;
+#X symbolatom 28 582 10 0 0 0 - - -;
+#X symbolatom 188 589 10 0 0 0 - - -;
+#X obj 150 246 netpd-sx \$0 sendsymbol5 receivesymbol5 yeah;
+#X symbolatom 23 453 10 0 0 0 - - -;
+#X obj 23 433 symbol;
+#X text 23 518 for local use (e.g. automation);
+#X connect 4 0 32 0;
+#X connect 5 0 32 1;
+#X connect 6 0 32 0;
+#X connect 21 0 37 0;
+#X connect 22 0 14 0;
+#X connect 23 0 13 0;
+#X connect 25 0 24 0;
+#X connect 33 0 22 0;
+#X connect 34 0 23 0;
+#X connect 35 0 29 0;
+#X connect 37 0 36 0;

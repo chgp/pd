@@ -1,0 +1,20 @@
+cr.display.fnt 0 11
+cr.label.fnt 1 9
+cr.title.fnt 1 11
+cr.display.clr 255 0 0
+cr.label.clr 0 0 0
+cr.background2.clr 216 213 234
+cr.background1.clr 193 195 200
+ch.font.clr 0 0 0
+ch.inputbox.clr 234 226 242
+ch.buttons.fnt 1 10
+ch.talk.fnt 0 11
+ch.title.fnt 1 11
+ch.border.clr 0 0 0
+ch.active.clr 182 180 182
+ch.background.clr 234 226 242
+netpd-msg-interval 100
+netpd-port 3025
+netpd-domain netpd.org
+netpd-welcome <<<<<<<<<<<<<connected<<<<<<<<<<<<<<<<<
+netpd-name name

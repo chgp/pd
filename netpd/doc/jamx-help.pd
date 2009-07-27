@@ -1,0 +1,154 @@
+#N canvas 29 44 469 328 10;
+#X obj 11 12 cnv 15 440 301 empty empty empty 20 12 0 14 -33289 -66577
+0;
+#X obj 12 13 cnv 15 438 32 empty empty empty 20 12 0 14 -262144 -66577
+0;
+#X obj 12 280 cnv 15 438 32 empty empty empty 20 12 0 14 -262144 -66577
+0;
+#X obj 12 46 cnv 15 438 200 empty empty empty 20 12 0 14 -262144 -66577
+0;
+#X obj 12 247 cnv 15 438 32 empty empty empty 20 12 0 14 -262144 -66577
+0;
+#N canvas 530 40 402 383 jamx-example 1;
+#X text 122 243 [r <name>];
+#X text 125 322 needs a midinote and 2 values;
+#N canvas 232 114 607 198 master 1;
+#X obj 15 16 inlet;
+#X obj 15 136 s stepshuffle;
+#X obj 15 76 + 1;
+#X obj 15 116 + 1;
+#X obj 15 96 % 11340;
+#X text 120 16 use roman's master.pd (netpd.org) to sync all patches.
+this subpatch is just its simulation to demonstrate jamx. if you use
+master.pd you do not have to use this subpatch.;
+#X text 121 136 <- jam-x will receive shuffled step from master.pd
+;
+#X obj 15 56 f;
+#X obj 14 36 metro 333;
+#X connect 0 0 8 0;
+#X connect 2 0 4 0;
+#X connect 2 0 7 1;
+#X connect 3 0 1 0;
+#X connect 4 0 3 0;
+#X connect 7 0 2 0;
+#X connect 8 0 7 0;
+#X restore 19 40 pd master;
+#X obj 171 289 print;
+#X obj 171 268 spigot;
+#X obj 208 248 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0
+1;
+#X obj 21 168 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0 1
+;
+#N canvas 0 22 191 150 net-traffic 0;
+#X obj 51 17 inlet;
+#X obj 14 39 r netpd-receive;
+#X obj 14 81 print netpd-receive;
+#X obj 14 60 spigot;
+#X connect 0 0 3 1;
+#X connect 1 0 3 0;
+#X connect 3 0 2 0;
+#X restore 21 186 pd net-traffic;
+#X msg 34 323 84 0.9 0.8;
+#X obj 19 20 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 1 1
+;
+#X text 126 337 e.g. [84 0.9 0.8(;
+#X text 120 79 [jamx <parent> <name> <*ctrl-amount>];
+#X obj 19 80 jamx \$0 jhelp;
+#X obj 25 243 r jhelp;
+#N canvas 110 285 277 310 jhelp 0;
+#X obj 16 19 inlet;
+#X obj 16 129 mtof;
+#X obj 16 149 t f b;
+#X msg 46 169 0.25;
+#X obj 16 189 osc~;
+#X obj 16 229 *~;
+#X obj 114 192 line~;
+#X obj 114 212 dbtorms~;
+#X msg 114 172 \$1 \, 0 \$2;
+#X obj 114 132 * 100;
+#X obj 16 258 dac~;
+#X obj 165 132 * 750;
+#X obj 16 39 unpack f 0.94 0.5;
+#X obj 171 65 sel 0;
+#X obj 94 78 sel 0;
+#X text 100 173 db;
+#X text 179 172 ms;
+#X obj 93 102 f 1;
+#X obj 170 92 f 1;
+#X obj 114 152 pack f 300;
+#X connect 0 0 12 0;
+#X connect 1 0 2 0;
+#X connect 2 0 4 0;
+#X connect 2 1 3 0;
+#X connect 3 0 4 1;
+#X connect 4 0 5 0;
+#X connect 5 0 10 0;
+#X connect 5 0 10 1;
+#X connect 6 0 7 0;
+#X connect 7 0 5 1;
+#X connect 8 0 6 0;
+#X connect 9 0 19 0;
+#X connect 11 0 19 1;
+#X connect 12 0 1 0;
+#X connect 12 1 14 0;
+#X connect 12 2 13 0;
+#X connect 13 0 18 0;
+#X connect 13 1 11 0;
+#X connect 14 0 17 0;
+#X connect 14 1 9 0;
+#X connect 17 0 9 0;
+#X connect 18 0 11 0;
+#X connect 19 0 8 0;
+#X restore 25 345 pd jhelp;
+#X text 41 19 first - turn on master (or master.pd);
+#X text 20 109 second - open jamx-gui ->;
+#X obj 206 111 tgl 15 0 jhelp-open-jam empty empty 0 -6 0 8 -262144
+-1 -1 1 1;
+#X text 21 125 + enter some notes;
+#N canvas 621 254 441 462 additional 0;
+#X msg 22 192 cool names;
+#X text 15 21 -send a ctrl description list to jamx;
+#X text 245 55 symbols;
+#X text 245 87 numbers;
+#X text 43 151 lists are posilbe;
+#X obj 22 232 pack s s;
+#X text 265 122 specials;
+#X obj 22 171 t b b;
+#X obj 22 151 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X msg 113 192 ctrl name;
+#X obj 22 212 list2symbol;
+#X obj 113 212 list2symbol;
+#X msg 22 48 \; jhelp_jx.c.label a b c d;
+#X msg 22 82 \; jhelp_jx.c.label 1 2 3 4;
+#X msg 22 116 \; jhelp_jx.c.label #0 #2 empty;
+#X msg 22 252 \; jhelp_jx.c.label \$1 \$2;
+#X msg 22 301 \; netpd-receive jhelp_jx.cnr 6 \; jhelp_jx.c.label attack
+decay hold sustain release;
+#X connect 0 0 10 0;
+#X connect 5 0 15 0;
+#X connect 7 0 0 0;
+#X connect 7 1 9 0;
+#X connect 8 0 7 0;
+#X connect 9 0 11 0;
+#X connect 10 0 5 0;
+#X connect 11 0 5 1;
+#X restore 200 157 pd additional infos;
+#X text 21 222 ----demo-patch-----------------------------;
+#X connect 4 0 3 0;
+#X connect 5 0 4 1;
+#X connect 6 0 7 0;
+#X connect 8 0 14 0;
+#X connect 9 0 2 0;
+#X connect 13 0 4 0;
+#X connect 13 0 14 0;
+#X restore 21 255 pd jamx-example;
+#X text 24 21 JAMx sequencer;
+#X text 24 55 [jamx] is an "easy to use" netpd sequencer abstraction.
+monophone notes can be set with additional ctrl-values. 'length' and
+'amount of controllers' can be changed while running. 'offset' and
+'repeat' defines which notes are played. 'reset' sets all notes and
+ctrl to zero.;
+#X text 24 215 needs [mtx] of iemmatrix;
+#X text 24 288 help-jamx.pd by Enrique Erne;
+#X msg 329 288 version 0.2.0;

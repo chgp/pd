@@ -1,0 +1,9 @@
+#N canvas 422 464 260 127 10;
+#X obj 25 21 r netpd-receive;
+#X obj 25 65 outlet;
+#X text 25 2 [netpd-a <receivesymbol>];
+#X obj 25 43 route \$1 \$1-nogui;
+#X msg 142 22 version 0.2.1;
+#X connect 0 0 3 0;
+#X connect 3 0 1 0;
+#X connect 3 1 1 0;

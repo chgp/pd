@@ -1,0 +1,694 @@
+netpd  
+        Roman Haefeli
+        mailto: roman@netpd.org
+        http://www.netpd.org
+
+
+
+2 0 0 8 - 1 1 - 0 4
+
+
+- chat v1.4.5
+  * fixed [declare]s in order to comply with pd-extended-0.40.3's
+    fixed 'declare' class.
+
+- creator v1.5.4
+  * tiny fix: put [list] in front of [pack]. this was discovered, since
+    zexy's [unpack] doesn't accept non-list messages.
+
+
+
+2 0 0 8 - 0 3 - 1 0
+
+
+- added new directory netpd/includes
+  all netpd specific (i.e. not custom made patches) are stored 
+  there. the advantage is separation of netpd-stuff and custom 
+  made stuff and also allows the main netpd-patches like creator
+  and chat to have their own abstractions, which makes maintainability
+  a lot easier.
+
+- chat v1.4.4
+  * fixed [online] button bug
+  * fixed bug: when typing numbers, last message was repeated
+  * added print to console
+  * removed (as far as possible) all external classes. now only
+    [symbol2list] from zexy and [netclient] are left.
+  * added '-path includes' to searchpathes ([declare]).
+
+- creator v1.5.3
+  * moved to netpd/includes.
+  * removed all external classes (as far as possible). currently only
+    [symbol2list] from zexy is left.
+  * changed color behaviour of close button. now the close button
+    does only highlight quickly after having pressed it.
+  
+- netpd-abstractions
+  * moved to netpd/includes in order to separate netpd-stuff from custom 
+    made stuff. 
+
+- doc
+  * directory netpd/doc was removed and content moved to netpd/abs. this
+    seems to be the usual way to install helppatches in the pd worlds and
+    has the advantage of not having to add a special search path. now also
+    help-files can be specified in [pd abslist].
+
+- tut
+  * the directory netpd/tut was renamed to netpd/tutorials.
+
+
+
+2 0 0 7 - 1 1 - 2 4 
+
+
+- chat v1.4.2
+  * replaced all [l2s] by [list2symbol] because of pd-extended
+    alias bug
+  * added special [declare] for pd-extended >= 0.40 in order to
+    comply with its libdir format
+  * added special (temporary) [declare] for pd on osx, because of
+    [declare -stdpath] bug in pd
+
+- creator v1.5.2
+  * replaced all [l2s] by [list2symbol] because of pd-extended
+    alias bug
+
+
+
+2 0 0 7 - 0 8 - 1 7
+
+
+- creator v1.5.1
+  some 'bugs' fixed, which have been there for a long time. 
+  
+  !!this version does _not_ work together with older versions!!
+
+  * cr does now only response on postloadrequest, when everything
+    is loaded (to assure completeness of postloadlist)
+  * cr does now only request postloadlist from one remote host, not
+    from all anymore, as in earlier versions (because of this, a new
+    client sometimes received patches/abstractions several times)
+  * in certain cases (when remote cr was closed or crashed in a bad
+    moment, so that local cr was stuck in waiting for confirmation to
+    be ready from remote cr), cr could hang and refuse to respond to
+    new clients. this has been fixed by adding a waittime. after 20s
+    waiting is stopped (this means, in the worst case, it takes 20s
+    to get a postloadlist). 
+  * cr.version can be requested ([s cr.getversion]/[r cr.version])
+  * cr compares version with remote versions and drops a message to
+    chat, if newer version on remote clients is found.
+
+- chat v1.4.1
+  * bug in message colors fixed (bug discovered by syntax_tn)
+
+
+
+2 0 0 7 - 0 8 - 1 1
+
+
+MAJOR NETPD UPDATE
+
+whole netpd is one single patch now. creator and logview are
+abstractions of chat, all netpd-patches are now abstractions of
+creator. because of that, the path adding feature of [declare] 
+could be used. this also means, that no additional configuration
+is needed anymore, when installing netpd. in other words:
+
+ - no '-lib' as start option isn't required anymore, if libs are 
+   necessary are installed at standard location.
+ - no '-path ..path/to/netpd/abs' required anymore as start option
+ - no 'netpd-path' settings is needed anymore
+
+- creator v1.5.0
+  * new gui with scrollbar 
+  * internal patch management restructured/reprogrammed
+  * patches are not opened anymore (with 'open' message to pd) but
+    are instantiated as abstraction in an own subpatch each. 
+  * added a subpatch [pd cr.singletons]. since there is no clean way
+    to implement a singleton pattern in pd, this subpatch was introduced
+    as a place, where netpd-patches can put their singletons. the goal is
+    that the singletons remain open, also when the patch, that initially
+    called the singleton, is closed. 
+
+- chat v1.4.0
+  * added scrollbar, so that old messages can be reviewed
+  * added client dependent message colors
+  * redesigned gui
+  * redesigned netpd-settings dialog ('pref')
+  * creator and logview are instantiated as abstractions now
+  * changed 'chat-status' to 'netpd-status' for consistency reasons
+
+
+
+2 0 0 7 - 0 5 - 0 6
+
+
+- creator v1.4.7
+  * bugfix (discovered by eni): sending patchname to [s cr.open] did 
+    not work, when sending more than one patchname at once, only last
+    patch was opened. this issue was introduced with v1.4.4, because
+    abslist was parsed slowly and patches didn't open immediately. this 
+    was the reason, why p-admin by eni didn't work properly since 1.4.4. 
+    the problem was solved by inserting a fifo, so that patchnames are
+    buffered. however, since patches don't open immediately anymore, any
+    preset administration patch needs to know, when a patch is opened in
+    order to not send the patch's state data too early. therefore, 
+    creator sends now the patchname (e.g. 'mypatch') to [s cr.open.done],
+    as soon as the patch is open.
+    
+
+
+2 0 0 7 - 0 4 - 2 4
+
+
+- creator v1.4.6
+  * bugfix (mentioned by sqgl): netpd-installatiion in a loctaion
+    with spaces did not work properly, at least on windows (although
+    this issues should have been fixed in another bugfix). it turned
+    out, that [ls2] from zexy from cvs behaves differently than the
+    [l2s] that comes with precompiled zexy for windows.
+    
+
+    
+2 0 0 7 - 0 4 - 2 3
+
+
+- creator v1.4.5
+  * bugfix: [pd abscheck] in [pd postloadresponse] wasn't 'slow', 
+    needed [slow_until]
+  * bugfix: confusion with pathes. 'netpd-path' was used, where it
+    shouldn't have been used. now, patch open uses 'netpd-path', 
+    patch/abs saving uses hardcoded path. old problem of relative
+    to startup (open) and relative to patch (saving in i.e. [textfile])
+
+
+
+2 0 0 7 - 0 3 - 1 3
+
+
+- creator v1.4.4
+  * bug-fix: bug discovered by eni: when a patch was opened with
+    more than 57 abstractions in the abslist, creator caused
+    a stack overflow. solved by parsing abslist 'slowly' with
+    a [slow_until]
+
+
+
+2 0 0 6 - 1 2 - 1 8
+
+
+- creator v1.4.3
+  * abslist is parsed recursively now. that means also abs can 
+    have a abslist-subpatch. the depth is infinite, but there
+    is _no_ loop detection.
+  * the button 'update abstraction' was removed, because it was
+    considered to be deprecated, since the user shouldn't care
+    about abstractions besides specifying a correct version-tag.
+  * creator now converts spaces in the path of a patch to '*', 
+    which makes it possible to install netpd to a location con-
+    taining spaces in the path.
+  * creator waits 300ms after opening a patch, before it opens 
+    the next patch. this should avoid crashes and gui-freezes
+    during opening process.
+
+- chat v1.3.3
+  * the chat can be received now with a [r netpd-chat]
+  * added a new option 'msg-interval' to settings-dialog (and
+    netpd-settings.txt, of course). using 'msg-interval' is a crude
+    way to limit network-bandwidth of netpd and therefor to avoid 
+    drop-outs caused by full buffer of [netclient]. the minimum time
+    between two messages sent over network can be defined.
+    stepsize = 1/100 ms
+    '0' gives the same behaviour like previous versions of chat.
+    
+
+
+2 0 0 6 - 0 8 - 1 0
+
+
+- new abstractions (by eni und moritz)
+ 
+  - [netpd-textfile]: a netpd-replacement for [textfile]
+  - [netpd-sx]: like [netpd-fx], but for symbol-gatoms
+  - [netpd-index]: a netpd-replacement for [index] (requires zexy-lib)
+
+- the code of all netpd-abs has been cleaned and since [list] many of them
+  do not require externals anymore.
+
+
+
+2 0 0 6 - 0 5 - 2 0
+
+
+- creator v1.4.2
+  bugfix: versioncompare was completely broken
+
+
+
+2 0 0 6 - 0 4 - 1 2
+
+
+- creator v1.4.1
+  bugfix: overwrite (now update) abstraction didn't work
+
+
+
+2 0 0 6 - 0 3 - 30
+
+
+- creator v1.4.0
+  * beschraenkung auf 10 patches aufgehoben
+  * neues patchlist-gui
+  * checkt versionen von patches und abstractions
+    und ueberschreibt alte mit neuen
+  * kein unnötiges mehrfaches runterladen von
+    abstractions mehr
+  * neu alle patches sichtbar in gui, nicht mehr nur
+    die eigenen
+  * 'kommunistisches system': alle haben einfluss auf
+    alles, man kann auch 'fremde' patches schliessen
+  * keine 'herrenlose' patches mehr
+  * creatorlist abgeschafft, da obsolet
+
+- netpd-abs
+  neues feature: interner status kann abgefragt werden
+
+- netpd-flx       von moritz
+  neue abstraction: sehr oekologische variante von netpd-fx
+  mit speedlimit-funktion. 
+  (siehe -> netpd/doc/netpd-flx-help.pd)
+
+
+
+2 0 0 6 - 0 3 - 16 
+
+
+- netpd-mtx v0.4.0 by eni
+  neues feature: resizeable matrix
+
+- creator v1.3.3
+  künstliche bremse beim upload wurde angepasst
+  -> upload geht jetzt 5mal schneller
+ 
+ 
+
+2 0 0 6 - 0 2 - 2 6
+
+
+- netpd-x v0.4.3
+  bug (immer noch wachsende preset-files) behoben
+
+
+
+2 0 0 6 - 0 2 - 1 6
+
+
+- creator v1.3.2
+  bug: postload response funktionierte auf osx nicht aufgrund eines
+  bugs in zexy's [msgfile]. 
+
+- netpd-x v0.4.2
+  bug: mehrfaches preset-speichern eines patches fuehrte dazu, dass
+  preset-files immer groesser wurden, da die daten statt ueberschrieben
+  nur angehaengt wurden.
+
+
+
+2 0 0 6 - 0 1 - 0 9
+
+
+- netpd-abs
+  (Aenderung betrifft nur netpd-x, netpd-fx und netpd-fdx)
+  chef-system wurde wieder abgeschafft, da unnoetig!
+  beim laden eines patches werden zuerst intern (neu!) die default
+  einstellung gedumpt und gleichzeitig ein dump-request verschickt.
+  falls andere instanzen offen sind, senden die einen dump zurueck, 
+  der die default-werte überschreibt. falls keine offen sind, 
+  steht ohne wartezeit die default-einstellung zur verfuegung.
+  vorteil ->  - kein chefsystem nötig
+              - kein abwarten auf dump-response 
+
+
+
+2 0 0 5 - 1 1 - 1 0
+
+
+- netpd-player wurde aus paket rausgenommen (ist eher ein gadget
+  und für netpd nicht dringen notwendig)
+
+- _preset.pd wurde entfernt und dessen funktion in netpd-x 
+  integriert.
+
+- chat v1.3.1
+  fehler in creator-settings behoben.
+  default-schriftgrösse überall auf min. 9 gesetzt.
+
+- creator v1.3.1
+  wenn creator über chat geschlossen wird, werden jetzt
+  alle patches aus der creatorlist entfernt.
+  .creatorlist wurde auf enis wunsch in creatorlist umbenannt.
+  
+- netpd-doc
+  kleine korrekturen
+
+  
+
+2 0 0 5 - 1 0 - 2 5
+
+
+tiefgreifende umstruktierung von netpd:
+
+- dumps werden nicht mehr an alle clients gesendet (netpd-broadcast), 
+  sondern werden von clients einzeln angefragt und direkt an client
+  gesendet (netpd-send) 
+  -> viel weniger traffic
+
+- alle netpd-*x-abs wurden auf neues system angepasst.
+
+- die netpd-internen sends und receives wurden alle umbenannt von
+  'chatxxxx' in 'netpd-xxxx' / 'chatgetxxxx' in 'netpd-getxxx'.
+
+- netpd-x
+  neu teilt creator netpd-x mit, bei welchem client sie einen dump 
+  anfordern müssen. 
+  -> viel stabiler, falsche dumps aufgrund zu
+     langer ping-time sind jetzt nicht mehr möglich.
+
+- chat 1.3.0
+  speichert neu alle settings in ein externes textfile (und kreiert
+  eines, falls noch keins existiert).
+  -> settings bleiben nach einem netpd-update erhalten.
+  [s2l] wurden in [symbol2list] umbenannt, da [s2l] auf bestimmten 
+  pd-distros nicht vorhanden ist.
+  
+- creator 1.3.0
+  - creator-gui wurde im style con chat-gui redesigned
+  - schrift- und farbeinstellungen können per 'settings'-dialog von chat 
+    angepasst und gespeichert werden.
+  - teil, der die geöffneten patches managed, wurde komplett neu gebaut
+    und ist jetzt übersichtlicher programmiert.
+  - nach einem ungewollten beenden (absturz) von pd / creator werden
+    beim start von creator die zuvor geöffneten patches wieder geöffnet.
+  - bei einem postload werden auch  der vis-status eines jeden patches
+    mitübertragen.
+
+- netpd-f* / netpd-r
+  werte können mit diesen abs intern aktualisiert werden, ohne gui zu
+  setzen. dies kann nützlich sein für automationen, um cpu zu entlasten.
+  verwende dazu '<sendsymbol>-nogui' (s. manuals von netpd-f*).
+
+
+
+2 0 0 5 - 0 9 - 24
+
+
+um mit pd0.39 nicht immer gefragt zu werden, ob man den patch
+auch ja schliessen will, musste in creator und chat 'menuclose'
+mit 'menuclose 1' ersetzt werden.
+
+in den netpd-abstractions wurden alle chatbroadcasts und chatreceives
+in 'netpd-broadcast' und 'netpd-receive' umbenannt.
+
+
+
+2 0 0 5 - 0 6 - 1 0
+
+
+creator v1.1.4 (nur wichtig für osx-user)
+- altes problem, verrursacht durch buggy [msgfile], wurde um-
+  gangen. das bedeutet, dass jetzt auch osx-user das
+  abslist-feature von creator nutzen können
+  
+
+
+2 0 0 5 - 0 5 - 3 1
+
+
+abs
+- neue abs [netpd-mtx] zur verwendung von matrizes in netpd.
+  (von eni)
+- alle abs wurden in passendere und êher nachvollziehbare
+  namen geändert (chf -> netpd-f usw.)
+
+creator v1.1.3
+- creator öffnet nicht mehr ctrl-fenster, sondern gui-fenster.
+  (änderung: meinpatch-ctrl -> meinpatch-gui)
+  in alten patches müssen subpatches [pd name-ctrl] in
+  [pd name-gui] umbenannt werden.
+
+chat v1.1.2
+- hat neu einen mute-button, um den cklick abzustellen
+  
+
+
+2 0 0 5 - 0 5 - 1 5
+
+
+tutorial
+dem netpd-paket wurde ein kleines tutorial hinzugefügt, das den 
+einstieg erleichtern soll, eigene netpd-fähige patches zu bauen.
+
+chat v1.1.1
+- zwei buttons für verbindung wurden mit einem toggle ersetzt
+- click kann nun per toggle stummgeschaltet werden.
+
+creator v1.1.2
+- kleine änderung im handling der abslist in den patches. neu sucht 
+  creator nach verlinkten abstractions nicht nur im netpd/abs-ordner,
+  sondern auch im quellverzeichnis des patches. 
+- 'overwrite' und 'load' wird nicht mehr per toggle eingestellt, 
+  sondern per separate buttons.
+
+
+
+2 0 0 5 - 0 2 - 1 2
+
+
+chat v1.1.0
+das GUI wurde komplett erneuert, weil auf verschiedenen OS' schriften
+in unterschiedlichen grössen dargestellt werden. nun können diverse
+einstellungen bezüglich schriftgrösse, schriftart und farben per
+settings-dialog  in einer abs gespeichert werden. dies ermöglicht
+eine individuelle einstellung der visuellen darstellung. da die
+einstellungen in einer abs gespeichert werden, werden sie nach
+einem chat-update beibehalten.
+
+neue abs:
+
+[chtb]
+wurde nochmal getestet und debugged. arrays können nun sehr einfach 
+in netpd verwendet werden.
+
+[chtbx]
+dank eni gibts auch eine extended version von [chtb], die sowohl 
+array-werte in ein preset speichern/laden kann, als auch die auto-
+update-funktion beinhaltet.
+
+
+
+2 0 0 4 - 1 1 - 1 4
+
+
+creator v1.1.0
+automatisches uploaden von abstractions ist jetzt möglich.
+um diese funktion zu nutzen, muss im patch ein subpatch
+[pd abslist] erstellt werden, in dem man die namen der abstractions 
+als als message-boxen angibt.
+wählt man 'overwrite' beim upload eines patches, werden alle dessen
+abstractions ebenfalls überschrieben.
+
+!! WiCHTIG !!
+der ordner 'abstractions' wurde in 'abs'geändert
+
+neu gibts in creator eine update-funktion. mit dieser funktion können
+die netpd-programme upgedated werden.
+
+chat v1.0.4
+das menu für die settings wurde optimiert. jetzt kann man, ohne in den
+edit-mode zu wechseln, die einstellungen ändern/sichern.
+
+
+
+2 0 0 4 - 0 9 - 1 6
+
+
+chat v1.0.3
+kleine änderungen in chat:
+-nach klick auf bang in [pd netpd]/[pd netpd_settings] logt
+ chat kurz aus und grad wieder ein. so erkennt man unmittelbar,
+ ob und wie sich änderungen in settings auswirken. zudem wird
+ vermieden, dass tausendfach fehlermeldung 'netclient not 
+ connected' erscheint.
+-'bling' erklingt jetzt auch beim auflösen einer verbindung.
+   
+
+
+2 0 0 4 - 0 8 - 2 8
+
+
+neue abstractions:
+
+[chbx] (erweiterte version von [chb])
+[chfx] (erweiterte version von [chf])
+[chfdx] (erweiterte version von [chfd])
+[chx] (braucht es einmal pro patch)
+
+diese abstractions vereinfachen die realisiation von
+patches der netpd-stufe 3. dazu gehört folgendes:
+
+I 
+mit den erweiterten versionen wird garantiert, dass auch 
+bei einem späteren hinzukommen zu einer laufenden session 
+die alle aktuellen werte der parameter geladen werden.
+
+II
+mit den erweiterten versionen können alle parameter-
+einstellungen als preset gespeichert werden. 
+dazu wird zusätzlich benötigt:
+-ordner: netpd/presets
+-programm: _preset.pd
+
+siehe helpfiles von:
+[chx] [chbx] [chfx] [chfdx]
+
+
+preset.pd
+programm zum speichern und laden von presets. _preset.pd
+wird von [chx] aus gesteuert und kann nicht direkt 
+bedient werden. 
+preset.pd speichert presets im ordner netpd/presets
+
+
+
+2 0 0 4 - 0 8 - 1 2
+
+
+netpd-player:
+
+player und recorder, der netpd-sessions sowohl aufnimmt 
+und als .snp speichert als auch abspielt. der player 
+nimmt alle daten auf, die über [chatbroadcast] gesendet 
+werden, er nimmt kein audio auf. um aufgenommene sessions
+korrekt wieder geben zu können, müssen bei beginn der 
+wiedergabe alle parameter denselben wert wie beim start 
+der aufnahme aufweisen. um dies zu erreichen, muss 
+entweder mit der default-einstellung der patches die
+aufnahme gestartet werden, oder alle parameter-werte
+einmal gesendet werden (dump).
+aufgenommen sessions können im ordner netpd/sessions
+gespeichert werden.
+
+
+creator v1.0.1 :
+
+ctrl-fenster erscheint jetzt nur noch bei demjenigen,
+der patch lädt.
+
+
+neue abstractions: (von moritz: erstens@gmx.ch)
+
+[chfd]
+funktioniert wie [chf], die werte werden jedoch erst dann 
+übertragen, wenn gui nicht mehr bewegt wird -> vermindert
+traffic (siehe helpfile)
+
+
+
+2 0 0 4 - 0 7 - 3 0 
+
+was ist neu?
+
+ich habe bei allen programmen nochmal von vorne begonnen, 
+die versionsnummern zu zählen, nach folgendem system:
+
+vX.X.X_k
+
+X.X.X   bezeichnet die versionsnummer
+
+k       steht für einen kleinen buchstaben (nur 
+        programme mit übereinstimmendem k sind 
+        kompatibel)
+
+
+
+chat v1.0.0:
+
+-in chat wurden alle netpd-einstellungen zentralisiert.
+ bevor das erste mal netpd verwendet wird, müssen diese
+ einstellungen zuerst vorgenommen werden:
+ [pd netpd] > [pd netpd_settings]
+
+-creator und logview sollen von chat mit entsprechenden 
+ toggles geöffnet/geschlossen werden. beim creator wird
+ somit garantiert, dass alle (auch die unsichtbaren) 
+ patches geschlossen werden.
+
+-chat hat ein feature, dass es jetzt erlaubt, netpd-mässig 
+ zu sounden, ohne dass man verbunden ist. so kann man allein
+ sounden, wenn man akut keinen internet-zugang hat (laptop). 
+
+
+
+creator v1.0.0:
+
+creator wurde in sachen bedienungssicherheit optimiert, 
+d.h. er verhindert u.a aktionen, die zu einem absturz von
+pd führen könnten.
+
+-optional kann mit 'overwrite'-toggle beim laden ein 
+ überschreiben der evt. schon vorhandenen files
+ erzwungen werden. diese option ist dann hilfreich, 
+ wenn ein update eines patches geladen werden soll.
+
+-creator checkt beim öffnen, ob schon ein patch mit 
+ gleichem namen geöffnet wurde. falls ja, unterbindet
+ er den vorgang.
+
+-creator startet automatisch nach dem oeffnen eine anfrage
+ aller geladenen patches und oeffnet sie. so wird 
+ sichhergestellt, dass bei einem user, der sich einer 
+ laufenden session anschliesst, alle patches geladen werden
+ (evt. muessen die werte der geladenen patches nochmals 
+ gesendet werden, damit der neue user dasselbe hoert).
+
+-wenn creator mit entsprechendem toggle in chat geschlossen
+ wird, werden dabei alle geladenen (sichtbaren und unsicht- 
+ baren) patches ebenfalls geschlossen. so wird vermieden,
+ dass während einer session unsichtbare verwaiste patches
+ offenleiben.
+
+-creator befolgt folgenden standard:
+ ein subpatch mit namen [pd mypatch-ctrl] im patch 'mypatch.pd'
+ wird für denjenigen, der patch geladen hat, sichtbar darge-
+ stellt. somit könnnen die eigenen patches bedienbar gemacht
+ werden, ohne dass man sie per toggle (für alle) visualisieren
+ muss.
+
+
+logview v1.0.0:
+
+nichts neues......
+
+
+neue abstractions:
+
+[chf]  (von eni: eni@mild.ch)
+ermöglicht, dass guis den veränderten wert nicht nur senden,
+sondern auch anzeigen, wenn sie von einem anderen user
+verändert werden. (siehe helpfile)
+
+
+
+
+bei fehlermeldungen, anregungen, ideen usw. 
+
+
+Roman Haefeli  
+mailto: roman@netpd.org
+
+
+
+
+http://www.netpd.org
+
+
