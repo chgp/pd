@@ -1,0 +1,58 @@
+#N canvas 355 239 669 520 12;
+#X obj 87 148 select 1 2;
+#X floatatom 87 120 0 0 0 0 - - -;
+#X obj 87 214 print select-1;
+#X obj 119 194 print select-2;
+#X obj 152 171 print select-3;
+#X floatatom 313 122 0 0 0 0 - - -;
+#X obj 313 155 pack;
+#X obj 313 182 route 1 2;
+#X obj 353 131 t b f;
+#X floatatom 353 107 0 0 0 0 - - -;
+#X obj 371 210 unpack;
+#X floatatom 313 210 0 0 0 0 - - -;
+#X floatatom 342 210 0 0 0 0 - - -;
+#X floatatom 371 233 0 0 0 0 - - -;
+#X floatatom 409 234 0 0 0 0 - - -;
+#X floatatom 120 307 0 0 0 0 - - -;
+#X obj 120 332 spigot;
+#X floatatom 157 307 0 0 0 0 - - -;
+#X floatatom 120 356 0 0 0 0 - - -;
+#X floatatom 125 427 0 0 0 0 - - -;
+#X floatatom 125 476 0 0 0 0 - - -;
+#X obj 125 452 moses 5;
+#X floatatom 169 476 0 0 0 0 - - -;
+#X text 27 10 Pd fornece pelo menos 4 objetos para computacao condicional.
+O objeto "select" testa sua entrada com seus argumentos e manda "bang"
+quando eles batem. O objeto "route" e' similiar porem copia os dados
+ao inves do bang. Em outras palavras \, o "route" recebe uma lista
+\, testa seu primeiro elemento e se bater passa o resto da lista.;
+#X text 56 262 Voce tem tambem o "spigot" que liga ou desliga um fluxo
+de mensagens (como o objeto Gate do Max):;
+#X text 187 308 <-- diferente de zero pra abrir;
+#X text 152 356 Se aberto \, as mensagens recebidas a esquerda sao
+enviadas para a saida.;
+#X text 55 390 E finalmente \, "moses" manda numeros para a esquerda
+se forem menores que o argumento \, caso contrario direita:;
+#X text 391 475 atualizado para Pd versão 0.26;
+#X text 392 492 traduzido por Puredeposito;
+#X connect 0 0 2 0;
+#X connect 0 1 3 0;
+#X connect 0 2 4 0;
+#X connect 1 0 0 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 11 0;
+#X connect 7 1 12 0;
+#X connect 7 2 10 0;
+#X connect 8 0 6 0;
+#X connect 8 1 6 1;
+#X connect 9 0 8 0;
+#X connect 10 0 13 0;
+#X connect 10 1 14 0;
+#X connect 15 0 16 0;
+#X connect 16 0 18 0;
+#X connect 17 0 16 1;
+#X connect 19 0 21 0;
+#X connect 21 0 20 0;
+#X connect 21 1 22 0;

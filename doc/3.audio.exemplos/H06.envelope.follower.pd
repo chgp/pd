@@ -1,0 +1,89 @@
+#N canvas 87 33 585 621 12;
+#X floatatom 359 453 4 0 0 0 - - -;
+#X floatatom 150 316 3 0 999 0 - #0-osc2 -;
+#X obj 150 336 osc~;
+#X obj 62 466 lop~;
+#X floatatom 93 444 3 0 100 0 - #0-lop -;
+#X obj 61 356 +~;
+#X obj 62 330 osc~ 500;
+#X obj 62 413 *~;
+#X obj 62 522 snapshot~;
+#X floatatom 62 573 5 0 999 0 - - -;
+#X obj 62 545 sqrt;
+#X obj 359 480 dbtorms;
+#X floatatom 359 507 5 0 999 0 - - -;
+#N canvas 536 459 382 265 startup 0;
+#X obj 22 24 loadbang;
+#X obj 22 48 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 22 67 f \$0;
+#X msg 22 91 \; \$1-osc2 400 \; \$1-lop 10 \; \$1-metro 1 \; pd dsp
+1;
+#X obj 223 132 metro 250;
+#X obj 223 107 r \$0-metro;
+#X obj 223 156 s \$0-tick;
+#X text 35 195 Este subpatch carrega valores;
+#X text 31 219 iniciais nas number boxes.;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 4 0 6 0;
+#X connect 5 0 4 0;
+#X restore 217 598 pd startup;
+#X obj 70 497 r \$0-tick;
+#X obj 395 427 r \$0-tick;
+#X obj 359 428 f;
+#X obj 381 403 env~;
+#X obj 150 359 *~;
+#X obj 185 360 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0
+1;
+#X text 204 358 <-- on/off;
+#X text 159 -16 SEGUIDOR DE ENVELOPE;
+#X text 303 561 Atualizado para Pd versão 0.39;
+#X text 331 581 Traduzido por Puredeposito.;
+#X text 16 10 Um seguidor de envelope mede o quadrado médio de um sinal
+enquanto muda no tempo. (Você pode converter o quadrado médio para
+amplitude RMS ou decibéis se você quiser). O termo "quadrado médio"
+significa simplesmente que o sinal deve ser elevado ao quadrado \,
+e depois tirado sua mpedia. A média é tirada usando um filtro passa-baixa
+como lop~.;
+#X text 17 112 Aqui nós estamos adicionando dois osciladores e então
+o resultado poderia ser o RMS do primeiro oscilador se o segundo estiver
+ligado \, ou 0.707 em caso contrário. Note dois efeitos: primeiro \,
+quanto mais responsivo for o seguidor de envelope \, menos apurado
+será o resultado (mas teré resposta mais rápida). Segundo \, se os
+dois osciladores estiverem sintonizados próximos ficaram evidentes
+seus efeitos de batimentos.;
+#X text 18 235 O objeto env~ na direita \, no qual foi construído o
+seguidor de envelope usando um filtro passa-baixa de maior qualidade
+do que lop~ \, é mostrado em comparação. sua sapida é artificialmente
+diminuída para encaixar no outro da esquerda.;
+#X text 187 317 <-- freqüência do segundo oscilador;
+#X text 334 348 objeto seguidor envelope;
+#X text 333 368 para comparação;
+#X text 115 414 quadrado do sinal;
+#X text 124 440 <-- respostividade;
+#X text 112 467 filtro passa-baixa;
+#X text 108 547 converte para RMS;
+#X text 114 573 saída;
+#X text 159 501 pega o estado;
+#X text 157 517 a cada 1/4 de segundo;
+#X connect 0 0 11 0;
+#X connect 1 0 2 0;
+#X connect 2 0 18 0;
+#X connect 3 0 8 0;
+#X connect 4 0 3 1;
+#X connect 5 0 7 0;
+#X connect 5 0 7 1;
+#X connect 5 0 17 0;
+#X connect 6 0 5 0;
+#X connect 7 0 3 0;
+#X connect 8 0 10 0;
+#X connect 10 0 9 0;
+#X connect 11 0 12 0;
+#X connect 14 0 8 0;
+#X connect 15 0 16 0;
+#X connect 16 0 0 0;
+#X connect 17 0 16 1;
+#X connect 18 0 5 1;
+#X connect 19 0 18 1;

@@ -1,0 +1,144 @@
+#N canvas 0 32 1001 628 12;
+#X obj 477 135 loadbang;
+#X obj 31 289 hip~ 5;
+#X obj 477 53 adc~ 1;
+#X obj 477 190 soundfiler;
+#X obj 32 322 output~;
+#X obj 478 100 tabwrite~ E03-table;
+#X msg 477 162 read ../sound/voice.wav E03-table;
+#X obj 117 64 fiddle~ 2048;
+#X obj 118 95 unpack;
+#X obj 111 199 osc~;
+#X obj 118 119 moses 1;
+#X obj 77 199 *~;
+#X obj 145 147 mtof;
+#X obj 145 170 *;
+#X msg 194 125 0.5;
+#X floatatom 194 154 3 0 0 0 - - -;
+#X msg 232 125 15;
+#N canvas 0 0 446 202 (subpatch) 0;
+#X obj 261 30 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0 1
+;
+#X obj 100 20 inlet~;
+#X obj 99 87 *~;
+#X obj 98 159 outlet~;
+#X text 381 181 corner;
+#X connect 0 0 2 1;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X coords 0 0 100 100 40 18 1;
+#X restore 78 248 pd;
+#N canvas 0 0 446 202 (subpatch) 0;
+#X obj 261 30 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0 1
+;
+#X obj 100 20 inlet~;
+#X obj 99 87 *~;
+#X obj 98 159 outlet~;
+#X text 381 181 corner;
+#X connect 0 0 2 1;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X coords 0 0 100 100 40 18 1;
+#X restore 32 248 pd;
+#X obj 78 222 *~ 2;
+#X obj 194 100 loadbang;
+#N canvas 414 195 613 302 looper 0;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array E03-table 44103 float 0;
+#X coords 0 1.02 44103 -1.02 200 130 1;
+#X restore 349 22 graph;
+#X text 347 161 ---- 44103 samples ----;
+#X obj 35 77 +~ 1;
+#X obj 35 25 phasor~ 1;
+#X obj 35 50 *~ 44100;
+#X obj 35 106 tabread4~ E03-table;
+#X obj 35 132 outlet~;
+#X text 46 238 one-second sample reader loop. You can replace this
+with an adc~ if you want to go live.;
+#X connect 2 0 5 0;
+#X connect 3 0 4 0;
+#X connect 4 0 2 0;
+#X connect 5 0 6 0;
+#X restore 118 18 pd looper;
+#X obj 489 77 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#N canvas 266 203 758 306 delay 0;
+#X obj 15 222 outlet~;
+#X obj 14 21 inlet~;
+#X obj 15 102 loadbang;
+#X obj 14 49 delwrite~ E03-del 40;
+#X obj 15 195 delread~ E03-del;
+#X obj 15 152 expr 1000*1024/$f1;
+#X obj 15 128 samplerate~;
+#X text 317 268 1024-sample delay;
+#X text 208 47 escreve a linha de delay que tem memória o suficiente
+para segurar 40 milisegundos;
+#X text 125 128 pega o samplerate do tempo de carga;
+#X text 185 152 divide 1024 pelo sample rate para dar o tempo em segundos
+\; multiplica por 1000 para converter em milisegundos.;
+#X text 168 197 relendo a linha de delay line com o delay calculado
+;
+#X connect 1 0 3 0;
+#X connect 2 0 6 0;
+#X connect 4 0 0 0;
+#X connect 5 0 4 0;
+#X connect 6 0 5 0;
+#X restore 31 71 pd delay;
+#X msg 406 237 read ../../saucisse.wav E03-table;
+#X obj 25 16 adc~ 1;
+#X text 241 2 DIVISOR DE OITAVAS VIA ANEL DE MODULAÇÃO;
+#X text 196 361 O mais díficil é conseguir a freqüência fundamental
+do som original.Nós estamos fazendo isso com o complicado objeto "fiddle~"
+\, que solta um fluxo de análise sobre um sinal corrente. O argumento
+"2048" especifica o tamanho de bloco da janela de análise. A análise
+esta mais próxima e alinhada com aquilo que estará soando no meio da
+janela de bloco \, neste caso em torno dos 1024 samples. A janela "pd
+delay" atrasa o sinal em 1024 samples para que este fique mais estritamente
+sincronizado com os dados da analise. (Se você estiver fazendo isso
+com uma entrada em tempo real \, você poderia diminuir o delay e setar
+para uma sincronação menos exigente).;
+#X text 507 75 <-- grava um sample;
+#X text 561 141 reler a tabela original;
+#X text 145 235 on/off para os sons;
+#X text 122 250 <--e processos originais;
+#X text 196 288 Este patch demonstra o uso de um anel de modulação
+para copiar um som em sua oitava abaixo. O anel de modulação em si
+("osc~" e um multiplicador) é simples. (Nós vamos em um passo de fator
+2 para balancear melhor o origianal).;
+#X text 266 125 <-- escolha um efeito;
+#X text 196 557 Sobre fiddle~ \, é suficiente dizer que sua terceira
+saída contém um par com (pitch \, amplitude). Nós desempacotamos o
+pitch e separamos para fora todos os zeros (quando o fiddle~ falha
+de encontrar um pitch ele da um zero na saída mas nós preferimos ficar
+sempre com o mais recente. Este é convertido de MIDI para Hertz \,
+e multiplicado pela metade do controle de modulação do oscilador. (você
+pode também tentar com inteiros mais espaçosos que deixam o pitch intacto
+mas instroduzem formantes divertidas).;
+#X text 684 759 Traduzido por Jardim de Volts.;
+#X text 682 744 Atualizado para Pd versão 0.37;
+#X connect 0 0 6 0;
+#X connect 1 0 4 0;
+#X connect 1 0 4 1;
+#X connect 2 0 5 0;
+#X connect 6 0 3 0;
+#X connect 7 2 8 0;
+#X connect 8 0 10 0;
+#X connect 9 0 11 1;
+#X connect 10 1 12 0;
+#X connect 11 0 19 0;
+#X connect 12 0 13 0;
+#X connect 13 0 9 0;
+#X connect 14 0 15 0;
+#X connect 15 0 13 1;
+#X connect 16 0 15 0;
+#X connect 17 0 1 0;
+#X connect 18 0 1 0;
+#X connect 19 0 17 0;
+#X connect 20 0 14 0;
+#X connect 21 0 7 0;
+#X connect 21 0 23 0;
+#X connect 22 0 5 0;
+#X connect 23 0 18 0;
+#X connect 23 0 11 0;
+#X connect 24 0 3 0;
+#X connect 25 0 23 0;

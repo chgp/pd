@@ -1,0 +1,64 @@
+#N canvas 0 27 1001 628 10;
+#X obj 67 77 osc~ 440;
+#X obj 67 329 dac~;
+#X obj 67 242 *~;
+#X obj 86 180 line~;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array produto 44100 float 0;
+#X coords 0 1.02 44100 -1.02 200 130 1;
+#X restore 631 350 graph;
+#N canvas 89 202 450 300 (subpatch) 0;
+#X array saida-osc 44100 float 0;
+#X coords 0 1.02 44100 -1.02 200 130 1;
+#X restore 631 20 graph;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array saida-line 44100 float 0;
+#X coords 0 1.02 44100 -1.02 200 130 1;
+#X restore 630 185 graph;
+#X obj 86 149 r ->line;
+#X text 634 491 ----- 1 segundo ----;
+#X obj 159 89 r grafar;
+#X obj 159 118 tabwrite~ saida-osc;
+#X obj 161 179 r grafar;
+#X obj 161 209 tabwrite~ saida-line;
+#X obj 160 245 r grafar;
+#X obj 161 276 tabwrite~ produto;
+#X text 116 330 <-- saida;
+#X text 51 363 sobe a rampa;
+#X text 220 362 desce a rampa;
+#X text 400 360 ate' 1/2;
+#X msg 39 385 \; pd dsp 1 \; ->line 0 \, 1 500 \; grafar bang;
+#X msg 211 385 \; pd dsp 1 \; ->line 1 \, 0 500 \; grafar bang;
+#X msg 376 384 \; pd dsp 1 \; ->line 0.5 1000 \; grafar bang;
+#X text 40 566 Na maioria das maquinas voce vai escutar uma interrupcao
+do som um segundo depois de clicar na primeira ou terceira caixa. Isto
+e' porque as atualizacoes graficas costumam gastar mais tempo de CPU
+do que o buffer de audio tem previamente armazenado. Isto pode ser
+evitado se voce mantiver is graficos em sub-janelas e abri-los somente
+quando necessario. Em alguma versao futura do Pd este comportamento
+sera' melhorado. Ate la \, teremos que evitar andar com vetores que
+se redesenham durante execucoes musicais.;
+#X text 559 648 traduzido por geada.;
+#X obj 67 299 *~ 0.1;
+#X text 559 628 atualizado para Pd versao 0.33;
+#X text 49 9 LINE~ EM GRAFICOS;
+#X text 47 32 Aqui temos novamente o line~ controlando a amplitude
+de um osc~ \, mas desta vez sua saida é gráfica:;
+#X text 39 463 Clique nas mensagens acima para testar. Veja bem que
+nas primeiras duas caixas os objetos line~ recebem duas mensagens.
+A primeira \, sem valor de tempo \, faz o line~ saltar imediatamente
+para o dado valor. A terceira caixa toma o valor previo de line~ como
+ponto de partida. O que voce vai ver depende de qual foi a última caixa
+clicada e quanto tempo passou entre ambas.;
+#X connect 0 0 2 0;
+#X connect 0 0 10 0;
+#X connect 2 0 14 0;
+#X connect 2 0 24 0;
+#X connect 3 0 2 1;
+#X connect 3 0 12 0;
+#X connect 7 0 3 0;
+#X connect 9 0 10 0;
+#X connect 11 0 12 0;
+#X connect 13 0 14 0;
+#X connect 24 0 1 0;
+#X connect 24 0 1 1;

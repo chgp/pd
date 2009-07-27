@@ -1,0 +1,56 @@
+#N canvas 103 -50 634 726 12;
+#X obj 88 107 send \$1;
+#X obj 199 106 + \$2;
+#X floatatom 303 88 0 0 0 0 - - -;
+#X obj 303 139 print;
+#X msg 303 113 blah \$1;
+#X msg 188 272 bang;
+#X obj 188 300 symbol \$1;
+#X msg 98 272 bang;
+#X obj 98 300 float \$2;
+#X floatatom 98 327 5 0 0 0 - - -;
+#X symbolatom 188 329 10 0 0 0 - - -;
+#X msg 97 383 bang;
+#X obj 97 407 float \$2;
+#X msg 97 434 five \$1;
+#X obj 97 459 print;
+#X msg 143 512 bang;
+#X obj 143 564 symbol \$1;
+#X obj 237 560 f \$2;
+#X obj 143 540 t b b;
+#X obj 142 587 pack symbol float;
+#X msg 142 613 six \$1 \$2;
+#X obj 142 640 print;
+#X text 34 6 Esta abstração é utilizada no exemplo 13 \, "dollarsigns".
+;
+#X text 37 50 Em caixas de objetos \, sinais de dolar referem aos argumentos
+de criação de uma abstração. Em mensagens ela altera dinamicamente:
+;
+#X text 36 163 Isto pode soar inconsistente \, mas não é: caixas de
+objeto e de mensagens são atualmente mensagens \, mas no caso da caixa
+de objeto a mensagem é passada na hora da criação e para a caixa de
+mensagem \, na hora da mensagem.;
+#X text 41 357 Ou \, se desejar \, conecte a caixa de mensagem como:
+;
+#X text 36 233 Entao como utilizar argumentos na criacao de mensagens?
+Utilize "float" e "symbol" como abaixo:;
+#X text 31 485 Para mensagens combinando mais de um argumento de criação
+tente:;
+#X text 324 642 atualizado para Pd versão 0.34;
+#X text 325 664 traduzido por Puredeposito;
+#X connect 2 0 4 0;
+#X connect 4 0 3 0;
+#X connect 5 0 6 0;
+#X connect 6 0 10 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 11 0 12 0;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 15 0 18 0;
+#X connect 16 0 19 0;
+#X connect 17 0 19 1;
+#X connect 18 0 16 0;
+#X connect 18 1 17 0;
+#X connect 19 0 20 0;
+#X connect 20 0 21 0;

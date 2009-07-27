@@ -1,0 +1,56 @@
+#N canvas 0 27 991 633 10;
+#X obj 37 297 hip~ 5;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array sample-table 44104 float 0;
+#X coords 0 1.02 44103 -1.02 200 130 1;
+#X restore 525 40 graph;
+#X obj 37 235 tabread4~ sample-table;
+#X obj 37 200 line~;
+#X obj 37 131 * 441;
+#X floatatom 37 47 0 0 100 0 - - -;
+#X obj 37 165 pack 0 100;
+#X obj 435 251 loadbang;
+#X msg 435 279 read ../sound/voice.wav sample-table;
+#X obj 435 304 soundfiler;
+#X obj 36 329 output~;
+#X text 36 13 MAQUINA DE SCRATCH;
+#X text 73 49 <-- ponto de leitura em centesimos de segundo;
+#X text 94 131 converte para SAMPLES (441 samples em 0.01 seg.);
+#X text 110 173 comment;
+#X text 84 200 converte gradualmente em sinal de audio;
+#X text 206 238 leitura a partir da tabela;
+#X text 49 256 (a entrada e'o indice em samples);
+#X text 96 299 filtro hi-pass para eliminar o DC;
+#X text 509 204 a interpolacao de quatro pontos);
+#X text 488 188 (um segundo - mais tres extra para;
+#X text 524 171 --- 44103 samples ---;
+#X text 53 77 ATENCAO: SO' HAVERA SAIDA DE SOM SE OS VALORES ESTIVEREM
+ENTRE 0 E 100 E FOREM CONSTANTEMENTE ALTERADOS;
+#X text 393 49 (de 0 a 100);
+#X text 29 395 Este patch apresenta o objeto "tabread4~" \, que le
+amostras (samples) de audio a partir de uma tabela. A entrada e' o
+indice de samples a ser lido \, a partir de zero. A saida e' calculada
+usando a interpolacao cubica de 4 pontos \, que e' a mais adequada
+para uma grande variedade de propositos. Devido ao esquema de interpolacao
+\, a entrada de tabread4~ nao pode ser menor que um \, nem maior que
+o total de pontos da tabela menos dois.;
+#X text 28 513 Para mais informacoes sobre ler e escrever arquivos
+de som em tabelas \, definir seus tamanhos \, etc \, ver "tabelas"
+- na serie "exemplos de controle" (doc/2.exemplos.controle).;
+#X text 30 565 Fanaticos tomem nota: se quiserem obter de fato um sampling
+de alta fidelidade \, usem um programa de "resampling" de alta qualidade
+para elevar a qualidade de amostragem para 88200 e assim reduzir drasticamente
+a margem de erro na interpolacao.;
+#X text 522 615 atualizado para Pd versao 0.33;
+#X text 522 629 traduzido por geada.;
+#X text 518 300 mensagem para ler um arquivo de som na tabela (automaticamente
+enviado quando este patch e aberto pelo objeto "loadbang");
+#X connect 0 0 10 0;
+#X connect 0 0 10 1;
+#X connect 2 0 0 0;
+#X connect 3 0 2 0;
+#X connect 4 0 6 0;
+#X connect 5 0 4 0;
+#X connect 6 0 3 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;

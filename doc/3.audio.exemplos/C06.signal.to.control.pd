@@ -1,0 +1,26 @@
+#N canvas 215 77 561 455 12;
+#N canvas 0 0 269 179 metro 0;
+#X obj 88 39 loadbang;
+#X msg 87 65 1;
+#X obj 87 128 outlet;
+#X obj 87 96 metro 100;
+#X msg 178 70 \; pd dsp 1;
+#X connect 0 0 1 0;
+#X connect 0 0 4 0;
+#X connect 1 0 3 0;
+#X connect 3 0 2 0;
+#X restore 41 247 pd metro;
+#X text 374 425 Updated for Pd 0.37;
+#X obj 41 316 snapshot~;
+#X obj 66 286 phasor~ 1;
+#X floatatom 41 347 5 0 0 0 - - -;
+#X text 14 7 CONVERTENDO SINAL EM CONTROLE;
+#X text 16 35 O objeto snapshot~ permite que você converta de sinal
+novamente para fluxos de controle (numeros decimais - float) -- em
+oposição ao sinal~. O valor de saída sepre está no fim do bloco de
+áudio mais recentemente computado \, então mesmo se você dispará-lo
+metronomicamente (como aqui) ele nao precisa fornecer samples que estao
+imediatamente em execução.;
+#X connect 0 0 2 0;
+#X connect 2 0 4 0;
+#X connect 3 0 2 0;

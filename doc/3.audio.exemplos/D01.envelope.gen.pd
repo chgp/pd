@@ -1,0 +1,52 @@
+#N canvas 0 32 1001 628 12;
+#X text 317 261 release;
+#X obj 248 397 line~;
+#X msg 318 355 0 500;
+#X obj 65 369 phasor~ 50;
+#X obj 65 417 *~;
+#X obj 65 465 wrap~;
+#X msg 247 355 1 2500;
+#X obj 65 393 -~ 0.5;
+#X msg 182 331 10 200;
+#X obj 247 331 del 200;
+#X obj 65 513 output~;
+#X obj 65 441 +~ 0.5;
+#X obj 65 489 hip~ 5;
+#X obj 247 280 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 318 281 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X msg 257 308 stop;
+#X text 127 -10 GERADORES DE ENVELOPE;
+#X text 304 578 Atualizar para Pd versão 0.37;
+#X text 302 595 Traduzido por Jardim de Volts;
+#X text 28 8 Este patch usa um gerador de envelope para controlar um
+som. Quando você tecla "ataque" duas coisas acontecem. Primeiro \,
+o objeto line~ sobre para 10 em 200 milisegundos. E então depois de
+um "delay" dos mesmos 200 milisegundos \, a segunda mensagem manda
+o line~ abaixar para 1 ao decorrer de 2500 milisegundos. O "release"
+(caimento) apenos faz uma rampa descendo até zero. no final.;
+#X text 26 117 Você pode disparar o "ataque" e/ou "release" enquanto
+algo continua andando desde um ataque previo ou release \, e o gerador
+de envelope faz a "coisa certa". Em particular \, o botão de release
+manda um "pare" para objeto del(delay) \, em caso deste ainda estar
+ainda aguardando alguma mensagem para sair de um ataque prévio.;
+#X text 25 212 Este método de síntese é uma forma de modelagem de onda
+\, que é assunto de um capítulo mais adiante.;
+#X text 246 260 ataque;
+#X connect 1 0 4 1;
+#X connect 2 0 1 0;
+#X connect 3 0 7 0;
+#X connect 4 0 11 0;
+#X connect 5 0 12 0;
+#X connect 6 0 1 0;
+#X connect 7 0 4 0;
+#X connect 8 0 1 0;
+#X connect 9 0 6 0;
+#X connect 11 0 5 0;
+#X connect 12 0 10 0;
+#X connect 13 0 9 0;
+#X connect 13 0 8 0;
+#X connect 14 0 2 0;
+#X connect 14 0 15 0;
+#X connect 15 0 9 0;

@@ -1,0 +1,142 @@
+#N canvas 127 136 697 536 12;
+#X obj 94 188 *~;
+#X obj 136 188 line~;
+#X obj 18 179 cos~;
+#X obj 18 154 +~;
+#X obj 136 165 pack 0 50;
+#X floatatom 136 117 0 0 0 0 - - -;
+#X obj 136 141 / 100;
+#X obj 18 129 phasor~;
+#X obj 18 284 output~;
+#X obj 17 253 hip~;
+#N canvas 122 159 558 609 fft 0;
+#X obj 19 61 inlet~;
+#X obj 208 212 inlet;
+#X obj 29 92 rfft~;
+#X obj 29 125 *~;
+#X obj 60 125 *~;
+#X obj 29 155 sqrt~;
+#X obj 332 109 block~ 4096 1;
+#X obj 29 181 biquad~ 0 0 0 0 1;
+#X obj 19 459 samplerate~;
+#X obj 19 436 bng 18 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X floatatom 19 506 5 0 0 0 - - -;
+#X obj 19 482 / 256;
+#X obj 19 412 loadbang;
+#X obj 75 528 s fundamental;
+#X obj 231 259 metro 500;
+#X obj 231 236 inlet;
+#X obj 19 295 tabwrite~ E09-signal;
+#X obj 231 298 tabwrite~ E09-spectrum;
+#X obj 19 528 t b f;
+#X msg 19 551 \; cm 6;
+#X obj 29 205 /~ 4096;
+#X msg 209 322 \; pd dsp 1;
+#X text 98 146 magnitude;
+#X text 11 -1 Este subpatch computa o espectro do sinal que vem com
+uma FFT (de janela retangular) . FFTs não serão propriamente introduzidas
+até mais adiante.;
+#X text 83 61 sinal para analisar;
+#X text 93 94 series de Fourier;
+#X text 96 131 calcula;
+#X text 193 164 atrasa dois samples;
+#X text 191 182 para melhor representação gráfica;
+#X text 262 212 bang para gráfico parado;
+#X text 281 238 toggle para grafico animado;
+#X text 16 362 No tempo de carga \, calcula uma boa escolha de freqüência
+fundamental para mostrar o espectro: o 16o binario em um espectro de
+4096pontos \, portanto SR*16/4096 ou SR/256.;
+#X text 238 425 SR=sample rate (taxa de amostra);
+#X text 25 585 seta o multiplicador da portadora após a fundamental
+;
+#X connect 0 0 2 0;
+#X connect 0 0 16 0;
+#X connect 1 0 16 0;
+#X connect 1 0 17 0;
+#X connect 1 0 21 0;
+#X connect 2 0 3 0;
+#X connect 2 0 3 1;
+#X connect 2 1 4 0;
+#X connect 2 1 4 1;
+#X connect 3 0 5 0;
+#X connect 4 0 5 0;
+#X connect 5 0 7 0;
+#X connect 7 0 20 0;
+#X connect 8 0 11 0;
+#X connect 9 0 8 0;
+#X connect 10 0 18 0;
+#X connect 11 0 10 0;
+#X connect 12 0 9 0;
+#X connect 14 0 16 0;
+#X connect 14 0 17 0;
+#X connect 15 0 14 0;
+#X connect 15 0 21 0;
+#X connect 18 0 19 0;
+#X connect 18 1 13 0;
+#X connect 20 0 17 0;
+#X restore 62 243 pd fft;
+#X obj 122 222 bng 18 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 122 243 tgl 18 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0
+1;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array E09-signal 882 float 0;
+#X coords 0 1.02 882 -1.02 200 80 1;
+#X restore 473 28 graph;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array E09-spectrum 259 float 0;
+#X coords 0 0.51 258 -0.008 259 130 1;
+#X restore 403 175 graph;
+#X text 433 306 2;
+#X text 464 306 4;
+#X text 403 306 0;
+#X text 663 291 0;
+#X text 664 173 0.5;
+#X obj 93 117 osc~;
+#X obj 93 86 r fundamental;
+#X text 496 306 6;
+#X text 529 306 8;
+#X text 557 306 10;
+#X text 589 306 12;
+#X text 621 306 14;
+#X floatatom 18 58 3 0 15 0 - - -;
+#X obj 18 105 *;
+#X obj 18 33 r cm;
+#X text 52 57 harmônico portadora #;
+#X text 171 117 índice (x100);
+#X text 144 222 <-- imprime gráfico;
+#X text 143 242 <-- anima gráfico;
+#X text 567 156 ESPECTRO;
+#X text 572 7 FORMA DE ONDA;
+#X text 14 7 ESPECTRO DE DOIS OPERADORES EM MODULAÇÃO DE FASE;
+#X text 411 518 Traduzido por Jardim de Volts.;
+#X text 410 503 Atualizado para Pd versão 0.37;
+#X text 482 114 ---- 0.02 segundos ----;
+#X text 441 321 -- número da parcial --;
+#X text 22 362 Este patch mede o espectro de um modelador de fase de
+dois operadores. A freqüencia portadora é inicialmente seis vezes a
+modulação de freqûencia mas você pode modificá-la com o controle de
+"harmônico portadora #" . Modificando este índice muda-se a força relativa
+dos harmônicos. Passado um certo índice (que depende da freqüência
+portadora) as bandas mais graves começam a refeletir para os cantos
+esquerdos do esectro causando complicadas interferências.;
+#X connect 0 0 3 1;
+#X connect 1 0 0 1;
+#X connect 2 0 9 0;
+#X connect 2 0 10 0;
+#X connect 3 0 2 0;
+#X connect 4 0 1 0;
+#X connect 5 0 6 0;
+#X connect 6 0 4 0;
+#X connect 7 0 3 0;
+#X connect 9 0 8 0;
+#X connect 9 0 8 1;
+#X connect 11 0 10 1;
+#X connect 12 0 10 2;
+#X connect 20 0 0 0;
+#X connect 21 0 20 0;
+#X connect 21 0 28 1;
+#X connect 27 0 28 0;
+#X connect 28 0 7 0;
+#X connect 29 0 27 0;

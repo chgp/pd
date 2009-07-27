@@ -1,0 +1,98 @@
+#N canvas 272 113 752 622 12;
+#X obj 105 111 inlet;
+#X obj 435 151 inlet;
+#X obj 105 139 sel 0;
+#X obj 244 155 t b;
+#X obj 166 264 f \$1;
+#X obj 166 289 pack 0 \$2;
+#X obj 492 151 inlet;
+#X obj 438 281 del \$2;
+#X obj 458 429 line~;
+#X obj 462 304 f \$4;
+#X obj 501 379 pack 0 \$3;
+#X obj 554 151 inlet;
+#X obj 616 151 inlet;
+#X obj 689 150 inlet;
+#X msg 105 170 stop;
+#X obj 612 306 pack 0 \$5;
+#X text 435 129 level;
+#X obj 501 355 * \$1;
+#X obj 458 454 outlet~;
+#X text 32 143 release;
+#X text 43 177 decay;
+#X obj 462 329 * 0.01;
+#X text 13 2 ADSR ENVELOPE;
+#X text 488 129 attack;
+#X text 555 128 decay;
+#X text 609 129 sustain;
+#X text 686 129 release;
+#X obj 204 92 moses;
+#X obj 194 122 t b b;
+#X msg 128 290 0;
+#X text 20 273 optionally;
+#X text 10 291 bash to zero;
+#X text 25 246 ATTACK:;
+#X text 439 113 peak;
+#X text 255 90 teste para o gatilho negativo;
+#X text 48 478 Quando você manda para este patch um gatilho positivo
+ele aloca um envelope line~ para atacar e decair \, e se chegar a zero
+\, inicia uma rampa de caimento(release).;
+#X text 47 529 Gatilhos negativos fazem a saída pular para zero e então
+atacar (ao inves de atacar da posição atual).;
+#X text 202 71 ataque;
+#X text 101 86 gatilho;
+#X text 12 160 e cancela;
+#X text 253 113 se verdadeito \, zero;
+#X text 254 129 na saida;
+#X text 281 149 ... faz isso;
+#X text 278 165 em qqer caso;
+#X text 605 332 no release desce;
+#X text 606 349 de volta pra 0;
+#X text 284 272 no ataque \, seta;
+#X text 268 288 delay para sustain;
+#X text 243 310 relembra valor sustain;
+#X text 254 330 converte de percentagem;
+#X text 255 358 multiplica pelo valor pico;
+#X text 123 346 ... então;
+#X text 72 365 relembra valor pico;
+#X text 71 384 e empacota com;
+#X text 72 404 tempo de ataque;
+#X text 31 126 se zero;
+#X text 261 376 empacota com tempo decay;
+#X text 208 1 Argumentos: volume \, tempo de ataque \, tempo decay
+\, nível sustain \, tempo release. A \, D \, e R são em mseg. e S é
+em porcentagem. Este patch é usado como abstração em vários exemplos.
+;
+#X text 48 561 Objetos como "f" é "pack" podem receber argumenos com
+um sinal de $ para inicializar seus conteúdos com argumentos de criação.
+Os inlets estão aí pra poder mudar os paramêtros durante o uso.;
+#X text 495 629 Atualizado para Pd versão 0.37;
+#X text 495 644 Traduzido por Jardim de Volts.;
+#X connect 0 0 2 0;
+#X connect 1 0 4 1;
+#X connect 1 0 17 1;
+#X connect 2 0 14 0;
+#X connect 2 0 15 0;
+#X connect 2 1 27 0;
+#X connect 3 0 4 0;
+#X connect 3 0 7 0;
+#X connect 4 0 5 0;
+#X connect 5 0 8 0;
+#X connect 6 0 5 1;
+#X connect 6 0 7 1;
+#X connect 7 0 9 0;
+#X connect 8 0 18 0;
+#X connect 9 0 21 0;
+#X connect 10 0 8 0;
+#X connect 11 0 10 1;
+#X connect 12 0 9 1;
+#X connect 13 0 15 1;
+#X connect 14 0 7 0;
+#X connect 15 0 8 0;
+#X connect 17 0 10 0;
+#X connect 21 0 17 0;
+#X connect 27 0 28 0;
+#X connect 27 1 3 0;
+#X connect 28 0 3 0;
+#X connect 28 1 29 0;
+#X connect 29 0 8 0;

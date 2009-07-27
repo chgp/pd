@@ -1,0 +1,73 @@
+#N canvas 36 83 977 603 10;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array cos-output 44100 float 0;
+#X coords 0 1.02 44100 -1.02 200 130 1;
+#X restore 494 191 graph;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array table18 44103 float 0;
+#X coords 0 1.02 44103 -1.02 200 130 1;
+#X restore 491 16 graph;
+#X obj 491 443 loadbang;
+#X obj 45 249 hip~ 5;
+#X floatatom 46 50 0 0 0 0 - - -;
+#X floatatom 126 87 0 0 0 0 - - -;
+#X obj 126 114 * 441;
+#X obj 110 163 +~ 1;
+#X obj 491 356 adc~ 1;
+#X msg 506 381 bang;
+#X obj 45 139 -~ 0.5;
+#X obj 45 189 cos~;
+#X obj 45 222 *~;
+#X obj 491 497 soundfiler;
+#X text 506 148 -- 44103 samples ---;
+#X obj 46 77 phasor~;
+#X obj 45 164 *~ 0.5;
+#X obj 44 281 output~;
+#X obj 110 138 *~;
+#X obj 167 247 tabwrite~ cos-output;
+#X obj 167 223 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 110 189 tabread4~ table18;
+#X obj 491 408 tabwrite~ table18;
+#X msg 491 472 read ../sound/voice.wav table18;
+#X text 26 15 APLICAR ENVELOPE NO SAMPLER CIRCULAR;
+#X text 85 49 <-- frequencia (Hz);
+#X text 189 222 <-- clique para grafar o envelope;
+#X text 30 473 Para ver o envelope \, ajuste o phasor para aprox. 2
+Hz \, clique no botao "grafar" \, e veja em "cos-output". Este e' multiplicado
+pela saida de tabread4~ para evitar o click quando a fase volta a zero.
+;
+#X text 28 542 Ainda e' possivel ter muito mais controle sobre a forma
+do envelope \, mas isso sera tratado mais adiante.;
+#X text 548 382 <-- clique aqui para gravar na tabela;
+#X text 582 451 v-- reler o som original;
+#X text 600 540 atualizado para Pd versao 0.37;
+#X text 600 555 traduzido por geada;
+#X text 513 322 ----- 1 segundo ------;
+#X text 165 86 <-- tamanho da fatia (centesimos de segundo);
+#X text 31 354 Aqui aplicamos um envelope de amplitude para evitar
+descontinuidades no ponto de loop ao inicio da tabela. O envelope e'
+simplesmente uma onda cossenoide entre -90 e +90 graus \, (-pi/2 a
+pi/2 radianos) \, ou seja: a parte que vale zero ou e' tem sinal positivo.
+A entrada do objeto "cos~" e' em ciclos (unidades de 2pi radianos)
+\, de maneira que -1/4 a +1/4 indicam a parte desejada da onda.;
+#X connect 2 0 23 0;
+#X connect 3 0 17 0;
+#X connect 3 0 17 1;
+#X connect 4 0 15 0;
+#X connect 5 0 6 0;
+#X connect 6 0 18 1;
+#X connect 7 0 21 0;
+#X connect 8 0 22 0;
+#X connect 9 0 22 0;
+#X connect 10 0 16 0;
+#X connect 11 0 12 0;
+#X connect 11 0 19 0;
+#X connect 12 0 3 0;
+#X connect 15 0 10 0;
+#X connect 15 0 18 0;
+#X connect 16 0 11 0;
+#X connect 18 0 7 0;
+#X connect 20 0 19 0;
+#X connect 21 0 12 1;
+#X connect 23 0 13 0;

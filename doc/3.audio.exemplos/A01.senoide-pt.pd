@@ -1,0 +1,35 @@
+#N canvas 0 32 991 628 10;
+#X obj 108 109 osc~ 440;
+#X obj 108 168 dac~;
+#X obj 108 138 *~ 0.05;
+#X msg 98 239 \; pd dsp 1;
+#X msg 202 239 \; pd dsp 0;
+#X text 187 139 <-- reduz a amplitude a 0.05;
+#X text 204 110 <-- onda senoidal de 440 Hz com amplitude maxima (1)
+;
+#X text 177 169 <-- envia para o dispositivo de saida de audio;
+#X text 28 197 A computacao de audio e' acionada ou desligada quando
+se enviam as seguintes mensagens ao objeto global "pd":;
+#X text 296 247 <-- clique aqui;
+#X text 98 278 LIGADO;
+#X text 208 277 DESLIGADO;
+#X text 22 1 CRIANDO UMA ONDA SENOIDAL;
+#X text 324 524 Atualizado para Pd version 0.36;
+#X text 23 25 O Pd interpreta objetos que contem "til" (~) em seu nome
+como objetos de computação de áudio \, como os tres logo a seguir.
+Estes usam correntes de audio continuas para interagir. Comunicam-se
+tambem com outros objetos de Pd ("control") usando mensagens.;
+#X text 28 297 Tente observar uma alteracao na janela - que deve indicar
+se o audio esta' ligado ou desligado. Embora seja possivel ligar e
+desligar o audio no menu "audio" \, os botoes estao disponiveis como
+um atalho.;
+#X text 28 367 Quando o DSP esta' ligado \, voce deve escutar um som
+com altura (pitch) de 440 e amplitude de 0.05. Se \, pelo contrario
+\, so' houver silencio \, leia a documentacao HTML referente a configuracoes
+de audio.;
+#X text 28 438 Geralmente \, ao iniciar-se uma sessao de trabalho com
+Pd \, pode-se optar por "test audio and MIDI" no menu "media" \, o
+qual abre um patch de teste mais apropriado que este.;
+#X text 325 543 traduzido por geada.;
+#X connect 0 0 2 0;
+#X connect 2 0 1 0;

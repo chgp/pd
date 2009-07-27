@@ -1,0 +1,60 @@
+#N canvas 0 27 1001 628 10;
+#X obj 56 79 osc~ 440;
+#X obj 48 316 dac~;
+#X msg 446 79 \; pd dsp 1;
+#X msg 538 79 \; pd dsp 0;
+#X text 467 112 ON;
+#X text 555 112 OFF;
+#X obj 56 269 *~;
+#X obj 72 243 line~;
+#X msg 72 103 0.1 2000;
+#X msg 72 177 0 2000;
+#X msg 72 125 0.1 50;
+#X msg 72 199 0 50;
+#X msg 72 147 0.1;
+#X msg 72 221 0;
+#X text 112 161 ----------------------;
+#X text 159 104 <-- lento;
+#X text 144 126 <-- rapido;
+#X text 111 146 <-- instantaneo;
+#X text 136 178 <-- lento;
+#X text 129 199 <-- rapido;
+#X text 109 219 <-- instantaneo;
+#X text 37 22 Neste patch \, o multiplicador esta' configurado para
+multiplicar dois sinais. A amplitude agora e' um sinal calculado pelo
+objeto "line~".;
+#X text 143 78 <-- onda senoidal;
+#X text 274 124 LIGADO;
+#X text 271 197 DESLIGADO;
+#X text 129 243 <--- gerador de rampas;
+#X text 103 268 <-- multiplica a onda senoidal pela rampa. Aqui ja
+nao ha' um argumento "0": isso avisa o Pd para esperar uma entrada
+de sinal pela direita.;
+#X text 36 1 CONTROLE DA AMPLITUDE USANDO LINE~;
+#X text 42 353 A entrada esquerda de line~ um valor de chegada \; A
+onda alcanca esse valor no tempo especificado na entrada da direita.
+;
+#X text 528 609 atualizado para Pd 0.36 \; traduzido por geada.;
+#X text 99 317 <-- saída;
+#X text 41 422 Neste exemplo \, há mensagens de dois numeros conectados
+à entrada esquerda de line~. A onda alcanca esse valor em tempo especificado
+'a direita desse valor de chegada (dentro da mesma mensagem). O processo
+\, no fim das contas \, e' o mesmo: exceto em alguns casos particulares
+\, objetos com mais de uma entrada distribuem automaticamente una lista
+de numeros atraves de suas entradas. Neste caso \, "0 50" equivale
+a "50 pela direita e 0 pela esquerda.";
+#X text 40 556 O objeto line~ (assim como o line \, seu "irmão" de
+controle) tratam de forma especial sua entrada direita. As entradas
+nao retem valores como acontece com outras entradas de direita \, e
+sim revertem a zero assim que um novo numero de chegada e' recebido
+(pela esquerda).;
+#X connect 0 0 6 0;
+#X connect 6 0 1 0;
+#X connect 6 0 1 1;
+#X connect 7 0 6 1;
+#X connect 8 0 7 0;
+#X connect 9 0 7 0;
+#X connect 10 0 7 0;
+#X connect 11 0 7 0;
+#X connect 12 0 7 0;
+#X connect 13 0 7 0;

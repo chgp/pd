@@ -1,0 +1,177 @@
+#N canvas 0 72 1001 628 12;
+#N canvas 0 0 600 392 samples 0;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array sample1 176403 float 0;
+#X coords 0 1.02 176403 -1.02 200 130 1;
+#X restore 262 41 graph;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array sample2 176403 float 0;
+#X coords 0 1.02 176403 -1.02 200 130 1;
+#X restore 262 226 graph;
+#X text 282 385 ------ 4 segundos ------;
+#X restore 931 97 pd samples;
+#N canvas 52 219 967 340 recorder 0;
+#X obj 220 21 inlet;
+#X obj 174 174 adc~ 1;
+#X obj 174 202 hip~ 5;
+#X obj 243 232 line~;
+#X obj 174 231 *~;
+#X msg 243 204 1;
+#X obj 302 169 del 3990;
+#X msg 279 204 0 10;
+#X obj 174 282 tabwrite~ sample1;
+#X msg 26 117 set \$1 \, bang;
+#X msg 348 140 stop;
+#X msg 302 140 bang;
+#X obj 220 50 route record stop reload browse;
+#X obj 411 158 loadbang;
+#X obj 514 113 openpanel;
+#X msg 514 85 bang;
+#X text 556 84 <-- browse for samples;
+#X text 482 209 v-- re-read original samples;
+#X obj 411 295 soundfiler;
+#X msg 411 237 read ../sound/bell.aiff sample1 \, read ../sound/voice2.wav
+sample2;
+#X msg 514 140 read \$1 sample1;
+#X obj 514 167 soundfiler;
+#X obj 26 88 makefilename sample%d;
+#X connect 0 0 12 0;
+#X connect 1 0 2 0;
+#X connect 2 0 4 0;
+#X connect 3 0 4 1;
+#X connect 4 0 8 0;
+#X connect 5 0 3 0;
+#X connect 6 0 7 0;
+#X connect 7 0 3 0;
+#X connect 9 0 8 0;
+#X connect 10 0 6 0;
+#X connect 11 0 6 0;
+#X connect 12 0 11 0;
+#X connect 12 0 5 0;
+#X connect 12 0 22 0;
+#X connect 12 1 7 0;
+#X connect 12 1 10 0;
+#X connect 12 2 19 0;
+#X connect 12 3 15 0;
+#X connect 13 0 19 0;
+#X connect 14 0 20 0;
+#X connect 15 0 14 0;
+#X connect 19 0 18 0;
+#X connect 20 0 21 0;
+#X connect 22 0 9 0;
+#X restore 931 284 pd recorder;
+#X msg 931 146 record 1;
+#X msg 931 202 stop;
+#X msg 931 174 record 2;
+#X text 3 94 amplitude (dB);
+#X msg 931 229 reload;
+#X msg 931 257 browse;
+#X obj 547 329 sampvoice;
+#X obj 631 17 r note;
+#X obj 631 44 unpack 0 0 0 0 0 0 0;
+#X obj 604 76 t b f;
+#X obj 544 109 f;
+#X obj 580 109 + 1;
+#X obj 552 146 mod 1e+06;
+#X obj 544 175 makenote 64;
+#X obj 544 203 poly 8 1;
+#X obj 544 230 stripnote;
+#X obj 617 272 pack 0 0 0 0 0 0 0 0;
+#X obj 617 300 route 1 2 3 4 5 6 7 8;
+#X text 929 124 record \, etc.;
+#X obj 704 516 qlist;
+#X obj 870 520 r comment;
+#X msg 704 486 read qlist-sampler.txt \, rewind \, tempo 1 \, bang
+;
+#X obj 548 551 output~;
+#X text 20 8 SAMPLER POLYFÔNICO;
+#X text 19 49 ARGUMENTOS PARA AS NOTAS:;
+#X text 5 72 pitch em meios tons;
+#X text 3 137 número do sample;
+#X text 2 175 tempo de elevação (mseg.);
+#X text 0 195 tempo de decaimento (mseg.);
+#X text 2 158 localização inicial (mseg.);
+#X text 4 116 duração (mseg.);
+#X text 736 415 ouve belos cantos. Ele implora a seus;
+#X text 738 437 marinheiros para desamarrá-lo...;
+#X text 735 394 Amarrado ao mastro de seu navio \, Ulisses;
+#X text 233 85 Incrementa (modulo) mod 1e+06 definindo;
+#X text 272 108 (age como um pitch MIDI;
+#X text 236 127 indentificando a nota para "poly");
+#X text 326 177 gera o note-on atrasado;
+#X text 335 203 aloca a voz do sampler;
+#X text 337 232 solta a nota novamente;
+#X obj 547 522 sampvoice;
+#X obj 547 494 sampvoice;
+#X obj 547 467 sampvoice;
+#X obj 547 439 sampvoice;
+#X obj 547 412 sampvoice;
+#X obj 547 384 sampvoice;
+#X obj 547 356 sampvoice;
+#X text 4 264 Aqui pegamos o patch prévio e o tornamos polifônico \,
+com 8 vozes. A voz isolada que nós tínhamos anteriormente foi convertida
+numa abstração \, "samplevoice.pd" \, a qual nos instanciamos em 8
+cópias. Anteriormente havíamos usados sends e receives para passar
+mensagens de "cutoff" e outras \, mas aqui se fizéssemos isto as cópias
+de samplevoice mandariam mensagens umas para as outras \, por isso
+combinamos o controle a computação do áudio dentro da abstração sampvoice
+sem usar send e receive. Clique em alguma delas para ver como.;
+#X text 5 426 O objeto "poly" essencialmente repete os pares de pitch
+e velocity na sua saída \, mas também esta mandando um número de voz
+de sua saída esquerda. Para usá-lo \, nós desempacotamos os 7 paramêtros
+\, calculando o número de voz primeiro \, e então usamos "route" para
+mandá-lo para uma das 8 vozes.;
+#X text 5 526 Há algum inconveniente porque poly espera rastrear mensagens
+de note on e note off separadamente como se elas estivessem vindo de
+um teclado MIDI externo. Portanto \, nós assinalamos cada nota em um
+único "pitch" falso \, usando o makenote para gerar mensagens de note-off
+\, e então rodar poly no fluxo resultante. Nós então descartamos ambos
+pitch e velocity (usando velocity apenas para filtrar os note-offs)
+e recontruímos a mensagem original adicionando o número de voz que
+acabos de adquirir.;
+#X text 839 651 Traduzido por Jardim de Volts.;
+#X text 838 633 Atualizado para Pd versão 0.33;
+#X connect 2 0 1 0;
+#X connect 3 0 1 0;
+#X connect 4 0 1 0;
+#X connect 6 0 1 0;
+#X connect 7 0 1 0;
+#X connect 8 0 48 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 10 1 18 2;
+#X connect 10 2 15 2;
+#X connect 10 2 18 3;
+#X connect 10 3 18 4;
+#X connect 10 4 18 5;
+#X connect 10 5 18 6;
+#X connect 10 6 18 7;
+#X connect 11 0 12 0;
+#X connect 11 1 18 1;
+#X connect 12 0 13 0;
+#X connect 12 0 15 0;
+#X connect 13 0 14 0;
+#X connect 14 0 12 1;
+#X connect 15 0 16 0;
+#X connect 15 1 16 1;
+#X connect 16 0 17 0;
+#X connect 16 2 17 1;
+#X connect 17 0 18 0;
+#X connect 18 0 19 0;
+#X connect 19 0 8 1;
+#X connect 19 1 48 1;
+#X connect 19 2 47 1;
+#X connect 19 3 46 1;
+#X connect 19 4 45 1;
+#X connect 19 5 44 1;
+#X connect 19 6 43 1;
+#X connect 19 7 42 1;
+#X connect 23 0 21 0;
+#X connect 42 0 24 0;
+#X connect 42 0 24 1;
+#X connect 43 0 42 0;
+#X connect 44 0 43 0;
+#X connect 45 0 44 0;
+#X connect 46 0 45 0;
+#X connect 47 0 46 0;
+#X connect 48 0 47 0;

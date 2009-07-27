@@ -1,0 +1,59 @@
+#N canvas 108 71 826 530 12;
+#X obj 28 412 osc~;
+#X obj 94 197 r poll-table;
+#X obj 129 337 + 50;
+#X obj 129 363 dbtorms;
+#X msg 78 339 0;
+#X obj 78 392 pack 0 30;
+#X obj 78 422 line~;
+#X obj 28 471 throw~ sum-bus;
+#X obj 28 442 *~;
+#X obj 28 87 r pitch;
+#X obj 28 114 mtof;
+#X obj 78 230 f;
+#X obj 28 142 * \$1;
+#X obj 37 168 ftom;
+#X obj 79 256 -;
+#X obj 121 255 r whammybar;
+#X obj 78 284 tabread4 spectrum-tab;
+#X obj 78 311 moses 1;
+#X text 49 6 Esta abstração é usada pelo espectro desenhável \, patch
+D08...;
+#X text 60 46 \$1 é o número da parcial;
+#X text 78 114 pitch para freqüência;
+#X text 78 141 e então pega a freqüencia em sua parcial específica
+;
+#X text 81 167 ... e converte devolta para pitch.;
+#X text 216 195 recebe um bang da "tabela-poll" a cada 30 mseg.;
+#X text 116 230 ... que em cada transição capturamos o pitch novamente...
+;
+#X text 233 249 ... e transpomos \, causando um efeito de modulação
+do espectro ao longo de sua banda.;
+#X text 285 288 Finalmente conseguimos a expressão de força da tabela.
+npte que usamos um objeto de controle \, tabread4 \, e não tabread4~.
+;
+#X text 202 341 A escala vertical é em dB de 1 até 50 \, mas nós queremos
+o zero quando o valor da tabela for 0 ou menos.;
+#X text 173 395 Controle de amplitude via pack \, line~ \, e *~.;
+#X text 171 444 Finalmene adicionamos ao mixer externo via throw~.
+|Todos os throw~s das instâncias desta abstração abstraction vão adicionar
+o sinal nesta variável de "catch~ sum-bus" na saída.;
+#X connect 0 0 8 0;
+#X connect 1 0 11 0;
+#X connect 2 0 3 0;
+#X connect 3 0 5 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 8 1;
+#X connect 8 0 7 0;
+#X connect 9 0 10 0;
+#X connect 10 0 12 0;
+#X connect 11 0 14 0;
+#X connect 12 0 13 0;
+#X connect 12 0 0 0;
+#X connect 13 0 11 1;
+#X connect 14 0 16 0;
+#X connect 15 0 14 1;
+#X connect 16 0 17 0;
+#X connect 17 0 4 0;
+#X connect 17 1 2 0;

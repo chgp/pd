@@ -1,0 +1,83 @@
+#N canvas 34 0 985 622 12;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array tab28 176403 float 0;
+#X coords 0 1.02 176403 -1.02 200 130 1;
+#X restore 740 126 graph;
+#X obj 624 447 loadbang;
+#X obj 31 340 hip~ 5;
+#X obj 634 306 adc~ 1;
+#X obj 634 336 hip~ 5;
+#X msg 605 267 bang;
+#X obj 31 306 *~;
+#X obj 71 279 r cutoff;
+#X obj 31 194 r phase;
+#X msg 24 37 bang;
+#X obj 124 92 delay 5;
+#X msg 24 128 \; cutoff 0 5;
+#X obj 669 366 line~;
+#X obj 634 371 *~;
+#X obj 702 303 del 3990;
+#X msg 702 331 0 10;
+#X obj 624 506 soundfiler;
+#X obj 71 306 vline~;
+#X obj 30 369 output~;
+#X obj 31 224 vline~;
+#X obj 605 400 tabwrite~ tab28;
+#X msg 624 477 read ../sound/bell.aiff tab28;
+#X obj 31 254 tabread4~ tab28;
+#X msg 124 127 \; phase 1 \, 4.41e+08 1e+07 \; cutoff 1;
+#X msg 543 286 0 \, 1 5;
+#X text 20 6 SAMPLER DE UM TRIGGER USANDO LINE~ COMO FASE;
+#X text 68 39 <-- toque o sample;
+#X text 205 77 Espere até o;
+#X text 202 97 cutoff (corte) para finalizar;
+#X text 34 85 corte;
+#X text 34 104 o som;
+#X text 349 121 sete um line~ superior para iniciar;
+#X text 349 140 no primeiro sample e continuar para sempre;
+#X text 643 266 <-- grava;
+#X text 753 333 <--para a gravação;
+#X text 728 453 v-- reler o sample original;
+#X text 739 266 ------ 4 segundos ------;
+#X text 26 424 Aqui esta como fazer um sampler usando o objeto line~
+ao invés do phasor~ \, para gerar uma leitura do sinal original.;
+#X text 350 157 (até o próximo gatilho);
+#X text 26 457 Para iniciar uma nota \, primeiro tem que mutar a saída
+em caso de já haver algo tocando -- de outra maneira teremos um clique.
+O objeto line~ de "cutoff leva 5 segundos para chegar até zero. Depois
+deste tanto de atraso \, nós resetamos a fase do sampler número 1 e
+inciamos seu movimento. Nós quermos que a saída de line~ incremente
+em 1 cada sample da saída \, então pedimos para fazer 4.41e+08 samples
+em 1e+07 milisegundos.;
+#X text 28 582 O mecanismo de cutoff continua seguro se acontecer de
+pedirmos por duas notas em menos de 5 milisegundos. A segunda requisição
+pode resetar o delay \, então não existe maneira que o delay possa
+disparar sem corat o line~ate zero.;
+#X text 27 659 Nós evitamos clicks (estalos) no fim de uma tabela levando
+os dados a irem suavemente at éo zero. Para fazer sso adicionamos um
+controle de nível ao patch de gravação que corta um um pouco antes
+de chegar ao fim da tabela.;
+#X text 686 737 Atualizado para Pd version 0.37;
+#X connect 1 0 21 0;
+#X connect 2 0 18 0;
+#X connect 2 0 18 1;
+#X connect 3 0 4 0;
+#X connect 4 0 13 0;
+#X connect 5 0 14 0;
+#X connect 5 0 24 0;
+#X connect 5 0 20 0;
+#X connect 6 0 2 0;
+#X connect 7 0 17 0;
+#X connect 8 0 19 0;
+#X connect 9 0 11 0;
+#X connect 9 0 10 0;
+#X connect 10 0 23 0;
+#X connect 12 0 13 1;
+#X connect 13 0 20 0;
+#X connect 14 0 15 0;
+#X connect 15 0 12 0;
+#X connect 17 0 6 1;
+#X connect 19 0 22 0;
+#X connect 21 0 16 0;
+#X connect 22 0 6 0;
+#X connect 24 0 12 0;

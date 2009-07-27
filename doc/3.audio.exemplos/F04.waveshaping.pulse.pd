@@ -1,0 +1,134 @@
+#N canvas 124 182 900 586 12;
+#X obj 220 171 line~;
+#X obj 220 147 pack 0 50;
+#X floatatom 220 46 0 0 0 0 - - -;
+#X obj 70 108 *~;
+#X obj 220 72 / 10;
+#X obj 220 96 moses 0;
+#X msg 220 120 0;
+#X obj 78 141 *~;
+#X obj 18 141 sig~ 1;
+#X obj 39 194 /~;
+#X obj 54 168 +~;
+#X text 111 141 X^2;
+#X text 84 171 1+X^2;
+#X text 71 196 1/(1+X^2);
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array F04-signal 882 float 0;
+#X coords 0 1.02 882 -1.02 200 130 1;
+#X restore 646 328 graph;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array F04-spectrum 259 float 0;
+#X coords 0 1.01 258 -0.008 256 200 1;
+#X restore 587 38 graph;
+#X text 646 461 ---- 0.02 seconds ----;
+#X text 614 237 2;
+#X text 645 237 4;
+#X text 584 237 0;
+#X text 622 252 -- partial number --;
+#X text 677 237 6;
+#X text 710 237 8;
+#X text 738 237 10;
+#X text 770 237 12;
+#X text 802 237 14;
+#X obj 40 277 output~;
+#X obj 39 246 hip~;
+#N canvas 122 159 558 609 fft 0;
+#X obj 19 61 inlet~;
+#X obj 224 210 inlet;
+#X obj 29 92 rfft~;
+#X obj 29 125 *~;
+#X obj 60 125 *~;
+#X obj 29 155 sqrt~;
+#X obj 332 109 block~ 4096 1;
+#X obj 29 181 biquad~ 0 0 0 0 1;
+#X obj 264 434 samplerate~;
+#X obj 251 255 metro 500;
+#X obj 251 232 inlet;
+#X obj 29 205 /~ 4096;
+#X obj 264 409 bang~;
+#X obj 264 457 / 512;
+#X obj 19 295 tabwrite~ F04-signal;
+#X obj 250 291 tabwrite~ F04-spectrum;
+#X obj 264 483 s freq/2;
+#X msg 224 321 \; pd dsp 1;
+#X text 95 135 magnitude;
+#X text 11 -1 Este subpatch computa o espectro do sinal que vem com
+uma FFT (de janela retangular) . FFTs não serão propriamente introduzidas
+até mais adiante.;
+#X text 83 61 sinal para analisar;
+#X text 93 94 series de Fourier;
+#X text 93 120 calcula;
+#X text 190 171 atrasa dois samples;
+#X text 191 185 para melhor representação gráfica;
+#X text 275 211 bang para gráfico parado;
+#X text 303 232 toggle para grafico animado;
+#X connect 0 0 2 0;
+#X connect 0 0 14 0;
+#X connect 1 0 14 0;
+#X connect 1 0 15 0;
+#X connect 1 0 17 0;
+#X connect 2 0 3 0;
+#X connect 2 0 3 1;
+#X connect 2 1 4 0;
+#X connect 2 1 4 1;
+#X connect 3 0 5 0;
+#X connect 4 0 5 0;
+#X connect 5 0 7 0;
+#X connect 7 0 11 0;
+#X connect 8 0 13 0;
+#X connect 9 0 14 0;
+#X connect 9 0 15 0;
+#X connect 10 0 9 0;
+#X connect 10 0 17 0;
+#X connect 11 0 15 0;
+#X connect 12 0 8 0;
+#X connect 13 0 16 0;
+#X restore 93 248 pd fft;
+#X obj 153 227 bng 18 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 153 248 tgl 18 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0
+1;
+#X obj 69 81 osc~;
+#X text 849 222 0;
+#X text 846 35 1;
+#X obj 69 56 r freq/2;
+#X text 215 28 largura de banda;
+#X text 175 227 <-- mostra gráfico;
+#X text 173 247 <-- anima gráfico;
+#X text 23 337 Aqui nós usamos a modelagem de onda para fazer uma outra
+forma de trem de pulso.Esta tem um espectro equilibrado: as parciais
+vão caindo exponencialmente (com a largura de banda controlando a taxa
+de queda). Em patches mais adiante nós iremos usar a tabela de ondas
+para fazer a modelegem \, mas pela simplicidade isto aqui esta feito
+algebricamente. O oscilador corre em meio ciclo da freqüência fundamental.
+A simetria da modelagem de onda dobra a freqüência na saída.;
+#X text 22 466 Esta é forma do trem de pulso usado no conhecido algoritmo
+"Formante de Fase Alinhada" - Phase Aligned Formant (PAF).;
+#X text 28 4 OUTRO GERADOR DE PULSO COM ALGORITMO DE MODELAGEM;
+#X text 26 505 NOTA: O algoritmo PAF é protegido por patentes e pertence
+ao IRCAM. O uso não comercial não deve haver problemas mas se for aplicar
+este algoritmo em uso comercial favor fazer contato com estes.;
+#X text 605 540 Atualizado para Pd versão 0.37;
+#X text 605 555 Traduzido por Jardim de Volts.;
+#X connect 0 0 3 1;
+#X connect 1 0 0 0;
+#X connect 2 0 4 0;
+#X connect 3 0 7 0;
+#X connect 3 0 7 1;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 5 1 1 0;
+#X connect 6 0 1 0;
+#X connect 7 0 10 1;
+#X connect 8 0 9 0;
+#X connect 8 0 10 0;
+#X connect 9 0 27 0;
+#X connect 9 0 28 0;
+#X connect 10 0 9 1;
+#X connect 27 0 26 0;
+#X connect 27 0 26 1;
+#X connect 29 0 28 1;
+#X connect 30 0 28 2;
+#X connect 31 0 3 0;
+#X connect 34 0 31 0;

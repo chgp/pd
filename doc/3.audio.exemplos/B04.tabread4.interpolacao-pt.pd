@@ -1,0 +1,46 @@
+#N canvas 0 27 1001 637 10;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array waveform13 11 float 1;
+#A 0 1 1 1 1 1 1 1 -1 -1 -1 -1;
+#X coords 0 1.02 10 -1.02 180 130 1;
+#X restore 448 53 graph;
+#X obj 156 161 +~ 1;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array wave-out13 441 float 0;
+#X coords 0 1.02 440 -1.02 300 140 1;
+#X restore 449 236 graph;
+#X msg 177 220 bang;
+#N canvas 11 418 531 224 other-stuff 0;
+#X obj 41 49 loadbang;
+#X msg 39 81 \; waveform13 0 1 1 1 1 1 1 1 -1 -1 -1 -1 \; waveform13
+xlabel -1.2 0 1 2 3 4 5 6 7 8 9 10 \; pd dsp 1;
+#X connect 0 0 1 0;
+#X restore 626 400 pd other-stuff;
+#X obj 156 251 tabwrite~ wave-out13;
+#X obj 156 188 tabread4~ waveform13;
+#X obj 156 135 *~ 8;
+#X obj 156 99 phasor~ 220;
+#X obj 216 320 sig~ 220;
+#X obj 216 350 tabosc4~ waveform13;
+#X text 40 100 de fase -->;
+#X text 37 123 ajuste;
+#X text 35 22 INTERPOLACAO DE 4 PONTOS EM DETALHES;
+#X text 41 86 gerador;
+#X text 36 138 de faixa -->;
+#X text 223 220 <--clique para grafar;
+#X text 18 319 (este seria equivalente;
+#X text 74 334 ao de cima) -->;
+#X text 539 460 atualizado para Pd versao 0.34;
+#X text 540 476 traduzido por geada.;
+#X text 21 411 Este patch demonstra a interpolacao de 4 pontos em tabread4~.
+A tabela de 11 pontos \, waveform13 \, contem uma transicao de 1 a
+-1 \, a qual e'"suavizada" \, como se pode ver em wave-out13. Esta
+transicao nao ocorre no ponto de virada do loop \, visto que a interpolacao
+sempre ocorre entre 4 mostras consecutivas da tabela \, sem levar em
+conta a volta ao inicio.;
+#X connect 1 0 6 0;
+#X connect 3 0 5 0;
+#X connect 6 0 5 0;
+#X connect 7 0 1 0;
+#X connect 8 0 7 0;
+#X connect 9 0 10 0;

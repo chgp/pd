@@ -1,0 +1,58 @@
+#N canvas 44 32 604 533 12;
+#X obj 43 278 mtof;
+#X floatatom 43 255 5 0 150 0 - #0-pit -;
+#X obj 32 446 output~;
+#X obj 32 225 noise~;
+#X text 106 301 <-- cutoff (Hertz);
+#X floatatom 43 303 5 0 0 0 - - -;
+#X obj 121 414 metro 250;
+#X obj 121 394 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 1
+1;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array H03-graph 882 float 2;
+#X coords 0 1 882 -1 200 140 1;
+#X restore 393 235 graph;
+#X obj 32 361 bp~;
+#X obj 121 439 tabwrite~ H03-graph;
+#X floatatom 54 331 5 0 1000 0 - #0-q -;
+#X text 106 329 <-- q;
+#N canvas 0 0 450 300 loadbang 0;
+#X obj 85 16 loadbang;
+#X obj 85 40 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 85 59 f \$0;
+#X text 18 179 boxes.;
+#X text 16 161 This subpatch loads initial values in number;
+#X msg 85 83 \; \$1-pit 72 \; \$1-q 1;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 5 0;
+#X restore 139 482 pd loadbang;
+#X text 97 -10 FILTRO RESSONANTE (BAND-PASS - PASSA-BANDA);
+#X text 287 476 Atualizado para Pd versão 0.39;
+#X text 318 495 Traduzido por Puredeposito.;
+#X text 19 16 Um simples filtro ressonante de passa banda é privdo
+pelo objeto bp~. Filtros ressonantes podem ser afinados para uma "freqüência
+central" específica e assim deixam passar esta freqüência equanto atenuam
+as demais (quando mais distante da freqüência central maior a atenuação).
+Este patch utiliza uma fonte de ruído branco para demostrar.;
+#X text 19 116 Os dois controles específicos \, primeiro a freqüência
+central \, e segundo \, a precisão de sintonia do filtro \, normalmente
+chamada de Q. Se você incrementa Q para 10 ou 20 \, você vai ver uma
+queda no sinal geral total \, e de uma forma ou de outra \, escutará
+mais claramente a freqüência no resultado.;
+#X text 98 224 ruído branco \, sinal teste;
+#X text 95 254 <-- cutoff (unidades de pitch);
+#X text 73 363 filtro passa banda (band-pass);
+#X text 396 382 --- 0.02 segundos ---;
+#X text 139 390 gráficos on/off;
+#X connect 0 0 5 0;
+#X connect 1 0 0 0;
+#X connect 3 0 9 0;
+#X connect 5 0 9 1;
+#X connect 6 0 10 0;
+#X connect 7 0 6 0;
+#X connect 9 0 2 0;
+#X connect 9 0 2 1;
+#X connect 9 0 10 0;
+#X connect 11 0 9 2;

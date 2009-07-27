@@ -1,0 +1,88 @@
+#N canvas 131 87 807 425 12;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array spectrum-tab 127 float 1;
+#A 0 0 0 0 0 0 0 0 0 0 33.2142 33.2142 33.2142 32.857 0 0 0 0 0 0 0
+0 0 42.857 42.4999 42.4999 0 0 0 0 0 33.5713 35.7142 38.9284 40.7142
+41.4284 41.4284 0 0 0 0 0 0 0 0 0 0 43.9285 39.2856 42.4999 36.7856
+0 0 0 0 0 0 0 0 0 42.857 41.4284 41.4284 0 5.35713 7.49998 24.6428
+24.6428 22.8571 22.4999 21.4285 21.7856 22.1428 23.2142 23.9285 24.2856
+24.9999 26.0713 11.4285 11.0714 4.99998 2.85713 0.714284 0 0 0 0 0
+0 0 1.42857 3.21428 3.92856 6.78569 8.92854 12.5 15.3571 8.57141 8.57141
+8.92855 11.7857 12.8571 15 17.1428 19.2857 23.9285 19.2857 16.0714
+12.1428 9.2857 7.49999 6.42856 6.07142 5.83333 5.59523 5.35714 4.99999
+4.64285 4.64285 4.64285 4.64285 4.64285 4.99999 4.99999 4.99999 4.99999
+5.35714 5.35714;
+#X coords 0 50 126 0 300 140 1;
+#X restore 496 136 graph;
+#N canvas 98 16 694 474 oscbank 1;
+#X obj 36 53 spectrum-partial 1;
+#X obj 122 382 loadbang;
+#X obj 122 407 metro 30;
+#X obj 122 433 s poll-table;
+#X text 107 21 Este é o banco de osiladore -- abra para ver;
+#X text 72 345 E aqui nós mandamos bangs para uma "tabela-poll" necessária
+nas abstrações.;
+#X obj 36 79 spectrum-partial 2;
+#X obj 36 105 spectrum-partial 3;
+#X obj 36 131 spectrum-partial 4;
+#X obj 36 157 spectrum-partial 5;
+#X obj 36 183 spectrum-partial 6;
+#X obj 36 209 spectrum-partial 7;
+#X obj 36 235 spectrum-partial 8;
+#X obj 36 261 spectrum-partial 9;
+#X obj 36 287 spectrum-partial 10;
+#X obj 216 53 spectrum-partial 11;
+#X obj 216 79 spectrum-partial 12;
+#X obj 216 105 spectrum-partial 13;
+#X obj 216 131 spectrum-partial 14;
+#X obj 216 157 spectrum-partial 15;
+#X obj 216 183 spectrum-partial 16;
+#X obj 216 209 spectrum-partial 17;
+#X obj 216 235 spectrum-partial 18;
+#X obj 215 261 spectrum-partial 19;
+#X obj 215 287 spectrum-partial 20;
+#X obj 395 53 spectrum-partial 21;
+#X obj 395 78 spectrum-partial 22;
+#X obj 395 104 spectrum-partial 23;
+#X obj 395 130 spectrum-partial 24;
+#X obj 395 156 spectrum-partial 25;
+#X obj 395 182 spectrum-partial 26;
+#X obj 395 207 spectrum-partial 27;
+#X obj 396 234 spectrum-partial 28;
+#X obj 395 260 spectrum-partial 29;
+#X obj 395 287 spectrum-partial 30;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X restore 17 251 pd oscbank;
+#X obj 19 321 catch~ sum-bus;
+#X obj 16 153 s pitch;
+#X floatatom 16 125 4 0 0 0 - - -;
+#X floatatom 14 183 4 0 0 0 - - -;
+#X obj 14 226 s whammybar;
+#N canvas 0 0 650 341 table-setup 0;
+#X obj 39 227 loadbang;
+#X msg 39 261 \; spectrum-tab xlabel -5 0 12 24 36 48 60 72 84 96 108
+120;
+#X connect 0 0 1 0;
+#X restore 17 283 pd table-setup;
+#X msg 596 65 \; spectrum-tab const 0;
+#X text 71 128 <-- pitch;
+#X obj 19 358 output~;
+#X text 40 14 ESPECTRO DESENHÁVEL;
+#X text 113 254 o banco de osciladores;
+#X text 13 38 Neste vetor (array) \, você pode desenhar um envelope
+espectral que será sintetizado com um banco oscilador. Cada oscilador
+no banco computa sua própria freqüência e usa esta para procurar e
+assinar uma amplitude no vetor.;
+#X text 27 199 <-- "shift" navegação de harmônicos (normalmente 0)
+;
+#X text 662 44 LIMPAR;
+#X text 512 376 Atualizado para Pd versão 0.37;
+#X text 513 392 Traduzido por Jardim de Volts.;
+#X text 153 283 <-- cria o desenho da escala ------->;
+#X text 157 317 <-- aqui nós somente coletamos a soma de todas as parciais
+com as quais que estão sendo computadas no "oscbank".;
+#X connect 2 0 10 0;
+#X connect 2 0 10 1;
+#X connect 4 0 3 0;
+#X connect 5 0 6 0;

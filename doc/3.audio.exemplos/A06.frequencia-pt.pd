@@ -1,0 +1,61 @@
+#N canvas 0 27 1001 637 10;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array osc-saida 4410 float 0;
+#X coords 0 1.02 4410 -1.02 200 130 1;
+#X restore 473 228 graph;
+#X msg 98 252 bang;
+#X floatatom 330 96 0 0 0 0 - - -;
+#X msg 330 67 set \$1;
+#X floatatom 6 96 0 0 0 0 - - -;
+#X msg 6 67 set \$1;
+#X obj 330 146 mtof;
+#X obj 6 146 ftom;
+#X obj 15 293 output~;
+#X obj 15 252 osc~;
+#X text 476 368 ---- 0.1 segundo ----;
+#X text 61 98 <- define a frequencia;
+#X text 51 146 <- converte a frequencia em nota MIDI;
+#X text 406 97 <-- define a nota MIDI;
+#X obj 6 38 r frequencia;
+#X obj 330 38 r altura;
+#X text 376 147 <-- converte a nota MIDI em frequencia;
+#X obj 15 226 r frequencia;
+#X text 147 251 <-- clique para grafar;
+#X text 87 311 <-- volume de saida;
+#X text 16 382 Se o objeto osc~ tem um argumento \, espera mensagens
+numericas para definir sua frequencia. Sem argumento \, sua frequencia
+e' controlada conectando-se um sinal de audio a sua entrada esquerda.
+;
+#X text 7 6 FREQUENCIA E ALTURA (PITCH);
+#X obj 6 175 s altura;
+#X obj 330 175 s frequencia;
+#X text 16 449 Frequencia e altura (pitch) convertem-se atraves dos
+objetos "ftom" e "mtof". A frequencia refere-se ao numero de ciclos
+por segundo. A altura vale "60" para o Do' central \, 61 para o Do'#
+\, 72 para o Do' da oitava acima \, etc.;
+#X text 18 572 Repare tambem nas mensagens "set" fluindo para as numberboxes
+de forma que cada uma possa atualizar a outra sem cair em um loop infinito.
+(para mais detalhes \, ver o help das numberboxes.);
+#X text 464 609 atualizado para Pd versao 0.36;
+#X text 465 623 traduzido por geada.;
+#X obj 19 121 s frequencia;
+#X obj 338 120 s altura;
+#X text 16 519 Mtof e ftom tambem funcionam com microtons ("notas midi"
+decimais) e nao se restringem ao espectro MIDI. Por exemplo \, MIDI
+-36 vale aproximadamente 1 Hz.;
+#X obj 98 281 tabwrite~ osc-saida;
+#X connect 1 0 31 0;
+#X connect 2 0 6 0;
+#X connect 2 0 29 0;
+#X connect 3 0 2 0;
+#X connect 4 0 7 0;
+#X connect 4 0 28 0;
+#X connect 5 0 4 0;
+#X connect 6 0 23 0;
+#X connect 7 0 22 0;
+#X connect 9 0 8 0;
+#X connect 9 0 8 1;
+#X connect 9 0 31 0;
+#X connect 14 0 5 0;
+#X connect 15 0 3 0;
+#X connect 17 0 9 0;

@@ -1,0 +1,43 @@
+#N canvas 0 27 1001 633 10;
+#X obj 66 131 tabwrite~;
+#X obj 66 105 line~;
+#X obj 54 298 +;
+#X obj 66 79 +~;
+#X obj 66 209 cos~;
+#X obj 66 157 osc~;
+#X obj 66 183 phasor~;
+#X obj 54 324 pack;
+#X obj 52 511 r;
+#X obj 53 487 s;
+#X obj 54 408 inlet;
+#X obj 53 462 f;
+#X obj 53 436 t;
+#X obj 54 378 dbtorms;
+#X obj 97 351 mtof;
+#X obj 54 350 ftom;
+#X obj 105 408 outlet;
+#X obj 66 235 dac~;
+#X text 151 14 REVISAO DA PARTE 1;
+#X text 28 50 Vimos ate aqui os seguintes objetos de audio:;
+#X text 106 78 (etc.) -- aritmetica com sinais de audio;
+#X text 123 104 -- gerador de rampas;
+#X text 142 130 -- sampler (que so' usamos ate agora para graficos)
+;
+#X text 111 156 -- oscilador de ondas senoidais;
+#X text 139 183 -- gerador de fases para fazer seu proprio oscilador
+;
+#X text 112 209 -- gerador de ondas em forma de cosseno;
+#X text 112 236 -- saida de audio ("digital/analog converter");
+#X text 31 266 ... e estes objetos de "controle":;
+#X text 92 296 (etc.) -- operacoes aritmeticas;
+#X text 99 323 -- combinar dois ou mais valores em uma unica mensagem
+;
+#X text 144 348 -- conversao de frequencia em nota MIDI;
+#X text 126 378 -- conversao de decibels em amplitude;
+#X text 167 409 -- entrada e saida de um subpatch;
+#X text 90 437 ("trigger") -- ordenacao e conversao de mensagens;
+#X text 93 462 ("float") -- armazenamento de um numero (decimal);
+#X text 91 488 ("send") -- envio de mensagens sem fios;
+#X text 91 513 ("receive") -- recepcao de mensagens sem fios;
+#X text 444 542 atualizado para Pd versao 0.34;
+#X text 444 557 traduzido por geada.;

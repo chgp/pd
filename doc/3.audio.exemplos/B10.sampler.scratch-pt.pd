@@ -1,0 +1,85 @@
+#N canvas 0 27 991 633 10;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array table19 44103 float 0;
+#X coords 0 1.02 44100 -1.02 200 130 1;
+#X restore 640 48 graph;
+#X obj 46 389 hip~ 5;
+#X floatatom 99 51 0 0 0 0 - - -;
+#X floatatom 129 106 0 0 0 0 - - -;
+#X obj 129 135 * 441;
+#X obj 100 158 *~ 0;
+#X obj 100 181 +~ 1;
+#X msg 194 281 bang;
+#X obj 475 274 adc~ 1;
+#X obj 475 300 hip~ 5;
+#X msg 493 328 bang;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array graph19 44100 float 0;
+#X coords 0 44100 44100 0 200 130 1;
+#X restore 641 226 graph;
+#X obj 46 363 *~;
+#X obj 123 276 line~;
+#X obj 123 228 * 441;
+#X floatatom 123 205 0 0 0 0 - - -;
+#X obj 123 252 pack 0 100;
+#X obj 101 310 +~;
+#X obj 478 402 loadbang;
+#X obj 488 471 soundfiler;
+#X text 638 187 ---- 44103 samples ---;
+#X obj 475 360 tabwrite~ table19;
+#X msg 488 447 read ../sound/voice.wav table19;
+#X msg 478 497 \; graph19 ylabel 48000 0 44100;
+#X obj 47 111 -~ 0.5;
+#X obj 99 76 phasor~;
+#X obj 47 135 *~ 0.5;
+#X obj 47 158 cos~;
+#X obj 47 413 output~;
+#X obj 100 336 tabread4~ table19;
+#X obj 194 307 tabwrite~ graph19;
+#X text 36 13 ENVELOPANDO UM LOOPING SAMPLER;
+#X text 146 50 <-- frequencia (Hz);
+#X text 164 106 <-- tamanho da fatia (centesimos de segundo);
+#X text 157 206 <-- ponto de leitura (centesimos de segundo);
+#X text 242 281 <-- grafar o indice da tabela;
+#X text 635 638 traduzido por geada.;
+#X text 634 621 atualizado para Pd versao 0.37;
+#X text 47 586 Voce deve ouvir um efeito doppler ao alterar o ponto
+de leitura. Para conferir o porque \, clique em "grafar..." e altere
+rapidamente o ponto de lectura: voce pode enxergar figurars divertidas
+na "table-index". O proximo patch mostra como evitar isso \, se voce
+estiver a fim.;
+#X text 535 327 <-- gravar;
+#X text 514 426 v-- reler o sample original;
+#X text 644 367 ----- 1 segundo ------;
+#X text 47 482 Neste patch podemos produzir loops em qualquer janela
+a partir do sample de entrada. O "ponto de leitura" (0-100) define
+o ponto inicial da janela. A "fatia" define seu tamanho (ambos em centesimos
+de segundo). Pode-se ajustar \, por exemplo \, frequencia 4 \, sharpness
+10 \, tamanho 25 \, e variar o ponto de leitura entre -25 e 100 \,
+e escutar como ficou.;
+#X connect 1 0 28 0;
+#X connect 2 0 25 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 1;
+#X connect 5 0 6 0;
+#X connect 6 0 17 0;
+#X connect 7 0 30 0;
+#X connect 8 0 9 0;
+#X connect 9 0 21 0;
+#X connect 10 0 21 0;
+#X connect 12 0 1 0;
+#X connect 13 0 17 1;
+#X connect 14 0 16 0;
+#X connect 15 0 14 0;
+#X connect 16 0 13 0;
+#X connect 17 0 29 0;
+#X connect 17 0 30 0;
+#X connect 18 0 23 0;
+#X connect 18 0 22 0;
+#X connect 22 0 19 0;
+#X connect 24 0 26 0;
+#X connect 25 0 5 0;
+#X connect 25 0 24 0;
+#X connect 26 0 27 0;
+#X connect 27 0 12 0;
+#X connect 29 0 12 1;

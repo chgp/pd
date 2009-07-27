@@ -1,0 +1,83 @@
+#N canvas 100 17 683 605 12;
+#X floatatom 424 290 0 0 100 0 - - -;
+#X obj 59 404 +~;
+#X obj 94 490 *~;
+#X obj 94 466 -~;
+#N canvas 0 0 600 400 delay-writer 0;
+#X obj 96 107 inlet~;
+#X obj 96 180 outlet~;
+#X obj 116 144 delwrite~ G05-d2 1000;
+#X connect 0 0 1 0;
+#X connect 0 0 2 0;
+#X restore 283 403 pd delay-writer;
+#N canvas 0 0 280 330 delay-reader 0;
+#X obj 96 107 inlet~;
+#X obj 89 267 outlet~;
+#X obj 112 163 inlet~;
+#X obj 89 237 +~;
+#X obj 112 198 vd~ G05-d2;
+#X connect 0 0 3 0;
+#X connect 2 0 4 0;
+#X connect 3 0 1 0;
+#X connect 4 0 3 1;
+#X restore 282 431 pd delay-reader;
+#X obj 59 490 +~;
+#X obj 424 313 / 44.1;
+#X obj 60 525 output~;
+#X obj 135 490 tgl 18 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0
+1;
+#X obj 424 337 pack 0 30;
+#N canvas 0 0 450 300 pulse 0;
+#X obj 64 197 outlet~;
+#X obj 63 93 phasor~ 50;
+#X obj 63 119 *~ 100;
+#X obj 63 144 clip~ 0.75 1.25;
+#X obj 64 170 cos~;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 0 0;
+#X restore 60 302 pd pulse;
+#X obj 81 354 delwrite~ G05-d1 1000;
+#X obj 82 381 vd~ G05-d1;
+#X obj 424 362 line~;
+#X text 84 -11 ORDEM DE EXECUÇÃO DE DELWRITE~ E DELREAD~/VD~;
+#X text 42 9 Se você estiver fazendo a escrita sobre - e a leitura
+a partir de - uma linha de delay \, é preciso ter a escrita escolhida
+antes da leitura \, senão você nunca irá conseguir delay menor do que
+o de um bloco. Este patch compara um flanger "errado" e um "correto":
+;
+#X text 44 96 Para fazê-los fluir na ordem correta \, ponha os objetos
+delread~ e vd~ em subpatches. As conexões de audio entre os subpatches
+forçam o "leitor" a ser escolhido antes do "escritor". No Pd o critério
+de escolha do DSP segue a hierarquia dos subpatches.;
+#X text 43 175 Para ouvir a diferença mova o tempo de delay entre 0
+e 100 samples. O patch à esquerda não te deixa produzir abaixo de 64
+samples \, porém o patch à direita pode reduzir tudo para um sample.
+;
+#X text 44 242 Pode-se usar a mesma estratégia de evitar a captação
+de delays indesejados (de 64 samples) também com os objetos send~/receive~
+e throw~/catch~.;
+#X text 473 284 <-- delay em samples;
+#X text 160 489 <-- desligado para ouvir o lado esquerdo \; ligado
+para ouvir o lado direito.;
+#X text 383 555 atualizado para Pd versão 0.37-1;
+#X text 383 575 traduzido por Jardim De Volts.;
+#X connect 0 0 7 0;
+#X connect 1 0 3 1;
+#X connect 1 0 6 0;
+#X connect 2 0 6 1;
+#X connect 3 0 2 0;
+#X connect 4 0 5 0;
+#X connect 5 0 3 0;
+#X connect 6 0 8 0;
+#X connect 6 0 8 1;
+#X connect 7 0 10 0;
+#X connect 9 0 2 1;
+#X connect 10 0 14 0;
+#X connect 11 0 1 0;
+#X connect 11 0 4 0;
+#X connect 11 0 12 0;
+#X connect 13 0 1 1;
+#X connect 14 0 5 1;
+#X connect 14 0 13 0;

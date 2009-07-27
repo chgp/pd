@@ -1,0 +1,75 @@
+#N canvas 0 27 537 622 10;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array table24 259 float 1;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 1.02 258 -1.02 258 130 1;
+#X restore 130 413 graph;
+#X obj 33 288 line~;
+#X msg 33 237 500 \, 1423 4000;
+#X floatatom 41 262 5 0 0 0 - - -;
+#X obj 33 342 output~;
+#X obj 201 268 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#N canvas 0 22 626 392 make-tab 0;
+#X obj 13 28 inlet;
+#X obj 99 28 inlet;
+#X obj 183 28 inlet;
+#X obj 255 29 inlet;
+#X msg 38 176 \; table24 sinesum 256 1 1 1 1 0 0 0 0 1 0 0 0 0 0 0
+1 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 1 \, normalize
+0.4;
+#X msg 14 277 \; table24 sinesum 256 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 \, normalize
+0.2;
+#X msg 183 101 \; table24 const 0 \, 0 1 1 1 1 1;
+#X msg 255 58 \; table24 const 0;
+#X connect 0 0 5 0;
+#X connect 1 0 4 0;
+#X connect 2 0 6 0;
+#X connect 3 0 7 0;
+#X restore 201 355 pd make-tab;
+#X obj 225 291 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 249 313 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 273 331 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 33 315 tabosc4~ table24;
+#X text 198 244 formas de onda:;
+#X text 31 9 O TEOREMA DE NYQUIST E O FOLDOVER;
+#X text 30 29 ADVERTENCIA: TESTAR O PATCH COM VOLUME MODERADO PARA
+EVITAR INCOMODO E POSSIVEIS DANOS AOS OUVIDOS.;
+#X text 218 266 senoidal;
+#X text 244 287 complexa;
+#X text 269 309 retangular;
+#X text 291 329 limpar;
+#X text 277 636 traduzido por geada.;
+#X text 200 620 atualizado para Pd versao 0.37;
+#X text 23 557 As tecnicas de síntese variam em sua tendencia a produzir
+foldover. Para os sons mais agudos buscam-se técnicas relativamente
+mais resistentes ao foldover.;
+#X text 29 66 O "foldover" ocorre quando sintetizamos frequencias maiores
+que a frequencia Nyquist - a metade da taxa de amostragem (sample rate).
+Neste exemplo \, a fundamental só alcança 1423 Hz \, mas as tabelas
+contem parciais altos. Quando os parciais deslizam para cima \, podemos
+ouvi-los refletir além da freqüência Nyquist. Deste modo \, alguns
+parciais podem ter contato entre si causando batimentos. O valor final
+de 1423 foi escolhido para tornar este efeito de batimentos particularmente
+forte \, desde que tenhamos uma taxa de amostragem de 44100 (a usual).
+;
+#X connect 1 0 10 0;
+#X connect 2 0 1 0;
+#X connect 3 0 1 0;
+#X connect 5 0 6 0;
+#X connect 7 0 6 1;
+#X connect 8 0 6 2;
+#X connect 9 0 6 3;
+#X connect 10 0 4 0;
+#X connect 10 0 4 1;

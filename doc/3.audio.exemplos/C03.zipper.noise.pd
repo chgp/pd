@@ -1,0 +1,57 @@
+#N canvas 298 115 559 418 10;
+#X obj 42 349 output~;
+#X obj 43 321 *~;
+#X obj 125 350 output~;
+#X obj 126 322 *~;
+#X obj 65 262 line;
+#X obj 149 262 line~;
+#N canvas 0 22 450 300 metro 0;
+#X obj 88 39 loadbang;
+#X msg 87 65 1;
+#X obj 87 96 metro 500;
+#X obj 87 131 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 1 1
+;
+#X obj 87 153 sel 0 1;
+#X obj 87 190 outlet;
+#X obj 151 192 outlet;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 4 1 6 0;
+#X restore 65 170 pd metro;
+#X obj 65 198 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 132 199 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X msg 65 219 1 300;
+#X msg 132 221 0 300;
+#X obj 72 290 osc~ 880;
+#X text 49 8 RUÍDO ZÍPER;
+#X text 29 41 Se usamos um objeto "line" (de controle) para mudar uma
+amplitude \, este envia mensagens de controle cada 20 milisegundos
+por amplitud \, este envia mensajes de control una vez cada 20 milisegundos
+por efeito. A esquerda usamos para controlar a amplitude de uma sinusoide.
+Em efeito estamos multiplicando a senóide escala (50 icrementos por
+segundo). Usando a outra versão de line~ \, controlamos o problema.
+Line~ nos da uma rampa que é incrementada em cada mostra (44100 vezes
+por segundo).;
+#X text 284 371 Atualizado para Pd version 0.37;
+#X text 284 386 trad. Jardim de Volts;
+#X connect 1 0 0 0;
+#X connect 1 0 0 1;
+#X connect 3 0 2 0;
+#X connect 3 0 2 1;
+#X connect 4 0 1 1;
+#X connect 5 0 3 1;
+#X connect 6 0 7 0;
+#X connect 6 1 8 0;
+#X connect 7 0 9 0;
+#X connect 8 0 10 0;
+#X connect 9 0 4 0;
+#X connect 9 0 5 0;
+#X connect 10 0 4 0;
+#X connect 10 0 5 0;
+#X connect 11 0 1 0;
+#X connect 11 0 3 0;

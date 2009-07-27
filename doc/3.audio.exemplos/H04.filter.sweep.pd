@@ -1,0 +1,59 @@
+#N canvas 84 56 553 524 12;
+#X floatatom 44 146 5 0 150 0 - #0-pitch -;
+#X obj 44 193 phasor~;
+#X obj 59 351 +~;
+#X floatatom 81 326 5 0 100 0 - #0-offset -;
+#X floatatom 60 222 5 0 0 0 - #0-speed -;
+#X floatatom 82 273 5 0 100 0 - #0-depth -;
+#X floatatom 75 404 5 0 1000 0 - #0-q -;
+#X obj 44 426 vcf~;
+#X obj 59 375 tabread4~ mtof;
+#X text 97 144 <-- pitch;
+#X obj 43 457 output~;
+#X obj 44 169 mtof;
+#X obj 60 244 phasor~;
+#X obj 60 298 *~;
+#N canvas 706 247 450 300 startup 0;
+#X obj 85 16 loadbang;
+#X obj 85 40 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 85 59 f \$0;
+#X text 9 257 boxes.;
+#X text 18 209 This subpatch loads initial values in number;
+#X msg 85 83 \; \$1-pitch 48 \; \$1-speed -2 \; \$1-depth 27 \; \$1-offset
+56 \; \$1-q 2;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 5 0;
+#X restore 376 398 pd startup;
+#X text 119 2 FILTROS DE VARREDURA;
+#X text 12 21 Se voce quer mudar as seqüências centrais ativamente
+\, use vcf~" ao invés de "bp~". O módulo vcf~ pega o sinal de áudio
+para setar a freqüência central. (Q continua sendo setado por mensagens).
+O vcf~ é um pouco mais custoso computacionalmente.;
+#X text 14 101 Note efeitos diferentes em varreduras de velocida positiva
+e negativa.;
+#X text 115 182 oscilador;
+#X text 116 198 dente de serra;
+#X text 112 221 <-- velocidade de varredura;
+#X text 137 245 LFO (oscilador de baixa freqüênca) para varredura;
+#X text 134 275 <-- profundidade de varredura;
+#X text 131 326 <-- freqüência de base central;
+#X text 103 350 adicione a base a varredura;
+#X text 192 374 converte para Hz.;
+#X text 127 403 <-- Q (selectividade);
+#X text 270 485 Atualizado para Pd versão 0.39;
+#X text 294 501 Traduzido para Puredeposito.;
+#X connect 0 0 11 0;
+#X connect 1 0 7 0;
+#X connect 2 0 8 0;
+#X connect 3 0 2 1;
+#X connect 4 0 12 0;
+#X connect 5 0 13 1;
+#X connect 6 0 7 2;
+#X connect 7 0 10 0;
+#X connect 7 0 10 1;
+#X connect 8 0 7 1;
+#X connect 11 0 1 0;
+#X connect 12 0 13 0;
+#X connect 13 0 2 0;

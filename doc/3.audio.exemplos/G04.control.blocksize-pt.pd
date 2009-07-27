@@ -1,0 +1,83 @@
+#N canvas 100 17 637 513 12;
+#N canvas 195 311 647 354 delay-writer 0;
+#X obj 86 220 inlet~;
+#X obj 86 326 outlet~;
+#X obj 392 197 block~ 1;
+#X obj 164 267 *~ 0.99;
+#X obj 87 272 +~;
+#X obj 165 221 inlet;
+#X text 80 7 Because of the feedback \, the delwrite~ has to be computed
+after the delread~. So we set the blocksize to 1 to minimize the resulting
+delay.;
+#X text 390 219 this object sets the;
+#X text 389 236 block size for audio;
+#X text 388 255 computations in this;
+#X obj 165 244 delread~ G04-del;
+#X obj 98 302 delwrite~ G04-del 1000;
+#X text 79 183 incoming;
+#X text 81 198 pulses;
+#X text 165 182 delay;
+#X text 166 197 time;
+#X text 388 273 window. Must be a;
+#X text 388 292 power of two.;
+#X text 77 60 The smaller the blocksize the more expensive the computations
+are \, so don't reduce it lower than you have to. Also \, it's a good
+idea to isolate the portion of the patch that requires the smaller
+block size \, and only run that portion that way. Here \, the pulses
+that excite the delay line are computed outside this window \, and
+the output level control as well.;
+#X connect 0 0 4 0;
+#X connect 3 0 4 1;
+#X connect 4 0 1 0;
+#X connect 4 0 11 0;
+#X connect 5 0 10 0;
+#X connect 10 0 3 0;
+#X restore 173 420 pd delay-writer;
+#X obj 275 384 expr 1000/$f1;
+#X obj 275 358 mtof;
+#X msg 173 355 1;
+#X msg 212 355 0;
+#X obj 173 266 metro 500;
+#X obj 275 304 random 60;
+#X obj 173 240 loadbang;
+#X obj 275 330 + 30;
+#X obj 173 449 output~;
+#X obj 173 387 vline~;
+#X obj 212 329 del 1;
+#X text 86 9 CONTROLANDO DELAY COM BLOCK~;
+#X text 63 38 Para situações em que a leitura de um delay realimenta
+para uma escrita de delay \, o mínimo atraso possível de ser ativado
+é de um bloco que vale \, por padrão \, 64 samples ou 1.45 ms a 44100
+Hz. Pode-se diminuir esse limite mínimo de delay quando se altera o
+tamanho do bloco. Faça isto em um subpatch (abra-o e descubra como).
+;
+#X text 61 140 Aqui este princípio é empregado para fazer um som tipo
+cravo: você envia pulsos para uma linha de delay recirculante (que
+imita a trajetória de cima para baixo da corda do cravo.) Isto tem
+a ver com a síntese de Karplus-Strong \, mas a idéia é provavelmente
+muito mais antiga do que o paper em questão.;
+#X text 9 325 indica que o pulso;
+#X text 33 346;
+#X text 9 342 retangular deve;
+#X text 10 360 durar 1 ms;
+#X text 134 356 -->;
+#X text 376 364 a extensão da linha de delay;
+#X text 433 379 vale 1000/(freqüência);
+#X text 398 380 <--;
+#X text 319 420 <-- aqui é o loop do delay;
+#X text 337 475 atualizado para Pd versão 0.37-1;
+#X text 337 495 traduzido por Jardim De Volts.;
+#X connect 0 0 9 0;
+#X connect 0 0 9 1;
+#X connect 1 0 0 1;
+#X connect 2 0 1 0;
+#X connect 3 0 10 0;
+#X connect 4 0 10 0;
+#X connect 5 0 3 0;
+#X connect 5 0 6 0;
+#X connect 5 0 11 0;
+#X connect 6 0 8 0;
+#X connect 7 0 5 0;
+#X connect 8 0 2 0;
+#X connect 10 0 0 0;
+#X connect 11 0 4 0;

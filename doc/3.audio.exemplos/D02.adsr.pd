@@ -1,0 +1,44 @@
+#N canvas 0 32 1001 628 12;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array adsr-output 44100 float 0;
+#X coords 0 1.02 44100 -1.02 200 130 1;
+#X restore 121 332 graph;
+#X text 121 464 ------ 1 second ------;
+#X obj 18 92 r trigger;
+#X obj 34 168 tabwrite~ adsr-output;
+#X obj 56 143 r graphit;
+#X msg 261 89 bang;
+#X obj 272 113 del 500;
+#X msg 261 177 \; pd dsp 1 \; trigger 1 \; graphit bang;
+#X msg 260 247 \; pd dsp 1 \; trigger 0 \; graphit bang;
+#X msg 272 138 \; trigger 0;
+#X text 324 452 -1;
+#X text 326 327 1;
+#X obj 18 118 adsr 1 100 200 50 300;
+#X obj 36 195 osc~ 440;
+#X obj 17 220 *~;
+#X obj 16 249 output~;
+#X text 153 4 GERADOR DE ABSTRAÇÃO DE ENVELOPE;
+#X text 26 31 Este patch introduz uma simples abstração "adsr" que
+nós iremos usar freqüentemente. Você pode clicar no objeto "adsr" para
+ver o que tem dentro deste.;
+#X text 304 90 <-- ataque e release atrasado;
+#X text 376 197 <-- somente ataque;
+#X text 376 273 <-- somente release;
+#X text 643 583 Atualizado para Pd versão 0.37;
+#X text 643 601 Traduzido por Jardim de Volts;
+#X text 20 483 O ingrediente ativo do gerador de envelope ADSR é um
+único objeto line~ que deixa passar mensagens para fazer um comportamento
+de ataque e release. Você pode redisparar o gerador de envelope ADSR
+o quanto quiser sem ter que esperar os ataques ou releases terminarem.
+;
+#X connect 2 0 12 0;
+#X connect 4 0 3 0;
+#X connect 5 0 7 0;
+#X connect 5 0 6 0;
+#X connect 6 0 9 0;
+#X connect 12 0 3 0;
+#X connect 12 0 14 0;
+#X connect 13 0 14 1;
+#X connect 14 0 15 0;
+#X connect 14 0 15 1;

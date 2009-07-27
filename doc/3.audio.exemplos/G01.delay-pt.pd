@@ -1,0 +1,49 @@
+#N canvas 0 25 991 628 12;
+#N canvas 0 0 548 248 sample 0;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array G01-tab 62079 float 0;
+#X coords 0 1 62078 -1 200 140 1;
+#X restore 100 20 graph;
+#X obj 61 176 loadbang;
+#X obj 60 221 soundfiler;
+#X msg 61 199 read -resize ../sound/voice.wav G01-tab;
+#X connect 1 0 3 0;
+#X connect 3 0 2 0;
+#X restore 253 337 pd sample;
+#X floatatom 38 226 4 0 999 0 - - -;
+#X obj 38 279 delread~ delay1;
+#X obj 14 87 tabplay~ G01-tab;
+#X obj 14 63 metro 1000;
+#X obj 14 39 loadbang;
+#X obj 15 367 output~;
+#X obj 15 305 +~;
+#X obj 26 154 delwrite~ delay1 1000;
+#X text 279 23 Você pode ajustar o delay (atraso) de um sinal usando
+os objetos delwrite~ e delread~. Neste exemplo \, vemos o loop contínuo
+de um sample que é adicionado a uma cópia adiada de si mesmo.;
+#X text 278 109 O objeto delwrite~ cria a linha de delay \; Você deve
+nomear e atribuir a ele um tamanho (em milissegundos). Um nome diferente
+para cada delwrite~.;
+#X text 278 170 os argumentos de delread~ são o nome de um delwrite
+(do qual não pode haver mais do que um) e um tempo opcional de delay
+(em milissegundos) entre 0 e a duração da linha de delay. Cada delwrite~
+pode ter tantos delread~s quantos você queira criar \, o que pode então
+funcionar como múltiplas batidas (taps) de delay.;
+#X text 277 276 O objeto delread~ calcula o delay de sinal usando um
+número inteiro e não faz interpolação.;
+#X text 499 348 atualizado para Pd versão 0.37-1;
+#X text 12 9 DELAYS (atrasos);
+#X text 498 367 traduzido por Jardim De Volts.;
+#X text 79 231 <-tempo de delay;
+#X text 97 245 (ms);
+#X text 25 112 testa o sinal para atrasar;
+#X text 26 174 escrita na linha de delay;
+#X text 67 302 leitura a partir da linha de delay;
+#X connect 1 0 2 0;
+#X connect 2 0 7 1;
+#X connect 3 0 7 0;
+#X connect 3 0 8 0;
+#X connect 4 0 3 0;
+#X connect 5 0 4 0;
+#X connect 7 0 6 0;
+#X connect 7 0 6 1;

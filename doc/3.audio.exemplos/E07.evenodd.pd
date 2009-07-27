@@ -1,0 +1,109 @@
+#N canvas 0 32 1001 628 12;
+#X obj 230 101 f;
+#X obj 264 77 + 1;
+#X obj 264 101 mod 11;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array E07 11 float 0;
+#X coords 0 96 11 36 100 160 1;
+#X restore 528 15 graph;
+#X floatatom 320 53 0 10 999 0 - - -;
+#X obj 230 173 mtof;
+#X msg 26 92 1;
+#X obj 27 217 *~;
+#X obj 27 267 cos~;
+#X obj 27 292 hip~ 5;
+#X obj 27 244 +~ 0.1;
+#X floatatom 61 144 0 0 0 0 - - -;
+#X floatatom 166 145 0 0 200 0 - - -;
+#X floatatom 96 144 0 0 999 0 - - -;
+#X floatatom 131 144 0 0 999 0 - - -;
+#X msg 112 267 0;
+#X msg 112 245 0.1;
+#X msg 112 289 0.25;
+#X text 68 108 ADSR controls;
+#X text 106 125 A;
+#X text 141 125 D;
+#X text 176 125 S;
+#X floatatom 320 77 0 1 11 0 - - -;
+#X obj 26 193 *~ 0.01;
+#X obj 230 29 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0 1
+;
+#X obj 27 321 output~;
+#X obj 26 170 adsr 70 10 90 50 500;
+#X obj 230 150 +;
+#X floatatom 265 150 0 -48 120 0 - - -;
+#N canvas 286 273 687 366 make-table 0;
+#X obj 38 85 loadbang;
+#X msg 38 113 \; array1 0 55 56 57 55 57 61 55 61 63 57 63 \; array1
+yticks 36 12 1 \; array1 ylabel 12 36 48 60 72 84 96;
+#X text 17 11 Este patch carrega uma seqüencia de pitches dentro do
+array1. Os valores estão em ponto decimal (floating-point) \, então
+podemos usar microtons (60.5 \, por exemplo) se desejarmos.;
+#X connect 0 0 1 0;
+#X restore 521 182 pd make-table;
+#X obj 176 50 sel 0;
+#X msg 26 69 0;
+#X text 48 125 level;
+#X obj 230 53 metro 130;
+#X obj 60 217 osc~;
+#X obj 230 126 tabread E07;
+#X text 253 26 <--ON/OFF;
+#X text 90 1 SINTETIZADOR MODELADOR DE ONDA SEQUENCIADO;
+#X text 355 56 <--milisegundos;
+#X text 354 79 <--incremento;
+#X text 299 152 <--transposição;
+#X text 111 225 simetria;
+#X text 147 244 mixado;
+#X text 157 265 par;
+#X text 165 288 ímpar;
+#X text 489 555 Atualizado para Pd versão 0.37;
+#X text 490 570 Traduzido por Jardim de Volts.;
+#X text 234 240 Este patch usa um sequenciador de passos para controlar
+um instrumento modelador de ondas. Um metrônomo (metro 130) guia um
+contador (f \, +1 \, e mod 11) que conta repetidamente em 11 valores
+os quais são lidos em uma tabela gravada (tabread E07). Os valores
+podem ser ldos em seqüencia \, de 2 de 3 e etc. \, de acordo com o
+paramêtro de incremento.;
+#X text 234 332 O metronômo também dispara im envelope ADSR envelope
+\, o qual os paramêtros podem ser modificados pelos controles "level"
+\, "A" \, "D" \, e "S".;
+#X text 236 386 A síntese (osc~ \, *~ \, +~ 0.1 \, cos~) é uma aplicação
+muito simples de modelação de onda. O oscilador (o qual a amplitude
+depende do gerador de ADSR) é usado como um índice para a tabela de
+"cos~". Um paramêtro adicional ("simetria") controla como o oscilador
+vai centrar sua forma de onda na tabela. Se o paramêtro for 0.25 \,
+nós lemos 1/4 de onda dentro de uma função coseno: o resultado é uma
+função ímpar e nós conseguimos harmônicos ímpares. Entre as duas nós
+conseguimos valores pares e ímpares.;
+#X connect 0 0 1 0;
+#X connect 0 0 35 0;
+#X connect 1 0 2 0;
+#X connect 2 0 0 1;
+#X connect 4 0 33 1;
+#X connect 5 0 34 0;
+#X connect 6 0 26 0;
+#X connect 7 0 10 0;
+#X connect 8 0 9 0;
+#X connect 9 0 25 0;
+#X connect 9 0 25 1;
+#X connect 10 0 8 0;
+#X connect 11 0 26 1;
+#X connect 12 0 26 4;
+#X connect 13 0 26 2;
+#X connect 14 0 26 3;
+#X connect 15 0 10 1;
+#X connect 16 0 10 1;
+#X connect 17 0 10 1;
+#X connect 22 0 1 1;
+#X connect 23 0 7 0;
+#X connect 24 0 30 0;
+#X connect 24 0 33 0;
+#X connect 26 0 23 0;
+#X connect 27 0 5 0;
+#X connect 28 0 27 1;
+#X connect 30 0 31 0;
+#X connect 31 0 26 0;
+#X connect 33 0 0 0;
+#X connect 33 0 6 0;
+#X connect 34 0 7 1;
+#X connect 35 0 27 0;

@@ -1,0 +1,47 @@
+#N canvas 130 225 601 527 12;
+#X floatatom 36 218 5 -30 130 0 - - -;
+#X floatatom 58 343 0 0 0 0 - - -;
+#X text 89 216 <-- pitch;
+#X obj 36 254 mtof;
+#X msg 111 254 1;
+#X obj 37 303 *~;
+#X obj 37 415 +~;
+#X obj 58 391 *~ 0.7;
+#X obj 111 302 *~;
+#X obj 111 278 adsr 1 100 1000 0 1000;
+#X obj 37 484 output~;
+#X obj 36 278 phasor~;
+#X obj 58 367 delread~ G02-del 160;
+#X obj 77 440 delwrite~ G02-del 2000;
+#X text 57 9 DELAYS COM RETROALIMENTAÇÃO;
+#X text 33 32 Você pode realimentar o delwrite~ com o resultado do
+módulo delread~ correspondente \, desde que tenha cuidado com a estabilidade.
+Para delays de duração inferior a 30 ms \, você é capaz de ouvir um
+pitch ressonante. Para períodos mais extensos de delay \, produz-se
+o bom e velho efeito de loop por delay.;
+#X text 88 342 <-- tempo de delay;
+#X text 32 131 Aqui nós adicionamos um controle de amplitude \, de
+maneira que o oscilador de teste só emite som ao mesmo tempo em que
+se está alterando a altura (para cima e para baixo). Tente arrastar
+o controle de pitch enquanto pressiona a tecla shift.;
+#X text 246 367 leitura a partir da linha de delay;
+#X text 72 414 soma sinal original + sinal atrasado (delayed);
+#X text 287 441 escrita na linha de delay;
+#X text 120 392 feedback do ganho;
+#X text 294 497 atualizado para Pd versão 0.37-1;
+#X text 318 516 Traduzido por Jardim de Volts.;
+#X connect 0 0 3 0;
+#X connect 0 0 4 0;
+#X connect 1 0 12 0;
+#X connect 3 0 11 0;
+#X connect 4 0 9 0;
+#X connect 5 0 6 0;
+#X connect 6 0 10 0;
+#X connect 6 0 10 1;
+#X connect 6 0 13 0;
+#X connect 7 0 6 1;
+#X connect 8 0 5 1;
+#X connect 9 0 8 0;
+#X connect 9 0 8 1;
+#X connect 11 0 5 0;
+#X connect 12 0 7 0;

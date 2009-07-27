@@ -1,0 +1,48 @@
+#N canvas 121 47 682 601 12;
+#X obj 19 128 +~;
+#X obj 18 209 output~;
+#X obj 154 171 / 100;
+#X floatatom 154 151 5 0 500 0 - - -;
+#X obj 18 181 clip~ -1 1;
+#X floatatom 42 81 5 0 0 0 - - -;
+#X obj 42 103 osc~ 200;
+#X obj 18 155 *~;
+#X obj 42 35 loadbang;
+#X msg 154 127 50;
+#X obj 154 103 loadbang;
+#X obj 18 9 osc~ 300;
+#X msg 42 58 225;
+#X text 141 3 DISTORÇÃO NÃO LINEAR E TONS DE DIFERNÇA;
+#X text 93 80 <-- freqüência do segundo tom;
+#X text 234 134 amplitude da soma;
+#X text 209 150 <-- antes de clipar;
+#X text 107 226 Este patch demonstra como uma distorção não-linear
+(também conhecida como "waveshaping" - modelagem de onda) pode criar
+tons de diferença a partir de um par de senóides. As senóides são inicialmente
+afinadas em 225 e 300 Hz \, uma quarta justa \, e tem amplitude de
+50 % (0.5) fazendo com que a soma seja sempre menor que 1 em valores
+absolutos. Com essa configuração o objeto "clip~" passa sua saída sem
+distorção prévia.;
+#X text 106 363 Se a amplitude aumentar acima de 50% \, o objeto clip~
+começa a alterar o sinal de maneira não-linear \, e o resultado é não
+mais como se as duas senóides houvessem sido processadas separadamente.
+Ao invés disso \, elas "intermodulam" \, encontrando um subharmônico
+em comum se este existe. Em 300 e 225 Hz \, existe um subharmônico
+em 75 \, duas oitavas abaixo do tom mais acima e 12 abaixo da mais
+grave delas. Mudar a freqüência do segundo tom causa uma variedade
+de efeitos interessantes.;
+#X text 355 543 Atualizado para Pd version 0.37;
+#X text 356 559 Traduzido por Jardim de Volts.;
+#X connect 0 0 7 0;
+#X connect 2 0 7 1;
+#X connect 3 0 2 0;
+#X connect 4 0 1 0;
+#X connect 4 0 1 1;
+#X connect 5 0 6 0;
+#X connect 6 0 0 1;
+#X connect 7 0 4 0;
+#X connect 8 0 12 0;
+#X connect 9 0 3 0;
+#X connect 10 0 9 0;
+#X connect 11 0 0 0;
+#X connect 12 0 5 0;

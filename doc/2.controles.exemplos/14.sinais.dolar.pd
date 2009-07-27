@@ -1,0 +1,6 @@
+#N canvas 60 367 561 155 12;
+#X obj 34 68 sinaldolar2 three 4;
+#X text 283 116 atualizado para Pd versão 0.34;
+#X text 281 136 traduzido por Puredeposito;
+#X text 32 14 Os argumentos de criação de abstrações podem ser números
+ou símbolos. Mais detalhes dentro do patch:;

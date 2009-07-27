@@ -1,0 +1,200 @@
+#N canvas 269 22 755 622 12;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array E02-signal 882 float 0;
+#X coords 0 5 882 -5 200 130 1;
+#X restore 501 66 graph;
+#X obj 15 370 hip~ 5;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array E02-spectrum 128 float 0;
+#X coords 0 4300 127 -40 257 130 1;
+#X restore 455 276 graph;
+#N canvas 0 32 1001 628 fft 0;
+#X obj 19 61 inlet~;
+#X obj 95 214 inlet;
+#X obj 29 92 rfft~;
+#X obj 29 125 *~;
+#X obj 60 125 *~;
+#X obj 29 155 sqrt~;
+#X obj 332 109 block~ 4096 1;
+#X obj 29 181 biquad~ 0 0 0 0 1;
+#X obj 16 425 samplerate~;
+#X obj 16 402 bng 18 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X floatatom 16 472 5 0 0 0 - - -;
+#X obj 16 448 / 256;
+#X obj 16 378 loadbang;
+#X floatatom 16 541 5 0 0 0 - - -;
+#X obj 24 494 s fundamental;
+#X obj 16 517 ftom;
+#X text 24 305 At load time \, calculate a good choice of fundamental
+frequency for showing spectra: the 16th bin in a 4096-point spectrum
+\, so SR*16/4096 or SR/256.;
+#X floatatom 191 480 5 0 0 0 - - -;
+#X obj 191 456 / 4096;
+#X obj 191 502 s freq-step;
+#X obj 95 248 tabwrite~ E02-spectrum;
+#X obj 20 281 tabwrite~ E02-signal;
+#X text 98 146 magnitude;
+#X text 11 -1 Este subpatch computa o espectro do sinal que vem com
+uma FFT (de janela retangular) . FFTs não serão propriamente introduzidas
+até mais adiante.;
+#X text 83 61 sinal para analisar;
+#X text 93 94 series de Fourier;
+#X text 96 131 calcula;
+#X text 193 164 atrasa dois samples;
+#X text 191 182 para melhor representação gráfica;
+#X text 238 368 No tempo de carga \, calcula uma boa escolha de freqüência
+fundamental para mostrar o espectro: o 16o binario em um espectro de
+4096pontos \, portanto SR*16/4096 ou SR/256.;
+#X text 238 425 SR=sample rate (taxa de amostra);
+#X text 72 539 <-só por curiosidade aqui está o pitch;
+#X text 145 216 "bang" para imprimir o gráfico;
+#X connect 0 0 2 0;
+#X connect 0 0 21 0;
+#X connect 1 0 20 0;
+#X connect 1 0 21 0;
+#X connect 2 0 3 0;
+#X connect 2 0 3 1;
+#X connect 2 1 4 0;
+#X connect 2 1 4 1;
+#X connect 3 0 5 0;
+#X connect 4 0 5 0;
+#X connect 5 0 7 0;
+#X connect 7 0 20 0;
+#X connect 8 0 11 0;
+#X connect 8 0 18 0;
+#X connect 9 0 8 0;
+#X connect 10 0 14 0;
+#X connect 10 0 15 0;
+#X connect 11 0 10 0;
+#X connect 12 0 9 0;
+#X connect 15 0 13 0;
+#X connect 17 0 19 0;
+#X connect 18 0 17 0;
+#X restore 23 343 pd fft;
+#X obj 84 344 bng 18 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 15 398 output~;
+#X text 486 409 1;
+#X text 520 409 2;
+#X text 552 409 3;
+#X text 584 409 4;
+#X text 617 409 5;
+#X text 647 409 6;
+#X text 678 409 7;
+#X text 454 409 0;
+#X text 703 120 0;
+#X obj 18 32 r fundamental;
+#X obj 18 94 osc~;
+#X obj 39 119 tgl 18 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0 1
+;
+#X obj 17 144 *~;
+#X obj 61 94 osc~;
+#X obj 82 119 tgl 18 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0 1
+;
+#X obj 60 144 *~;
+#X obj 104 94 osc~;
+#X obj 125 119 tgl 18 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0
+1;
+#X obj 103 144 *~;
+#X obj 104 71 * 2;
+#X obj 147 94 osc~;
+#X obj 168 119 tgl 18 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0
+1;
+#X obj 146 144 *~;
+#X obj 190 94 osc~;
+#X obj 211 119 tgl 18 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0
+1;
+#X obj 189 144 *~;
+#X obj 233 94 osc~;
+#X obj 254 119 tgl 18 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0
+1;
+#X obj 232 144 *~;
+#X obj 18 71 * 0;
+#X obj 147 71 * 3;
+#X obj 190 71 * 4;
+#X obj 233 71 * 5;
+#X text 284 125 <-- On/Off;
+#X text 715 392 0;
+#X text 713 271 1;
+#X text 714 330 0.5;
+#X text 703 60 5;
+#X text 704 180 -5;
+#X obj 16 239 *~;
+#X obj 154 270 osc~;
+#X floatatom 154 210 3 0 200 0 - - -;
+#X obj 154 239 *;
+#X obj 187 239 r freq-step;
+#X obj 84 299 tgl 18 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0 1
+;
+#X obj 84 321 metro 500;
+#X text 550 27 FORMA DE ONDA;
+#X text 501 198 ---- 0.02 segundos ----;
+#X text 545 239 ESPECTRO;
+#X text 490 428 -- número da parcial --;
+#X text 90 -24 ANEL DE MODULAÇÃO: multiplicando um tom complexo por
+uma senóide;
+#X text 302 109 parciais;
+#X text 226 177 modulação de;
+#X text 222 192 freqüência em;
+#X text 185 209 <-- "passos" de f/16;
+#X text 107 298 <-- atualizar o gráfico repetidamente;
+#X text 106 343 <-- atualizar o gráfico única vez;
+#X obj 61 70 * 1;
+#X text 26 467 Agora o anel esta modulando o sinal ao multiplicar este
+por outra senóide. A modulação de freqüência esta sendo controlada
+por passos de f/16 onde "f" é a freqüência fundamental chegando asperamente
+até 11 Hz por passo. Note que se a freqüência de modulação é setada
+para zero nós não podemos prever a amplitude geral porque isto depende
+em qual fase o oscilador de modulação estará no momento.;
+#X text 28 582 Se você escolhe uma multipla da fundamental como modulação
+de freqüência (16 \, 32 \, 48 \, 64 ... "passos") o resultado é novamente
+periódico com a freqüencia original. Se voce selecionar "metades" destes
+multiplos (ex: passos 8 \, 24 \, 40... ) o pitch cai em uma oitava
+e você fica apenas com os harmônicos ímpares. Para a maioria dos outros
+paramêtros você vai ter um complexo inarmônico de tons. Estes as vezes
+podem ser ouvidos como pitches separados e outras vezes parecem fundir-se
+dentro de um único timbre com pitch indeterminado.;
+#X text 471 747 Atualizado para Pd versão 0.37;
+#X text 472 765 Traduzido por Jardim de Volts.;
+#X connect 1 0 5 0;
+#X connect 1 0 5 1;
+#X connect 4 0 3 1;
+#X connect 15 0 35 0;
+#X connect 15 0 25 0;
+#X connect 15 0 36 0;
+#X connect 15 0 37 0;
+#X connect 15 0 38 0;
+#X connect 15 0 63 0;
+#X connect 16 0 18 0;
+#X connect 17 0 18 1;
+#X connect 18 0 45 0;
+#X connect 19 0 21 0;
+#X connect 20 0 21 1;
+#X connect 21 0 45 0;
+#X connect 22 0 24 0;
+#X connect 23 0 24 1;
+#X connect 24 0 45 0;
+#X connect 25 0 22 0;
+#X connect 26 0 28 0;
+#X connect 27 0 28 1;
+#X connect 28 0 45 0;
+#X connect 29 0 31 0;
+#X connect 30 0 31 1;
+#X connect 31 0 45 0;
+#X connect 32 0 34 0;
+#X connect 33 0 34 1;
+#X connect 34 0 45 0;
+#X connect 35 0 16 0;
+#X connect 36 0 26 0;
+#X connect 37 0 29 0;
+#X connect 38 0 32 0;
+#X connect 45 0 3 0;
+#X connect 45 0 1 0;
+#X connect 46 0 45 1;
+#X connect 47 0 48 0;
+#X connect 48 0 46 0;
+#X connect 49 0 48 1;
+#X connect 50 0 51 0;
+#X connect 51 0 4 0;
+#X connect 63 0 19 0;

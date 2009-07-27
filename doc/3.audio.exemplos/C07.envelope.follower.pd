@@ -1,0 +1,117 @@
+#N canvas 66 0 925 622 12;
+#X obj 102 333 dbtorms;
+#X obj 23 329 osc~ 440;
+#X obj 24 421 env~;
+#X floatatom 79 411 0 0 0 0 - - -;
+#X floatatom 102 310 0 0 0 0 - - -;
+#X msg 450 331 \; pd dsp 1;
+#X obj 120 462 t b f;
+#X floatatom 120 485 0 0 0 0 - - -;
+#X obj 127 540 pack;
+#X obj 127 563 route 0 1;
+#X obj 127 586 > 55;
+#X obj 177 586 < 45;
+#X obj 127 609 sel 1;
+#X obj 177 609 sel 1;
+#X msg 91 620 1;
+#X msg 91 598 0;
+#X obj 127 646 print attack;
+#X obj 120 517 != 0;
+#X obj 450 308 loadbang;
+#X obj 23 352 *~;
+#X text 164 5 SEGUIDORES DE ENVELOPES;
+#X text 8 156 Seguidores de envelopes são frequentemente usados para
+detectar ataques e periodos de silêncio. (Existem detectores de ataques
+mais enfeitados por aí \, em todo caso - como bonk~). Aqui temos u
+simples detector de ataque baseado em threshold (limites de amplitude)
+e detector de pausas.;
+#X text 9 250 Ambos detectores são máquinas de dois estados - ligado
+e desligado. Se ligados \, um teste corre para determinar quando desligar
+\, e vice-versa. Os testes estão correndo em cada saída do objeto rms~.
+;
+#X text 8 29 O objeto env~ reporta o volume de sinal RMS pelos últimos
+256 samples (por padrão) ou qualquer outra potência de 2 que pelo memos
+dobrará o tamanho de bloco. A análise é feita de uma maneira de sobrecarga
+que resulta onde o resultado aparece a cada N/2 pontos se N é o tamanho
+da janela de análise. então quanto maior a janela \, mais estável vai
+ser o resultado e menos frequentemente ele aparece. O custo computaional
+não depende tanto de N.;
+#X text 120 375 note uma diferença de 3.01 dB;
+#X text 120 389 entre amplitude de pico e amplitude RMS.;
+#X text 133 441 DETECÃO DE ATAQUE;
+#X text 70 675 DETECÇÃO DE PAUSA;
+#X text 169 494 estado -- 1 se esperando por um threshold baixo \,
+0 se ele ja acorreu e agora esperamos o alto.;
+#X text 229 571 roteia o valor RMS de acordo com o estado. Se desligado
+\, 55dB significa ataque. Se estiver ligado \, 45dB ou menos é o estado
+de desligue.;
+#X text 152 943 Se mais de 1 segundo \, reporta uma pausa.;
+#X text 154 959 Se não estamos na pausa \, cai fora quando o RMS não
+é baixo o suficiente.;
+#X text 640 1004 Atualizado Pd version 0.37;
+#X text 640 1021 traduzido por Jardim de Volts.;
+#X obj 20 725 t b f;
+#X floatatom 20 750 0 0 0 0 - - -;
+#X obj 32 800 pack;
+#X obj 32 823 route 0 1;
+#X obj 32 861 sel 1;
+#X msg 11 968 1;
+#X msg 12 991 0;
+#X obj 25 778 != 0;
+#X obj 63 751 < 45;
+#X obj 36 895 timer;
+#X obj 118 824 sel 0;
+#X obj 100 944 sel 0;
+#X obj 50 944 sel 1;
+#X obj 50 985 print rest;
+#X obj 36 918 > 1000;
+#X text 124 731 Aqui nós sempre iremos testar o RMS comparado a um
+valor baixo.;
+#X text 127 765 mas como anteriormente nos roteamos o resultado de
+acordo com o estado atual \, 1 se "pausado" \, 0 em caso contrário.
+;
+#X text 168 821 independente do estado \, quando o RMS é baixo;
+#X text 190 836 reseta o timer;
+#X text 122 866 Se nós não estamos na pausa e o RMS é baixo \,;
+#X text 145 883 checa o empo corrido desde que o RMS não estava baixo.
+;
+#X connect 0 0 19 1;
+#X connect 1 0 19 0;
+#X connect 2 0 3 0;
+#X connect 2 0 6 0;
+#X connect 2 0 34 0;
+#X connect 4 0 0 0;
+#X connect 6 0 7 0;
+#X connect 6 1 8 1;
+#X connect 7 0 17 0;
+#X connect 8 0 9 0;
+#X connect 9 0 10 0;
+#X connect 9 1 11 0;
+#X connect 10 0 12 0;
+#X connect 11 0 13 0;
+#X connect 12 0 14 0;
+#X connect 12 0 16 0;
+#X connect 13 0 15 0;
+#X connect 14 0 7 0;
+#X connect 15 0 7 0;
+#X connect 17 0 8 0;
+#X connect 18 0 5 0;
+#X connect 19 0 2 0;
+#X connect 34 0 35 0;
+#X connect 34 1 42 0;
+#X connect 35 0 41 0;
+#X connect 36 0 37 0;
+#X connect 37 0 38 0;
+#X connect 37 1 45 0;
+#X connect 38 0 43 1;
+#X connect 39 0 35 0;
+#X connect 40 0 35 0;
+#X connect 41 0 36 0;
+#X connect 42 0 36 1;
+#X connect 42 0 44 0;
+#X connect 43 0 48 0;
+#X connect 44 0 43 0;
+#X connect 45 0 40 0;
+#X connect 46 0 39 0;
+#X connect 46 0 47 0;
+#X connect 48 0 46 0;

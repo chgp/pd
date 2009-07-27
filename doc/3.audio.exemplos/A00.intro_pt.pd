@@ -1,0 +1,12 @@
+#N canvas 0 27 451 345 10;
+#X text 15 -139 Estes patches estÃ£o acompanhados de um um LIVRO ONLINE:
+;
+#X text 84 -111 http://www.crca.ucsd.edu/~msp/techniques.htm;
+#X text 16 -84 que desenvolve a teoria subjacente.;
+#X text 11 -20 atualizado para Pd version 0.37;
+#X text 15 -262 INTRODUCAO;
+#X text 16 -235 Esta é a segunda de três séries de tutoriais do Pd.
+Demonstra as características do processamento de Audio no domínio do
+tempo. A primeira;
+#X text 11 0 traduzido do ingles (documentacao original do Pd) e/ou
+do espanhol (Pedro Alvarez) \, por PUREDEPOSITO.;

@@ -1,0 +1,109 @@
+#N canvas 57 0 934 622 12;
+#X obj 13 514 mtof;
+#X obj 13 463 stripnote;
+#X obj 164 519 select;
+#X obj 155 413 float;
+#X obj 164 381 t b f;
+#X obj 164 487 float;
+#X text 128 459 off;
+#X obj 13 340 unpack;
+#X obj 13 273 notein;
+#X obj 13 300 pack;
+#X obj 94 570 line~;
+#X msg 94 544 \$1 100;
+#X msg 164 545 0 1000;
+#X msg 152 290 55 64;
+#X msg 152 316 55 0;
+#X msg 95 291 48 64;
+#X msg 95 317 48 0;
+#X obj 155 442 sel 0;
+#X text 177 463 on;
+#X obj 16 712 output~;
+#X obj 15 688 hip~ 5;
+#X obj 14 642 *~;
+#X obj 13 541 phasor~;
+#X obj 13 565 -~ 0.5;
+#X obj 14 593 cos~;
+#X obj 102 617 *~;
+#X obj 14 617 +~ 1;
+#X obj 102 665 cos~;
+#X msg 95 268 48 128;
+#X text 18 491 pitch;
+#X text 19 425 note-on;
+#X obj 15 664 *~;
+#X obj 94 517 / 127;
+#X obj 102 641 *~ 2;
+#X obj 123 594 +~ 0.5;
+#X text 132 2 SYNTH MONOFONICO MIDI;
+#X text 17 21 Este patch mostra como fazer um sintetizador monofônico
+que poderia ser controlado por um teclado MIDI ou qualquer outro contole
+de voltagem (nessa caso assumindo o uso MIDI).;
+#X text 18 68 Primeiro \, no topo \, as notas MIDI que vão entrando
+são filtradas e usadas para setar o pitch e o gatilho de envelope ADSR.
+Segundo \, o gerador de envelope foi extendido para oferecer controles
+sobre o tempo e valores alvo via number boxes.;
+#X text 18 145 O teste de note-off é complicado pelo fato de que nós
+temos que testar ambas notas e checar qual a de velocidade zero \,
+e mais adiante checar se o pitch da note-off é o mesmo da nota que
+esta soando (o note-on mais recente).;
+#X text 16 210 As técnicas de sintese são as mesmas do patch anterior
+\, feitas de uma maneira mais simples (mas menos geral) com um objeto
+cos~ subtituindo a busca na tabela.;
+#X text 211 290 Estes botões simulam entrada MIDI.;
+#X text 217 367 f - grava o pitch abaixo;
+#X text 218 387 b - dispara para chamar a velocidade;
+#X text 209 415 velocidade gravada aqui;
+#X text 210 440 teste para checar note-on ou off;
+#X text 216 486 chama novamente o pitch;
+#X text 227 520 Compara com o último;
+#X text 286 538 pitch note-on;
+#X text 20 409 mensagens;
+#X text 19 393 filtra;
+#X text 148 570 gerador de envelope agora controla a amplitude;
+#X text 317 589 assim como o tamanho da granulação;
+#X text 148 648 Isso substitui um objeto tabread4~;
+#X text 146 668 do ultimo patch;
+#X text 148 687 As constantes +~ 0.5 e *~ 2 são os fatores timbrísticos.
+;
+#X text 644 735 Atualizado para Pd versão 0.37;
+#X text 646 750 Traduzido por Jardim de Volts.;
+#X connect 0 0 22 0;
+#X connect 1 0 2 1;
+#X connect 1 0 0 0;
+#X connect 2 0 12 0;
+#X connect 3 0 17 0;
+#X connect 4 0 3 0;
+#X connect 4 1 5 1;
+#X connect 5 0 2 0;
+#X connect 7 0 1 0;
+#X connect 7 0 4 0;
+#X connect 7 1 1 1;
+#X connect 7 1 3 1;
+#X connect 8 0 9 0;
+#X connect 8 1 9 1;
+#X connect 9 0 7 0;
+#X connect 10 0 31 1;
+#X connect 10 0 34 0;
+#X connect 11 0 10 0;
+#X connect 12 0 10 0;
+#X connect 13 0 7 0;
+#X connect 14 0 7 0;
+#X connect 15 0 7 0;
+#X connect 16 0 7 0;
+#X connect 17 0 5 0;
+#X connect 17 1 32 0;
+#X connect 20 0 19 0;
+#X connect 20 0 19 1;
+#X connect 21 0 31 0;
+#X connect 22 0 23 0;
+#X connect 23 0 25 0;
+#X connect 23 0 24 0;
+#X connect 24 0 26 0;
+#X connect 25 0 33 0;
+#X connect 26 0 21 0;
+#X connect 27 0 21 1;
+#X connect 28 0 7 0;
+#X connect 31 0 20 0;
+#X connect 32 0 11 0;
+#X connect 33 0 27 0;
+#X connect 34 0 25 1;

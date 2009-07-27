@@ -1,0 +1,117 @@
+#N canvas 160 105 864 622 12;
+#X obj 327 413 line~;
+#X obj 55 456 cos~;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array pulse-output 882 float 0;
+#X coords 0 1 882 -1 200 130 1;
+#X restore 627 357 graph;
+#X obj 327 390 pack 0 50;
+#X floatatom 327 344 0 0 0 0 - - -;
+#X obj 55 355 -~ 0.5;
+#X obj 55 410 *~;
+#X obj 327 367 / 10;
+#X obj 55 433 clip~ -0.5 0.5;
+#X obj 327 436 +~ 1;
+#X obj 55 479 +~ 1;
+#X obj 206 491 cos~;
+#X obj 56 547 *~;
+#X floatatom 228 346 4 0 0 0 - - -;
+#X obj 228 366 / 10;
+#X obj 206 465 *~;
+#N canvas 129 316 777 218 graph 0;
+#X obj 70 76 inlet~;
+#X obj 662 76 inlet;
+#X obj 67 143 tabwrite~ pulse-output;
+#X obj 298 81 inlet~;
+#X obj 472 74 inlet~;
+#X obj 295 148 tabwrite~ window;
+#X obj 477 149 tabwrite~ carrier;
+#X msg 654 140 \; pd dsp 1;
+#X connect 0 0 2 0;
+#X connect 1 0 2 0;
+#X connect 1 0 5 0;
+#X connect 1 0 6 0;
+#X connect 1 0 7 0;
+#X connect 3 0 5 0;
+#X connect 4 0 6 0;
+#X restore 100 572 pd graph;
+#X obj 228 412 line~;
+#X obj 228 389 pack 0 50;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array carrier 882 float 0;
+#X coords 0 1 881 -1 200 140 1;
+#X restore 627 188 graph;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array window 882 float 0;
+#X coords 0 1 881 -1 200 140 1;
+#X restore 625 26 graph;
+#X floatatom 55 310 4 0 0 0 - - -;
+#X obj 55 331 phasor~ 100;
+#X text 202 318 fundamental);
+#X obj 55 604 output~;
+#X obj 55 580 hip~;
+#X obj 182 573 bng 18 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X text 601 635 updated for Pd version 0.37;
+#X obj 55 502 *~ 0.5;
+#X text 828 152 -1;
+#X text 830 22 1;
+#X text 831 314 -1;
+#X text 835 184 1;
+#X text 832 476 -1;
+#X text 835 351 1;
+#X text 31 2 PACOTES EM JANELAS;
+#X text 24 32 A mais simples das duas técnicas para fazer centros de
+freqüência navegáveis é sintetizar pacotes de ondas senóides envelopadas.
+Os pacotes devem repetir a freqüência fudamental \, mas a freqüência
+do pacote controla ele mesmo a frequencia da formante. O tamanho do
+pacote varia inversamente a largura de banda.;
+#X text 26 128 No patch abaixo \, o objeto "clip~" é seguido por "cos~"
+e "+~ 1" é a função envelope ("windoning"-"janelador") \, que aparece
+no topo do grafo. A portadora \, por outro lado \, é uma senóide quebrada
+feita com a amplificação do objeto phasor~ (o objeto "*~" controlado
+pela "freqüência central" ) e pegando o cos~ do resultado. Os "quebrados"
+na senóide somente ocorrem quando o envelope do sinal é zero.;
+#X text 51 266 freqüência;
+#X text 51 285 fundamental;
+#X text 206 260 freqüência;
+#X text 204 279 central (em;
+#X text 203 298 décimos da fundamental;
+#X text 327 322 largura de banda;
+#X text 241 469 fase escalada;
+#X text 204 573 <-- gráfico;
+#X text 255 492 <--este coseno vai até a;
+#X text 283 509 freqüencia central desejada;
+#X text 284 528 mas sua fase está resetando cada período;
+#X text 282 547 fundamental.;
+#X text 114 462 janela;
+#X text 113 479 do coseno;
+#X text 119 493 elevado;
+#X text 627 490 --- 0.02 segundos ---;
+#X connect 0 0 9 0;
+#X connect 1 0 10 0;
+#X connect 3 0 0 0;
+#X connect 4 0 7 0;
+#X connect 5 0 6 0;
+#X connect 5 0 15 0;
+#X connect 6 0 8 0;
+#X connect 7 0 3 0;
+#X connect 8 0 1 0;
+#X connect 9 0 6 1;
+#X connect 10 0 28 0;
+#X connect 11 0 12 1;
+#X connect 11 0 16 2;
+#X connect 12 0 16 0;
+#X connect 12 0 25 0;
+#X connect 13 0 14 0;
+#X connect 14 0 18 0;
+#X connect 15 0 11 0;
+#X connect 17 0 15 1;
+#X connect 18 0 17 0;
+#X connect 21 0 22 0;
+#X connect 22 0 5 0;
+#X connect 25 0 24 0;
+#X connect 25 0 24 1;
+#X connect 26 0 16 3;
+#X connect 28 0 12 0;
+#X connect 28 0 16 1;

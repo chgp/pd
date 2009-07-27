@@ -1,0 +1,73 @@
+#N canvas 97 32 698 613 12;
+#X obj 114 404 cos~;
+#X floatatom 161 194 4 0 100 0 - - -;
+#X obj 161 218 / 10;
+#X obj 114 374 *~;
+#X obj 161 290 line~;
+#X obj 161 242 max 0;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array F08-carrier 882 float 0;
+#X coords 0 2 881 -2 200 140 1;
+#X restore 447 123 graph;
+#X floatatom 14 291 4 0 0 0 - - -;
+#X obj 156 404 cos~;
+#X obj 197 317 wrap~;
+#X obj 161 344 -~;
+#X obj 156 374 +~;
+#X obj 161 441 -~;
+#X obj 176 471 *~;
+#X obj 154 496 +~;
+#X obj 161 266 pack 0 50;
+#X obj 155 522 hip~;
+#X obj 156 548 output~;
+#X obj 243 548 tabwrite~ F08-carrier;
+#X obj 241 523 bng 18 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X obj 14 315 phasor~ 100;
+#X text 209 440 c2 - c1;
+#X text 224 469 q * (c2 - c1);
+#X text 193 496 q * c2 + (1-q) * c1;
+#X text 126 3 FREQ‹ NCIA M”VEL CENTRAL PELA ADIC√O DE DOIS COSENOS
+;
+#X text 252 315 a parte fracional "q";
+#X text 210 343 subtrai para conseguir a parte inteira "k";
+#X text 206 376 multiplica a fase por k e k+1;
+#X text 211 404 sintetiza as duas parciais;
+#X text 273 524 <-gr·fico;
+#X text 10 247 freq¸Íncia;
+#X text 39 145 freq¸Íncia central (em;
+#X text 39 165 dÈcimos da fundamental);
+#X text 421 577 Atualizado para Pd vers„o 0.37;
+#X text 421 593 Traduzido por Jardim de Volts.;
+#X text 461 275 --- 0.02 segundos ---;
+#X text 10 266 fundamental;
+#X text 26 29 Uma outra maneira mais tosca de fazer a soma de cosenos
+È interpolar entre harmÙnicos adjacentes. Suponha por exemplo que nÛs
+queremos uma freq¸Íncia central de 5.3 (em unidades da fundamental).
+NÛs sÛ pegamos a parcial 5 de amplitude 0.7 e a parcial 6 de amplitude
+0.3:;
+#X connect 0 0 12 1;
+#X connect 0 0 14 0;
+#X connect 1 0 2 0;
+#X connect 2 0 5 0;
+#X connect 3 0 0 0;
+#X connect 3 0 11 0;
+#X connect 4 0 10 0;
+#X connect 4 0 9 0;
+#X connect 5 0 15 0;
+#X connect 7 0 20 0;
+#X connect 8 0 12 0;
+#X connect 9 0 10 1;
+#X connect 9 0 13 1;
+#X connect 10 0 3 1;
+#X connect 11 0 8 0;
+#X connect 12 0 13 0;
+#X connect 13 0 14 1;
+#X connect 14 0 16 0;
+#X connect 14 0 18 0;
+#X connect 15 0 4 0;
+#X connect 16 0 17 0;
+#X connect 16 0 17 1;
+#X connect 19 0 18 0;
+#X connect 20 0 3 0;
+#X connect 20 0 11 1;

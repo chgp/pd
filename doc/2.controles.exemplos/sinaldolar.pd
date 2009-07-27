@@ -1,0 +1,35 @@
+#N canvas 263 131 594 369 12;
+#X obj 194 32 inlet;
+#X obj 194 59 s \$1-a;
+#X obj 289 60 s \$1-b;
+#X obj 289 35 inlet;
+#X obj 62 249 s \$1-c;
+#X obj 62 279 r \$1-c;
+#X floatatom 62 218 5 0 0 0 - - -;
+#X floatatom 62 307 5 0 0 0 - - -;
+#X floatatom 163 308 5 0 0 0 - - -;
+#X floatatom 164 220 5 0 0 0 - - -;
+#X floatatom 505 218 5 0 0 0 - - -;
+#X floatatom 506 301 5 0 0 0 - - -;
+#X obj 505 245 s \$0-d;
+#X obj 506 275 r \$0-d;
+#X obj 164 250 s aqui-o-que-acontece-se-voce-vacila;
+#X obj 164 278 r aqui-o-que-acontece-se-voce-vacila;
+#X text 63 6 Esta abstração é usada no exemplo 13.locamente.pd;
+#X text 48 84 Os "send"s acima são nomeados "um-a" e "um-b" ou "dois-a"
+e "dois-b" dependendo do argumento de criacão do objeto da abstração
+na janela pai. Observe a barra de título para saber os argumentos para
+esta instância. Você pode usar isso para fazer conexões internas locais
+como mostrado abaixo. O par \$1-c funciona localmente \, enquanto o
+par do meio afeta a outra cópia deste mesmo patch. o \$0 sempre recebe
+do PD um valor unico que nao se repete nos outros.;
+#X text 318 348 traduzido por Puredeposito;
+#X text 317 331 atualizado para Pd versão 0.34;
+#X connect 0 0 1 0;
+#X connect 3 0 2 0;
+#X connect 5 0 7 0;
+#X connect 6 0 4 0;
+#X connect 9 0 14 0;
+#X connect 10 0 12 0;
+#X connect 13 0 11 0;
+#X connect 15 0 8 0;

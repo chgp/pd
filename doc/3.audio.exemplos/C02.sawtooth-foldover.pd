@@ -1,0 +1,40 @@
+#N canvas 0 27 485 571 10;
+#X obj 55 268 output~;
+#X obj 54 240 clip~ 0 1;
+#X obj 55 73 mtof;
+#X floatatom 55 51 3 0 0 0 - - -;
+#X obj 55 189 *~ 20;
+#X obj 55 215 -~ 19;
+#X obj 55 97 phasor~;
+#N canvas 0 22 564 187 (subpatch) 0;
+#X obj 25 74 loadbang;
+#X msg 25 99 61;
+#X obj 25 124 outlet;
+#X text 7 6 This sets the pitch initially to 61 when the patch is first
+opened.;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X restore 55 25 pd;
+#X obj 64 126 output~;
+#X text 22 -105 FOLDOVER EM ONDAS DENTE-DE-SERRA;
+#X text 90 50 <-- altura (pitch) - nota MIDI;
+#X text 140 124 <-- amplitude da onda dente-de-sierra;
+#X text 133 293 <-- amplitude do som de pulsos;
+#X text 29 335 Mais adiante explicaremos como se fazem os pulsos...
+este exemplo e' so' pra testar o efeito auditivo.;
+#X text 218 416 atualizado para Pd versao 0.37;
+#X text 218 430 traduzido por geada.;
+#X text 21 -75 Em formas de onda mais comuns \, o foldover e' percebido
+como um som de "sintetizador barato". Aqui podemos escutar claramente
+o foldover no som de pulsos \, e menos claramnte (mas igualmente audivel)
+na onda dente-de-serra \, especialmente em notas mais agudas.;
+#X connect 1 0 0 0;
+#X connect 1 0 0 1;
+#X connect 2 0 6 0;
+#X connect 3 0 2 0;
+#X connect 4 0 5 0;
+#X connect 5 0 1 0;
+#X connect 6 0 4 0;
+#X connect 6 0 8 0;
+#X connect 6 0 8 1;
+#X connect 7 0 3 0;
