@@ -1,3 +1,16 @@
 
-pure data's patches
-by chgp@riseup.net
+pure data's patches by chgp at riseup.net
+
+artesmidia.pd       - video installation at MuNA 07/2009
+catatau.pd          - text randomizer
+dd-pt-br.tcl        - Desire Data portuguese translation
+gem_vplayer.pd      - Gem movie player abstraction
+gem_vseq.pd         - Gem movie sequencer
+moog.pd             - Moog synthetizer
+netserver.pd        - netserver usage example
+pdp_vplayer.pd      - PDP movie player abstraction
+pianao.pd           - simple patch that uses fluid~ and keyboard keys to simulate a piano foot keyboard
+strobe_tunner.pd    - strobe tunner initial thoughts
+umx25.pd            - umx25 midi keyboard
+wiiosc.pd           - wii OSC 
+
