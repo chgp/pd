@@ -1,0 +1,30 @@
+Descricao de cada diretorio do external:
+
+aenv~: asymptotic ADSR envelope generator
+ann: Artificial Neural Networks
+   ann_som: self-organized maps
+   ann_mlp: multi layer perceptrons
+   ann_td: time delay
+arraysize: returns the size of an array when banged.
+august: (flext)
+   readanysf~, a puredata external for reading multiple file formats.
+
+
+grill : (flext)
+   absattr: patcher attributes
+   deljoin: join a list with delimiter - nao compilado
+   delsplit: cd 
+   dyn: 
+   dynext: 
+   dyn_py: 
+   fftease: 
+   flext: 
+   guitest: 
+   idelay
+   namedobjs
+   pool
+   prepend         
+   py
+   vasp
+   vst
+   xsample
