@@ -53,15 +53,15 @@
 #X obj 253 393 s estado;
 #X obj 418 395 s estado;
 #X msg 236 186 \; estado 1;
-#X text 37 17 Exemplo de como construir uma corrente de Markov simples
+#X text 398 430 atualizado para Pd versão 0.35;
+#X text 399 447 traduzido por Puredeposito;
+#X text 61 16 Exemplo de como construir uma cadeia de Markov simples
 de três valores usando "random". Cada vez em que você clicar no "passo"
 a saída anterior "estado" determina qual das três redes de números
 aleatórios invocar \, cada uma tendo uma distribuição de probabilidade
 diferente para o próximo valor de "estado". Por exemplo \, se o estado
 foi 3 \, o próximo estado vai ser 1 70% das vezes \, 2 10% e continuará
 como 3 20% das vezes.;
-#X text 398 430 atualizado para Pd versão 0.35;
-#X text 399 447 traduzido por Puredeposito;
 #X connect 0 0 24 0;
 #X connect 1 0 4 0;
 #X connect 2 0 5 0;

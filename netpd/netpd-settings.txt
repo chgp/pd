@@ -17,4 +17,4 @@ netpd-msg-interval 100
 netpd-port 3025
 netpd-domain netpd.org
 netpd-welcome <<<<<<<<<<<<<connected<<<<<<<<<<<<<<<<<
-netpd-name name
+netpd-name ceaga
